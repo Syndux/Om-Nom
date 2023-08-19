@@ -31,6 +31,7 @@ const validateLogin = [
 
 const validateSignup = [
   check("email")
+    .normalizeEmail()
     .notEmpty()
     .withMessage("Email is required.")
     .isEmail()
