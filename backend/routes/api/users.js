@@ -74,7 +74,7 @@ router.post("/login", validateLogin, async (req, res, next) => {
 });
 
 // Sign up
-router.post("", validateSignup, async (req, res) => {
+router.post("/", validateSignup, async (req, res) => {
   const { email, password, username, firstName, lastName } = req.body;
   const hashedPassword = bcrypt.hashSync(password);
   const user = await User.create({ email, firstName, lastName, username, hashedPassword });
@@ -92,6 +92,12 @@ router.post("", validateSignup, async (req, res) => {
   return res.json({
     user: safeUser,
   });
+});
+
+// Log out
+router.delete("/", (_req, res) => {
+  res.clearCookie("token");
+  return res.json({ message: "success" });
 });
 
 module.exports = router;
