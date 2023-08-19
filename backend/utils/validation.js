@@ -23,7 +23,9 @@ const validateLogin = [
   check("credential")
     .notEmpty()
     .withMessage("Please provide a valid email or username."),
-  check("password").notEmpty().withMessage("Please provide a password."),
+  check("password")
+    .notEmpty()
+    .withMessage("Please provide a password."),
   handleValidationErrors,
 ];
 
