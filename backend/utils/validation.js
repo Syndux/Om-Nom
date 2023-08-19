@@ -1,5 +1,5 @@
 // backend/utils/validation.js
-const { validationResult } = require("express-validator");
+const { validationResult, check } = require("express-validator");
 
 // middleware for formatting errors from express-validator middleware
 // (to customize, see express-validator's documentation)
@@ -8,9 +8,7 @@ const handleValidationErrors = (req, _res, next) => {
 
   if (!validationErrors.isEmpty()) {
     const errors = {};
-    validationErrors
-      .array()
-      .forEach((error) => (errors[error.param] = error.msg));
+    validationErrors.array().forEach((error) => (errors[error.param] = error.msg));
 
     const err = Error("Bad request.");
     err.errors = errors;
@@ -23,33 +21,37 @@ const handleValidationErrors = (req, _res, next) => {
 
 const validateLogin = [
   check("credential")
-    .exists({ checkFalsy: true })
     .notEmpty()
     .withMessage("Please provide a valid email or username."),
-  check("password")
-    .exists({ checkFalsy: true })
-    .withMessage("Please provide a password."),
+  check("password").notEmpty().withMessage("Please provide a password."),
   handleValidationErrors,
 ];
 
 const validateSignup = [
   check("email")
-    .exists({ checkFalsy: true })
+    .notEmpty()
+    .withMessage("Email is required.")
     .isEmail()
-    .withMessage("Please provide a valid email."),
+    .withMessage("Please provide a valid email address."),
   check("username")
-    .exists({ checkFalsy: true })
-    .isLength({ min: 4 })
-    .withMessage("Please provide a username with at least 4 characters."),
-  check("username").not().isEmail().withMessage("Username cannot be an email."),
+    .notEmpty().withMessage("Username is required.")
+    .isAlphanumeric().withMessage("Username must consist of letters and numbers only.")
+    .isLength({ min: 4 }).withMessage("Username must be at least 4 characters long.")
+    .not().isEmail().withMessage("Username cannot be an email."),
+  check('firstName')
+    .notEmpty().withMessage('First name is required.')
+    .isLength({ min: 2 }).withMessage('First name must be at least 2 characters long.'),
+  check('lastName')
+    .notEmpty().withMessage('Last name is required.')
+    .isLength({ min: 2 }).withMessage('Last name must be at least 2 characters long.'),
   check("password")
-    .exists({ checkFalsy: true })
+    .notEmpty().withMessage('Password is required.')
     .isLength({ min: 6 })
-    .withMessage("Password must be 6 characters or more."),
+    .withMessage("Password must be at least 6 characters long."),
   handleValidationErrors,
 ];
 
 module.exports = {
   validateLogin,
-  validateSignup
+  validateSignup,
 };
