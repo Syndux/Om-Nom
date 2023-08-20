@@ -16,16 +16,23 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       userId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: { model: "Users", key: "id" },
+        onUpdate: "CASCADE",
+        onDelete: "CASCADE"
       },
       name: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING(256),
+        allowNull: false,
       },
       description: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: false,
       },
       cuisine: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING(30),
+        allowNull: false,
       },
       imgUrl: {
         type: Sequelize.STRING

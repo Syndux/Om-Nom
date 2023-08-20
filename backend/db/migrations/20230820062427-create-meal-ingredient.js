@@ -10,10 +10,16 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       mealId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references: { model: "Meals", key: "id" },
+        onUpdate: "CASCADE",
+        onDelete: "CASCADE"
       },
       ingredientId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references: { model: "Ingredients", key: "id" },
+        onUpdate: "CASCADE",
+        onDelete: "CASCADE"
       },
       quantity: {
         type: Sequelize.INTEGER
@@ -23,11 +29,13 @@ module.exports = {
       },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
       }
     }, options);
   },

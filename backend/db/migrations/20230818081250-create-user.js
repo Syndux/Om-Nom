@@ -26,11 +26,11 @@ module.exports = {
         unique: true,
       },
       firstName: {
-        type: Sequelize.STRING,
+        type: Sequelize.STRING(15),
         allowNull: false,
       },
       lastName: {
-        type: Sequelize.STRING,
+        type: Sequelize.STRING(15),
         allowNull: false,
       },
       hashedPassword: {
