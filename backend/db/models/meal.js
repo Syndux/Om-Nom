@@ -1,7 +1,5 @@
-'use strict';
-const {
-  Model
-} = require('sequelize');
+"use strict";
+const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class Meal extends Model {
     /**
@@ -13,15 +11,57 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
     }
   }
-  Meal.init({
-    userId: DataTypes.INTEGER,
-    name: DataTypes.STRING,
-    description: DataTypes.STRING,
-    cuisine: DataTypes.STRING,
-    imgUrl: DataTypes.STRING
-  }, {
-    sequelize,
-    modelName: 'Meal',
-  });
+  Meal.init(
+    {
+      userId: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        validate: {
+          async isUniqueMeal(val) {
+            const existingMeal = await Meal.findOne({
+              where: {
+                userId: this.userId,
+                name: val,
+              },
+            });
+            if (existingMeal) {
+              throw new Error("You already have an existing meal with this name!");
+            }
+          },
+        },
+      },
+      name: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          len: [2, 256]
+        },
+      },
+      description: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          len: [5],
+        },
+      },
+      cuisine: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          len: [3, 20],
+        },
+      },
+      imgUrl: {
+        type: DataTypes.STRING,
+        validate: {
+          isUrl: true,
+        },
+      },
+    },
+    {
+      sequelize,
+      modelName: "Meal",
+    }
+  );
   return Meal;
 };

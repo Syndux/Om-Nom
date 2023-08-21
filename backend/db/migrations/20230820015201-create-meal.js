@@ -31,7 +31,7 @@ module.exports = {
         allowNull: false,
       },
       cuisine: {
-        type: Sequelize.STRING(30),
+        type: Sequelize.STRING(20),
         allowNull: false,
       },
       imgUrl: {
