@@ -17,6 +17,15 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.INTEGER,
         allowNull: false,
         validate: {
+          isInt: true,
+          min: 1,
+        }
+      },
+      name: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          len: [2, 256],
           async isUniqueMeal(val) {
             const existingMeal = await Meal.findOne({
               where: {
@@ -28,13 +37,6 @@ module.exports = (sequelize, DataTypes) => {
               throw new Error("You already have an existing meal with this name!");
             }
           },
-        },
-      },
-      name: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        validate: {
-          len: [2, 256]
         },
       },
       description: {
