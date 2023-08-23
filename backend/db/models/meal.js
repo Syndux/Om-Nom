@@ -39,13 +39,6 @@ module.exports = (sequelize, DataTypes) => {
           },
         },
       },
-      description: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        validate: {
-          len: [5],
-        },
-      },
       cuisine: {
         type: DataTypes.STRING,
         allowNull: false,

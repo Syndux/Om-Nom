@@ -26,10 +26,6 @@ module.exports = {
         type: Sequelize.STRING(256),
         allowNull: false,
       },
-      description: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
       cuisine: {
         type: Sequelize.STRING(20),
         allowNull: false,
