@@ -23,7 +23,7 @@ module.exports = {
         onDelete: "CASCADE"
       },
       name: {
-        type: Sequelize.STRING(256),
+        type: Sequelize.STRING(124),
         allowNull: false,
       },
       cuisine: {
