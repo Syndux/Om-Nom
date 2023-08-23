@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
   }
   Meal.init(
     {
-      userId: {
+      creatorId: {
         type: DataTypes.INTEGER,
         allowNull: false,
         validate: {
