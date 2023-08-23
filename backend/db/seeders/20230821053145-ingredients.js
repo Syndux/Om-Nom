@@ -76,6 +76,10 @@ module.exports = {
           name: "Onion",
           imgUrl: "",
         },
+        {
+          name: "White Wine Vineger",
+          imgUrl: "",
+        },
       ],
       { validate: true }
     );
