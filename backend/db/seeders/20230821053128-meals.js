@@ -116,7 +116,7 @@ module.exports = {
         },
         {
           creatorId: 9,
-          name: "Beef Sukiyako",
+          name: "Beef Sukiyaki",
           cuisine: "Japanese",
           imgUrl: "",
         },
