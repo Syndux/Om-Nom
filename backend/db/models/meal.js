@@ -25,7 +25,7 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: false,
         validate: {
-          len: [2, 124],
+          len: [2, 120],
           async isUniqueMeal(val) {
             const existingMeal = await Meal.findOne({
               where: {
