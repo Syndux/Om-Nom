@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 /** @type {import('sequelize-cli').Migration} */
 
 let options = {};
@@ -131,12 +131,13 @@ module.exports = {
           ingredientId: 11,
           quantity: 0.25,
           unit: "cup",
-        }
-      ]
-    )
+        },
+      ],
+      { validate: true }
+    );
   },
 
-  down: async  (queryInterface, Sequelize) => {
+  down: async (queryInterface, Sequelize) => {
     options.tableName = "MealIngredients";
     return queryInterface.bulkDelete(options, null, {});
   },

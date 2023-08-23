@@ -30,11 +30,10 @@ module.exports = (sequelize, DataTypes) => {
         },
       },
       quantity: {
-        type: DataTypes.DECIMAL(6, 2),
+        type: DataTypes.DECIMAL,
         allowNull: false,
         validate: {
-          isInt: true,
-          min: 1,
+          isDecimal: true,
         },
       },
       unit: {
