@@ -18,7 +18,7 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         unique: true,
         validate: {
-          len: [2, 256]
+          len: [2, 120]
         }
       },
       imgUrl: {
