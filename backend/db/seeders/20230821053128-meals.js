@@ -57,12 +57,12 @@ module.exports = {
         {
           userId: 4,
           name: "Caesar Salad",
-          cuisine: "American",
+          cuisine: "Greek",
           imgUrl: "",
         },
         {
           userId: 5,
-          name: "Spaghetti Bolognese",
+          name: "Garlic Spaghetti",
           cuisine: "Italian",
           imgUrl: "",
         },
