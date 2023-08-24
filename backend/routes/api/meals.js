@@ -94,10 +94,17 @@ router.get("/", async (req, res, next) => {
 
 // Create a new meal
 router.post("/", requireAuth, async (req, res, next) => {
+  const { name, imgUrl, cuisine } = req.body;
+  const userId = req.user.id;
+
   const newMeal = await Meal.create({
-    
-  })
-    return res.status(201).json(newMeal);
+    creatorId: userId,
+    name,
+    imgUrl,
+    cuisine,
+  });
+
+  return res.status(201).json(newMeal);
 });
 
 module.exports = router;
