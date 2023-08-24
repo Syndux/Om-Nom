@@ -55,6 +55,7 @@ router.put("/:mealId", requireAuth, async (req, res, next) => {
   return res.json(updatedMeal);
 });
 
+// Delete meal from mealId
 router.delete("/:mealId", requireAuth, async (req, res, next) => {
   const { mealId } = req.params;
   const userId = req.user.id;
