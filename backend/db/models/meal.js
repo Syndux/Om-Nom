@@ -8,7 +8,15 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      Meal.belongsTo(models.User, {
+        foreignKey: "creatorId",
+        as: "creator",
+      });
+      Meal.belongsToMany(models.Ingredient, {
+        through: "MealIngredients",
+        foreignKey: "mealId",
+        as: "ingredients",
+      });
     }
   }
   Meal.init(
@@ -19,7 +27,7 @@ module.exports = (sequelize, DataTypes) => {
         validate: {
           isInt: true,
           min: 1,
-        }
+        },
       },
       name: {
         type: DataTypes.STRING,
