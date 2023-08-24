@@ -5,6 +5,7 @@ const { Ingredients } = require("../../db/models");
 
 const router = express.Router();
 
+// Get all ingredients
 router.get("/", async (req, res, next) => {
   const ingredients = await Ingredients.findAll({
     order: ["name"],
