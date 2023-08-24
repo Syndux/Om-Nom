@@ -41,7 +41,7 @@ router.put("/:mealId", requireAuth, async (req, res, next) => {
   if (userId !== meal.creatorId) {
     const err = new Error("Authorization required");
     err.status = 403;
-    err.message = "Forbidden";
+    err.message = "You are not allowed to edit this meal.";
     return next(err);
   }
 
@@ -49,7 +49,7 @@ router.put("/:mealId", requireAuth, async (req, res, next) => {
   const updatedMeal = await meal.update({
     name,
     imgUrl,
-    cuisine
+    cuisine,
   });
 
   return res.json(updatedMeal);
@@ -58,6 +58,29 @@ router.put("/:mealId", requireAuth, async (req, res, next) => {
 router.delete("/:mealId", requireAuth, async (req, res, next) => {
   const { mealId } = req.params;
   const userId = req.user.id;
+
+  const meal = await Meal.findByPk(mealId);
+
+  if (!meal) {
+    return next({
+      status: 404,
+      message: "Meal could not be found",
+    });
+  }
+
+  if (userId !== meal.creatorId) {
+    const err = new Error("Authorization required");
+    err.status = 403;
+    err.message = "You are not allowed to delete this meal.";
+    return next(err);
+  }
+
+  await meal.destroy();
+
+  return res.json({
+    status: 200,
+    message: "Successfully deleted",
+  });
 });
 
 // Get all meals
