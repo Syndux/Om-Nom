@@ -92,4 +92,12 @@ router.get("/", async (req, res, next) => {
   return res.json(meals);
 });
 
+// Create a new meal
+router.post("/", requireAuth, async (req, res, next) => {
+  const newMeal = await Meal.create({
+    
+  })
+    return res.status(201).json(newMeal);
+});
+
 module.exports = router;
