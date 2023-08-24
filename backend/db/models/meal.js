@@ -1,5 +1,5 @@
 "use strict";
-const { Model } = require("sequelize");
+const { Model, Op } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class Meal extends Model {
     /**
@@ -37,7 +37,7 @@ module.exports = (sequelize, DataTypes) => {
           async isUniqueMeal(val) {
             const existingMeal = await Meal.findOne({
               where: {
-                userId: this.userId,
+                creatorId: this.creatorId,
                 name: val,
               },
             });
