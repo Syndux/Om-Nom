@@ -36,7 +36,7 @@ router.delete("/:mealId/ingredients/:ingredientId", requireAuth, async (req, res
   if (userId !== meal.creatorId) {
     const err = new Error("Authorization required");
     err.status = 403;
-    err.message = "You are not allowed to delete this meal.";
+    err.message = "You are not allowed to edit this meal's ingredients.";
     return next(err);
   }
 
