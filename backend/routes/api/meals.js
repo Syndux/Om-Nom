@@ -5,6 +5,41 @@ const { Meal, Ingredient, MealIngredient, sequelize } = require("../../db/models
 
 const router = express.Router();
 
+// Delete ingredient in a meal with mealId and ingredientId
+router.delete("/:mealId/ingredients/:ingredientId", async (req, res, next) => {
+  const { mealId, ingredientId } = req.params;
+
+  const meal = await Meal.findByPk(mealId);
+
+  if (!meal) {
+    return next({
+      status: 404,
+      message: "Meal could not be found",
+    });
+  }
+
+  const mealIngredient = await MealIngredient.findOne({
+    where: {
+      mealId,
+      ingredientId,
+    },
+  });
+
+  if (!mealIngredient) {
+    return next({
+      status: 404,
+      message: "Ingredient could not be found.",
+    });
+  }
+
+  await mealIngredient.destroy();
+
+  return res.json({
+    status: 200,
+    message: "Successfully deleted",
+  });
+});
+
 // Get ingredients for a meal with mealId
 router.get("/:mealId/ingredients", async (req, res, next) => {
   const { mealId } = req.params;
@@ -52,7 +87,30 @@ router.get("/current", requireAuth, async (req, res, next) => {
 // Get details of a meal with mealId
 router.get("/:mealId", async (req, res, next) => {
   const { mealId } = req.params;
-  const meal = await Meal.findByPk(mealId);
+  const meal = await Meal.findByPk(mealId, {
+    include: {
+      model: Ingredient,
+      as: "ingredients",
+      through: {
+        model: MealIngredient,
+        attributes: ["quantity", "unit"],
+      },
+      attributes: {
+        exclude: ["id", "createdAt", "updatedAt"],
+      },
+    },
+    raw: true,
+    attributes: {
+      exclude: ["createdAt", "updatedAt"],
+    },
+  });
+
+  if (!meal) {
+    return next({
+      status: 400,
+      message: "Meal could not be found",
+    });
+  }
 
   return res.json(meal);
 });
