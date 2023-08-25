@@ -10,6 +10,11 @@ router.post("/:mealId/ingredients/:ingredientId", requireAuth, async (req, res, 
 
 });
 
+// Update ingredient info for a meal with mealId and ingredientId
+router.put("/:mealId/ingredients/:ingredientId", requireAuth, async (req, res, next) => {
+
+});
+
 // Delete ingredient in a meal with mealId and ingredientId
 router.delete("/:mealId/ingredients/:ingredientId", requireAuth, async (req, res, next) => {
   const { mealId, ingredientId } = req.params;
