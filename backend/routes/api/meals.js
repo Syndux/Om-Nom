@@ -6,8 +6,9 @@ const { Meal, Ingredient, MealIngredient, sequelize } = require("../../db/models
 const router = express.Router();
 
 // Delete ingredient in a meal with mealId and ingredientId
-router.delete("/:mealId/ingredients/:ingredientId", async (req, res, next) => {
+router.delete("/:mealId/ingredients/:ingredientId", requireAuth, async (req, res, next) => {
   const { mealId, ingredientId } = req.params;
+  const userId = req.user.id;
 
   const meal = await Meal.findByPk(mealId);
 
@@ -30,6 +31,13 @@ router.delete("/:mealId/ingredients/:ingredientId", async (req, res, next) => {
       status: 404,
       message: "Ingredient could not be found.",
     });
+  }
+
+  if (userId !== meal.creatorId) {
+    const err = new Error("Authorization required");
+    err.status = 403;
+    err.message = "You are not allowed to delete this meal.";
+    return next(err);
   }
 
   await mealIngredient.destroy();
