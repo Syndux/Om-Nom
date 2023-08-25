@@ -2,6 +2,7 @@
 const router = require("express").Router();
 const usersRouter = require("./users.js");
 const mealsRouter = require("./meals.js");
+const ingredientsRouter = require("./ingredients.js");
 const { restoreUser } = require("../../utils/auth.js");
 
 // Connect restoreUser middleware to the API router
@@ -11,6 +12,7 @@ router.use(restoreUser);
 
 router.use("/users", usersRouter);
 router.use("/meals", mealsRouter);
+router.use("/ingredients", ingredientsRouter);
 
 router.post("/test", function (req, res) {
   res.json({ requestBody: req.body });
