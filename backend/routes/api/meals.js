@@ -5,6 +5,11 @@ const { Meal, Ingredient, MealIngredient, sequelize } = require("../../db/models
 
 const router = express.Router();
 
+// Create/add ingredients for a meal with mealId
+router.post("/:mealId/ingredients/:ingredientId", requireAuth, async (req, res, next) => {
+
+});
+
 // Delete ingredient in a meal with mealId and ingredientId
 router.delete("/:mealId/ingredients/:ingredientId", requireAuth, async (req, res, next) => {
   const { mealId, ingredientId } = req.params;
@@ -46,6 +51,11 @@ router.delete("/:mealId/ingredients/:ingredientId", requireAuth, async (req, res
     status: 200,
     message: "Successfully deleted",
   });
+});
+
+// Read ingredients for a meal with mealId
+router.get("/:mealId/ingredients", async (req, res, next) => {
+
 });
 
 // Get ingredients for a meal with mealId
