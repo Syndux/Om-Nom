@@ -1,9 +1,43 @@
 const express = require("express");
 
 const { requireAuth } = require("../../utils/auth");
-const { Meal } = require("../../db/models");
+const { Meal, Ingredient, MealIngredient, sequelize } = require("../../db/models");
 
 const router = express.Router();
+
+// Get ingredients for a meal with mealId
+router.get("/:mealId/ingredients", async (req, res, next) => {
+  const { mealId } = req.params;
+
+  const meal = await Meal.findByPk(mealId);
+
+  if (!meal) {
+    return next({
+      status: 404,
+      message: "Meal could not be found",
+    });
+  }
+
+  const mealIngredients = await MealIngredient.findAll({
+    where: { mealId },
+    include: {
+      model: Ingredient,
+      as: "ingredient",
+      attributes: ["name", "imgUrl"],
+    },
+    attributes: { exclude: ["mealId"] },
+    raw: true,
+  });
+
+  if (!mealIngredients) {
+    return next({
+      status: 404,
+      message: "No ingredients for this meal could be found.",
+    });
+  }
+
+  return res.json({ mealIngredients });
+});
 
 // Get all meals from current user
 router.get("/current", requireAuth, async (req, res, next) => {
@@ -34,7 +68,7 @@ router.put("/:mealId", requireAuth, async (req, res, next) => {
   if (!meal) {
     return next({
       status: 404,
-      message: "Meal couldn't be found",
+      message: "Meal could not be found",
     });
   }
 
