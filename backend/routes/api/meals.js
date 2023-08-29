@@ -28,14 +28,29 @@ router.post("/:mealId/ingredients/:ingredientId", requireAuth, async (req, res, 
     return next(err);
   }
 
-  const newMealIngredient = await MealIngredient.create({
-    mealId: meal.id,
-    ingredientId: ingredient.id,
-    quantity,
-    unit
+  const existingMealIngredient = await MealIngredient.findOne({
+    where: {
+      mealId: meal.id,
+      ingredientId: ingredient.id,
+    },
   });
 
-  return res.status(201).json({ newMealIngredient });
+  if (existingMealIngredient) {
+    return next({
+      status: 404,
+      message: "Ingredient for meal already exists. Try updating instead."
+    });
+
+  } else {
+    const newMealIngredient = await MealIngredient.create({
+      mealId: meal.id,
+      ingredientId: ingredient.id,
+      quantity,
+      unit,
+    });
+    
+    return res.status(201).json({ newMealIngredient });
+  }
 });
 
 // Update ingredient info for a meal with mealId and ingredientId
@@ -149,7 +164,7 @@ router.get("/:mealId/ingredients", async (req, res, next) => {
       attributes: ["name", "imgUrl"],
     },
     attributes: { exclude: ["mealId"] },
-    raw: true,
+    // raw: true,
   });
 
   if (!mealIngredients) {
@@ -187,7 +202,7 @@ router.get("/:mealId", async (req, res, next) => {
         exclude: ["id", "createdAt", "updatedAt"],
       },
     },
-    raw: true,
+    // raw: true,
     attributes: {
       exclude: ["createdAt", "updatedAt"],
     },
