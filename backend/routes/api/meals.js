@@ -7,12 +7,97 @@ const router = express.Router();
 
 // Create/add ingredients for a meal with mealId
 router.post("/:mealId/ingredients/:ingredientId", requireAuth, async (req, res, next) => {
+  const { mealId, ingredientId } = req.params;
+  const { quantity, unit } = req.body;
+  const userId = req.user.id;
 
+  const meal = await Meal.findByPk(mealId);
+  const ingredient = await Ingredient.findByPk(ingredientId);
+
+  if (!meal || !ingredient) {
+    return next({
+      status: 404,
+      message: "Meal or ingredient could not be found",
+    })
+  }
+
+  if (userId !== meal.creatorId) {
+    const err = new Error("Authorization required");
+    err.status = 403;
+    err.message = "You are not allowed to edit this meal's ingredients.";
+    return next(err);
+  }
+
+  const existingMealIngredient = await MealIngredient.findOne({
+    where: {
+      mealId: meal.id,
+      ingredientId: ingredient.id,
+    },
+  });
+
+  if (existingMealIngredient) {
+    return next({
+      status: 404,
+      message: "Ingredient for meal already exists. Try updating instead."
+    });
+
+  } else {
+    const newMealIngredient = await MealIngredient.create({
+      mealId: meal.id,
+      ingredientId: ingredient.id,
+      quantity,
+      unit,
+    });
+    
+    return res.status(201).json({ newMealIngredient });
+  }
 });
 
 // Update ingredient info for a meal with mealId and ingredientId
 router.put("/:mealId/ingredients/:ingredientId", requireAuth, async (req, res, next) => {
+  const { mealId, ingredientId } = req.params;
+  const { quantity, unit } = req.body;
+  const userId = req.user.id;
+  
+  const meal = await Meal.findByPk(mealId);
+  const ingredient = await Ingredient.findByPk(ingredientId);
 
+  if (!meal || !ingredient) {
+    return next({
+      status: 404,
+      message: "Meal or ingredient could not be found",
+    })
+  }
+
+  if (userId !== meal.creatorId) {
+    const err = new Error("Authorization required");
+    err.status = 403;
+    err.message = "You are not allowed to edit this meal's ingredients.";
+    return next(err);
+  }
+
+  const mealIngredient = await MealIngredient.findOne({
+    where: {
+      mealId: meal.id,
+      ingredientId: ingredient.id,
+    },
+  });
+
+  if (!mealIngredient) {
+    return next({
+      status: 404,
+      message: "Ingredient not found for this meal"
+    })
+  }
+
+  const updatedMealIngredient = await mealIngredient.update({
+    mealId: meal.id,
+    ingredientId: ingredient.id,
+    quantity,
+    unit
+  });
+
+  return res.status(200).json({ updatedMealIngredient });
 });
 
 // Delete ingredient in a meal with mealId and ingredientId
@@ -60,11 +145,6 @@ router.delete("/:mealId/ingredients/:ingredientId", requireAuth, async (req, res
 
 // Read ingredients for a meal with mealId
 router.get("/:mealId/ingredients", async (req, res, next) => {
-
-});
-
-// Get ingredients for a meal with mealId
-router.get("/:mealId/ingredients", async (req, res, next) => {
   const { mealId } = req.params;
 
   const meal = await Meal.findByPk(mealId);
@@ -84,7 +164,7 @@ router.get("/:mealId/ingredients", async (req, res, next) => {
       attributes: ["name", "imgUrl"],
     },
     attributes: { exclude: ["mealId"] },
-    raw: true,
+    // raw: true,
   });
 
   if (!mealIngredients) {
@@ -122,7 +202,7 @@ router.get("/:mealId", async (req, res, next) => {
         exclude: ["id", "createdAt", "updatedAt"],
       },
     },
-    raw: true,
+    // raw: true,
     attributes: {
       exclude: ["createdAt", "updatedAt"],
     },
