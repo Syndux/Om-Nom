@@ -7,7 +7,27 @@ const router = express.Router();
 
 // Create/add ingredients for a meal with mealId
 router.post("/:mealId/ingredients/:ingredientId", requireAuth, async (req, res, next) => {
+  const { mealId, ingredientId } = req.params;
+  const { quantity, unit } = req.body;
+  
+  const meal = await Meal.findByPk(mealId);
+  const ingredient = await Ingredient.findByPk(ingredientId);
 
+  if (!meal || !ingredient) {
+    return next({
+      status: 404,
+      message: "Meal or ingredient could not be found",
+    })
+  }
+
+  const newMealIngredient = await MealIngredient.create({
+    mealId: meal.id,
+    ingredientId: ingredient.id,
+    quantity,
+    unit
+  });
+
+  return res.status(201).json({ newMealIngredient });
 });
 
 // Update ingredient info for a meal with mealId and ingredientId
