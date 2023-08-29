@@ -59,14 +59,14 @@ router.put("/:mealId/ingredients/:ingredientId", requireAuth, async (req, res, n
     })
   }
 
-  await mealIngredient.update({
+  const updatedMealIngredient = await mealIngredient.update({
     mealId: meal.id,
     ingredientId: ingredient.id,
     quantity,
     unit
   });
 
-  return res.status(200).json({ mealIngredient });
+  return res.status(200).json({ updatedMealIngredient });
 });
 
 // Delete ingredient in a meal with mealId and ingredientId
