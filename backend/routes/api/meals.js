@@ -9,6 +9,7 @@ const router = express.Router();
 router.post("/:mealId/ingredients/:ingredientId", requireAuth, async (req, res, next) => {
   const { mealId, ingredientId } = req.params;
   const { quantity, unit } = req.body;
+  const userId = req.user.id;
 
   const meal = await Meal.findByPk(mealId);
   const ingredient = await Ingredient.findByPk(ingredientId);
@@ -18,6 +19,13 @@ router.post("/:mealId/ingredients/:ingredientId", requireAuth, async (req, res, 
       status: 404,
       message: "Meal or ingredient could not be found",
     })
+  }
+
+  if (userId !== meal.creatorId) {
+    const err = new Error("Authorization required");
+    err.status = 403;
+    err.message = "You are not allowed to edit this meal's ingredients.";
+    return next(err);
   }
 
   const newMealIngredient = await MealIngredient.create({
@@ -34,6 +42,7 @@ router.post("/:mealId/ingredients/:ingredientId", requireAuth, async (req, res, 
 router.put("/:mealId/ingredients/:ingredientId", requireAuth, async (req, res, next) => {
   const { mealId, ingredientId } = req.params;
   const { quantity, unit } = req.body;
+  const userId = req.user.id;
   
   const meal = await Meal.findByPk(mealId);
   const ingredient = await Ingredient.findByPk(ingredientId);
@@ -43,6 +52,13 @@ router.put("/:mealId/ingredients/:ingredientId", requireAuth, async (req, res, n
       status: 404,
       message: "Meal or ingredient could not be found",
     })
+  }
+
+  if (userId !== meal.creatorId) {
+    const err = new Error("Authorization required");
+    err.status = 403;
+    err.message = "You are not allowed to edit this meal's ingredients.";
+    return next(err);
   }
 
   const mealIngredient = await MealIngredient.findOne({
