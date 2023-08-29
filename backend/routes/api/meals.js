@@ -9,7 +9,7 @@ const router = express.Router();
 router.post("/:mealId/ingredients/:ingredientId", requireAuth, async (req, res, next) => {
   const { mealId, ingredientId } = req.params;
   const { quantity, unit } = req.body;
-  
+
   const meal = await Meal.findByPk(mealId);
   const ingredient = await Ingredient.findByPk(ingredientId);
 
@@ -32,7 +32,41 @@ router.post("/:mealId/ingredients/:ingredientId", requireAuth, async (req, res, 
 
 // Update ingredient info for a meal with mealId and ingredientId
 router.put("/:mealId/ingredients/:ingredientId", requireAuth, async (req, res, next) => {
+  const { mealId, ingredientId } = req.params;
+  const { quantity, unit } = req.body;
+  
+  const meal = await Meal.findByPk(mealId);
+  const ingredient = await Ingredient.findByPk(ingredientId);
 
+  if (!meal || !ingredient) {
+    return next({
+      status: 404,
+      message: "Meal or ingredient could not be found",
+    })
+  }
+
+  const mealIngredient = await MealIngredient.findOne({
+    where: {
+      mealId: meal.id,
+      ingredientId: ingredient.id,
+    },
+  });
+
+  if (!mealIngredient) {
+    return next({
+      status: 404,
+      message: "Ingredient not found for this meal"
+    })
+  }
+
+  await mealIngredient.update({
+    mealId: meal.id,
+    ingredientId: ingredient.id,
+    quantity,
+    unit
+  });
+
+  return res.status(200).json({ mealIngredient });
 });
 
 // Delete ingredient in a meal with mealId and ingredientId
