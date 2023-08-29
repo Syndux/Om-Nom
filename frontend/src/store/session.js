@@ -17,7 +17,7 @@ const clearSessionUser = () => ({
 // Thunk action creators
 export const login = (user) => async dispatch => {
   const { credential, password } = user;
-  const response = await csrfFetch('/api/session', {
+  const response = await csrfFetch('/api/users/login', {
     method: 'POST',
     body: JSON.stringify({ credential, password }),
   });
@@ -30,7 +30,7 @@ export const login = (user) => async dispatch => {
 };
 
 export const restoreUser = () => async dispatch => {
-  const response = await csrfFetch('/api/session');
+  const response = await csrfFetch('/api/users/current');
 
   if (response.ok) {
     const data = await response.json();
@@ -60,7 +60,7 @@ export const signup = (user) => async dispatch => {
 };
 
 export const logout = () => async dispatch => {
-  const response = await csrfFetch('/api/session', {
+  const response = await csrfFetch('/api/users', {
     method: 'DELETE',
   });
 
