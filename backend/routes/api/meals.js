@@ -60,11 +60,6 @@ router.delete("/:mealId/ingredients/:ingredientId", requireAuth, async (req, res
 
 // Read ingredients for a meal with mealId
 router.get("/:mealId/ingredients", async (req, res, next) => {
-
-});
-
-// Get ingredients for a meal with mealId
-router.get("/:mealId/ingredients", async (req, res, next) => {
   const { mealId } = req.params;
 
   const meal = await Meal.findByPk(mealId);
