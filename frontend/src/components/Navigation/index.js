@@ -8,7 +8,7 @@ function Navigation({ isLoaded }){
   const sessionUser = useSelector(state => state.session.user);
 
   return (
-    <ul>
+    <ul className="inline-flex flex-row">
       <li>
         <NavLink exact to="/">Home</NavLink>
       </li>
