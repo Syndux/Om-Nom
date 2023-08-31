@@ -8,16 +8,15 @@ function Navigation({ isLoaded }){
   const sessionUser = useSelector(state => state.session.user);
 
   return (
-    <ul className="inline-flex flex-row">
-      <li>
-        <NavLink exact to="/">Home</NavLink>
-      </li>
-      {isLoaded && (
-        <li>
-          <ProfileButton user={sessionUser} />
-        </li>
-      )}
-    </ul>
+    <div className="flex justify-between items-center m-2">
+      <div>
+        <NavLink exact to="/">Om Nom</NavLink>
+      </div>
+      <div>
+        
+      </div>
+
+    </div>
   );
 }
 
