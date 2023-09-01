@@ -17,23 +17,33 @@ function App() {
     dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
   }, [dispatch]);
 
+  const activeMenu = true;
   return (
-    <>
-      <Navigation isLoaded={isLoaded} />
-      {isLoaded && (
-        <Switch>
-          <Route path="/login">
-            <LoginFormPage />
-          </Route>
-          <Route path="/signup">
-            <SignupFormPage />
-          </Route>
-          <Route exact path="/">
-            <LandingPage />
-          </Route>
-        </Switch>
+    // <>
+    //   <Navigation isLoaded={isLoaded} />
+    //   {isLoaded && (
+    //     <Switch>
+    //       {/* Home */}
+    //       {/* Meals */}
+    //       {/* Ingredients */}
+    //       {/* Meal Planning */}
+    //       <Route path="/login" component={() => <LoginFormPage />} />
+    //       <Route path="/signup" component={() => <SignupFormPage />} />
+    //       <Route exact path="/" component={() => <LandingPage /> } />
+    //     </Switch>
+    //   )}
+    // </>
+    <div>
+      {isLoaded && activeMenu ? (
+        <div className="sidebar w-60 fixed bg-white">
+          Active Sidebar
+        </div>
+      ) : (
+        <div className="w-0">
+          Inactive Sidebar
+        </div>
       )}
-    </>
+    </div>
   );
 }
 
