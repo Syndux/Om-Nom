@@ -1,11 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, Redirect } from "react-router-dom";
 
+import ComingSoon from "./components/ComingSoon";
 import LandingPage from "./components/LandingPage";
 import LoginFormPage from "./components/Login-Signup/LoginFormPage";
 import SignupFormPage from "./components/Login-Signup/SignupFormPage";
-import Navigation from "./components/Navigation";
+import Meals from "./components/Meals";
+import MealsOwned from "./components/Meals/MealsOwned";
+import MealsSingular from "./components/Meals/MealsSingular";
+import Navbar from "./components/Navbar";
+import Ingredients from "./components/Ingredients";
 
 import * as sessionActions from "./store/session";
 
@@ -50,23 +55,27 @@ function App() {
           NavBar
         </div>
       </div>
-
-      <div>
         {/* Preparing to update ReactRouterDom v6 */}
         <Switch>
           {/* Home */}
           <Route exact path="/" component={LandingPage} /> {/* View for logged-in (explore) and logged-out (showcase) */}
           {/* Meals */}
-          <Route path="/meals/current" component={} /> {/* SIDEBAR - View all meals */}
-          <Route path="/meals/saved" component={} /> {/* SIDEBAR - View favorite/saved meals - Coming soon!*/}
-          <Route path="/meals/:mealId" component={} /> {/* View singular meal */}
-          <Route path="/meals" component={} /> {/* SIDEBAR - View all meals */}
+          <Route path="/meals/current" component={MealsOwned} /> {/* SIDEBAR - View all of your meals */}
+          <Route path="/meals/saved" component={ComingSoon} /> {/* SIDEBAR - View favorite/saved meals - Coming soon! */}
+          <Route path="/meals/:mealId" component={MealsSingular} /> {/* View singular meal */}
+          <Route path="/meals" component={Meals} /> {/* SIDEBAR - View all meals */}
           {/* Ingredients */}
-          <Route path="/ingredients" component={} /> {/* SIDEBAR - View all ingredients */}
+          <Route path="/ingredients" component={Ingredients} /> {/* SIDEBAR - View all ingredients */}
           {/* Meal Planning */}
-          <Route path="/meal-plan" component={} /> {/* SIDEBAR - Calendar for meals - Coming soon!*/}
+          <Route path="/meal-plan" component={ComingSoon} /> {/* SIDEBAR - Calendar for meals - Coming soon!*/}
+          {/* User Profile */}
+          <Route path="/following" component={ComingSoon} /> {/* NAVBAR - View followers/following after clicking text in profile dropdown - Coming soon! */}
+          <Route path="/reviews" component={ComingSoon} /> {/* NAVBAR - View all reviews you made - Coming soon! */}
+          <Route path="/messages" component={ComingSoon} /> {/* NAVBAR - View your messages - Coming soon! */}
+          <Route path="/logout">
+            <Redirect to="/"/>
+          </Route>
         </Switch>
-      </div>
     </div>
   );
 }
