@@ -8,7 +8,7 @@ import LoginFormPage from "./components/Login-Signup/LoginFormPage";
 import SignupFormPage from "./components/Login-Signup/SignupFormPage";
 import Meals from "./components/Meals";
 import MealsOwned from "./components/Meals/MealsOwned";
-import MealsSingular from "./components/Meals/MealsSingular";
+import Meal from "./components/Meals/MealsSingular";
 import Navbar from "./components/Navbar";
 import Ingredients from "./components/Ingredients";
 
@@ -62,7 +62,7 @@ function App() {
           {/* Meals */}
           <Route path="/meals/current" component={MealsOwned} /> {/* SIDEBAR - View all of your meals */}
           <Route path="/meals/saved" component={ComingSoon} /> {/* SIDEBAR - View favorite/saved meals - Coming soon! */}
-          <Route path="/meals/:mealId" component={MealsSingular} /> {/* View singular meal */}
+          <Route path="/meals/:mealId" component={Meal} /> {/* View singular meal */}
           <Route path="/meals" component={Meals} /> {/* SIDEBAR - View all meals */}
           {/* Ingredients */}
           <Route path="/ingredients" component={Ingredients} /> {/* SIDEBAR - View all ingredients */}

@@ -1,9 +1,9 @@
 import React from 'react'
 
-const MealsSingular = () => {
+const Meal = () => {
   return (
-    <div>MealsSingular</div>
+    <div>Meal</div>
   )
 }
 
-export default MealsSingular;
+export default Meal;
