@@ -4,9 +4,6 @@ module.exports = {
   darkMode: 'class',
   theme: {
     extend: {
-      fontSize: {
-        14: "14px",
-      },
       backgroundColor: {
         'main-bg': '#F9FBFC',
         'main-dark-bg': '#23272F',
@@ -16,13 +13,16 @@ module.exports = {
       },
       backgroundImage: {
         'hero-pattern':
-          "url('https://wallpapercave.com/wp/wp7707112.jpg')",
+        "url('https://wallpapercave.com/wp/wp7707112.jpg')",
       },
       borderColor: {
         color: 'rgba(0, 0, 0, 0.1)',
       },
       borderWidth: {
         1: '1px',
+      },
+      fontSize: {
+        14: "14px",
       },
       height: {
         80: '80px',
