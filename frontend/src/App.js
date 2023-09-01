@@ -17,7 +17,7 @@ function App() {
     dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
   }, [dispatch]);
 
-  const activeMenu = true;
+  const activeMenu = false;
   return (
     // <>
     //   <Navigation isLoaded={isLoaded} />
@@ -35,9 +35,7 @@ function App() {
     // </>
     <div>
       {isLoaded && activeMenu ? (
-        <div className="sidebar w-60 fixed bg-white">
-          Active Sidebar
-        </div>
+        <div className="sidebar fixed w-60 bg-white">Active Sidebar</div>
       ) : (
         <div className="w-0">
           Inactive Sidebar
