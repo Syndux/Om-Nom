@@ -1,7 +1,7 @@
 import React from "react";
 
-const ThemeSwitch = () => {
-  return <div>ThemeSwitch</div>;
+const ThemeToggle = () => {
+  return <div>Theme Toggle</div>;
 };
 
-export default ThemeSwitch;
+export default ThemeToggle;
