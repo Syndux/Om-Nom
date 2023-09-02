@@ -9,6 +9,7 @@
     "js-cookie": "^3.0.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-icons": "^4.10.1",
     "react-redux": "^7.2.9",
     "react-router-dom": "^5.3.4",
     "react-scripts": "5.0.1",
@@ -37,7 +38,10 @@
     ]
   },
   "devDependencies": {
-    "redux-logger": "^3.0.6"
+    "prettier": "^3.0.3",
+    "prettier-plugin-tailwindcss": "^0.5.4",
+    "redux-logger": "^3.0.6",
+    "tailwindcss": "^3.3.3"
   },
   "proxy": "http://localhost:8000"
 }
