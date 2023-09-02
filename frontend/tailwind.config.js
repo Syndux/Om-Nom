@@ -9,6 +9,10 @@ module.exports = {
         'main-dark-bg': '#23272F',
         'secondary-dark-bg': '#2E3238',
         'light-gray': '#EBEBEB',
+        'navy-blue': '#010079',
+        'bright-navy-blue': '#1B73D3',
+        'american-gold': '#D5AD36',
+        'chinese-gold': '#CD9703',
         'half-transparent': 'rgba(0, 0, 0, 0.5)',
       },
       backgroundImage: {
