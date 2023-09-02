@@ -7,10 +7,11 @@ import LandingPage from "./components/LandingPage";
 import LoginFormPage from "./components/Login-Signup/LoginFormPage";
 import SignupFormPage from "./components/Login-Signup/SignupFormPage";
 import Meals from "./components/Meals";
+import Meal from "./components/Meals/Meal";
 import MealsOwned from "./components/Meals/MealsOwned";
-import Meal from "./components/Meals/MealsSingular";
 import Navbar from "./components/Navbar";
 import Ingredients from "./components/Ingredients";
+import Sidebar from "./components/Sidebar";
 
 import * as sessionActions from "./store/session";
 
@@ -28,10 +29,6 @@ function App() {
     //   <Navigation isLoaded={isLoaded} />
     //   {isLoaded && (
     //     <Switch>
-    //       {/* Home */}
-    //       {/* Meals */}
-    //       {/* Ingredients */}
-    //       {/* Meal Planning */}
     //       <Route path="/login" component={() => <LoginFormPage />} />
     //       <Route path="/signup" component={() => <SignupFormPage />} />
     //       <Route exact path="/" component={() => <LandingPage /> } />
@@ -42,9 +39,13 @@ function App() {
       {isLoaded && activeMenu ? (
         <div className="sidebar fixed w-60 bg-white dark:bg-secondary-dark-bg">
           Active Sidebar
+          <Sidebar />
         </div>
       ) : (
-        <div className="w-0 dark:bg-secondary-dark-bg">Inactive Sidebar</div>
+        <div className="w-0 dark:bg-secondary-dark-bg">
+          Inactive Sidebar
+          <Sidebar />
+        </div>
       )}
       <div
         className={`min-h-screen w-full bg-main-bg dark:bg-main-bg ${
@@ -52,7 +53,7 @@ function App() {
         }`}
       >
         <div className="navbar fixed w-full bg-main-bg dark:bg-main-dark-bg md:static">
-          NavBar
+          <Navbar />
         </div>
       </div>
         {/* Preparing to update ReactRouterDom v6 */}
