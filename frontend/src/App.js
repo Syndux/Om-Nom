@@ -23,33 +23,22 @@ function App() {
     dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
   }, [dispatch]);
 
-  const activeMenu = false;
+  const activeMenu = true;
+
   return (
-    // <>
-    //   <Navigation isLoaded={isLoaded} />
-    //   {isLoaded && (
-    //     <Switch>
-    //       <Route path="/login" component={() => <LoginFormPage />} />
-    //       <Route path="/signup" component={() => <SignupFormPage />} />
-    //       <Route exact path="/" component={() => <LandingPage /> } />
-    //     </Switch>
-    //   )}
-    // </>
     <div>
       {isLoaded && activeMenu ? (
         <div className="sidebar fixed w-60 bg-white dark:bg-secondary-dark-bg">
-          Active Sidebar
           <Sidebar />
         </div>
       ) : (
         <div className="w-0 dark:bg-secondary-dark-bg">
-          Inactive Sidebar
           <Sidebar />
         </div>
       )}
       <div
         className={`min-h-screen w-full bg-main-bg dark:bg-main-bg ${
-          activeMenu ? `md:ml-72` : `flex-2`
+          activeMenu ? `md:ml-60` : `flex-2`
         }`}
       >
         <div className="navbar fixed w-full bg-main-bg dark:bg-main-dark-bg md:static">
