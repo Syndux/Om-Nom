@@ -10,8 +10,7 @@ import {
   MealsOwned,
   Navbar,
   Ingredients,
-  Sidebar,
-  ThemeToggle,
+  Sidebar
 } from "./components";
 
 import * as sessionActions from "./store/session";
