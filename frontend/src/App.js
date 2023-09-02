@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { Route, Switch, Redirect } from "react-router-dom";
 
-import { LandingPage } from "./views";
+import { LandingPage } from "./pages";
 import {
   ComingSoon,
   Meals,
