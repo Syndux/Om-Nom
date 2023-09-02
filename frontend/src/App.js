@@ -2,16 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { Route, Switch, Redirect } from "react-router-dom";
 
-import { LandingPage } from "./pages";
-import {
-  ComingSoon,
-  Meals,
-  Meal,
-  MealsOwned,
-  Navbar,
-  Ingredients,
-  Sidebar
-} from "./components";
+import { Explore, Showcase, AllIngredientsPage, OwnedMealsPage } from "./pages";
+import { ComingSoon, Meals, Meal, Navbar, Sidebar } from "./components";
 
 import * as sessionActions from "./store/session";
 
@@ -49,27 +41,29 @@ function App() {
         {/* Preparing to update ReactRouterDom v6 */}
         <Switch>
           {/* Home */}
-          {/* View for logged-in (explore) and logged-out (showcase) */}
-          <Route exact path="/" component={LandingPage} />{" "}
-          
+          {/* View for logged-out (showcase) */}
+          <Route exact path="/" component={Showcase} />
+          {/* View for logged-in (home) */}
+          <Route path="/home" component={Explore} />
+
           {/* Meals */}
           {/* SIDEBAR - View all of your meals */}
-          <Route path="/meals/current" component={MealsOwned} />
+          <Route path="/meals/current" component={OwnedMealsPage} />
           {/* SIDEBAR - View favorite/saved meals - Coming soon! */}
           <Route path="/meals/saved" component={ComingSoon} />
           {/* View singular meal */}
           <Route path="/meals/:mealId" component={Meal} />
           {/* SIDEBAR - View all meals */}
           <Route path="/meals" component={Meals} />
-          
+
           {/* Ingredients */}
           {/* SIDEBAR - View all ingredients */}
-          <Route path="/ingredients" component={Ingredients} />
-          
+          <Route path="/ingredients" component={AllIngredientsPage} />
+
           {/* Meal Planning */}
           {/* SIDEBAR - Calendar for meals - Coming soon!*/}
           <Route path="/meal-plan" component={ComingSoon} />
-          
+
           {/* User Profile */}
           {/* NAVBAR - View followers/following after clicking text in profile dropdown - Coming soon! */}
           <Route path="/following" component={ComingSoon} />
