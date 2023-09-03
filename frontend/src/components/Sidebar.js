@@ -60,9 +60,9 @@ const sidebarItems = [
 ];
 
 const activePage =
-  "flex items-center gap-4 pl-3 pt-2 pb-2 rounded-lg text-white text-md m-2";
+  "flex items-center gap-4 pl-3 pt-2 pb-2 rounded-lg text-light-gray text-md m-2";
 const inactivePage =
-  "flex items-center gap-4 pl-3 pt-2 pb-2 rounded-lg text-md text-gray-700 dark:text-gray-200 dark:hover:text-black hover:bg-light-gray m-2 transition-transform duration-300 hover:scale-105";
+  "flex items-center gap-4 pl-3 pt-2 pb-2 rounded-lg text-md text-secondary-dark-bg dark:text-light-gray dark:hover:text-black hover:bg-light-gray m-2 transition-transform duration-300 hover:scale-105";
 
 const Sidebar = () => {
   const { sidebarOpen, setSidebarOpen, currentMode } = useAppContext();
@@ -70,14 +70,14 @@ const Sidebar = () => {
   const logoSrc = currentMode === "Dark" ? OmNomLightLogo : OmNomDarkLogo;
 
   return (
-    <div className="mx-2 h-screen overflow-auto pb-10 md:overflow-hidden md:hover:overflow-auto">
+    <div className="mx-2 h-screen overflow-auto pb-10 md:overflow-hidden">
       {sidebarOpen && (
         <>
-          <div className="flex items-center justify-center">
+          <div className="relative flex items-center justify-center">
             <button
               type="button"
-              onClick={() => setSidebarOpen(!sidebarOpen)}
-              className="absolute left-6 top-6 rounded-full text-xl transition-transform duration-300 hover:scale-110"
+              onClick={() => setSidebarOpen(false)}
+              className="border-secondary-dark-bg text-secondary-dark-bg dark:text-light-gray dark:border-light-gray absolute left-0 top-6 ml-4 rounded-full border-2 border-solid text-xl transition-transform duration-300 hover:scale-110"
             >
               <MdRestaurantMenu />
             </button>
@@ -90,7 +90,7 @@ const Sidebar = () => {
               if (!icon) {
                 return (
                   <div key={text}>
-                    <p className="m-3 ml-2 mt-4 uppercase text-gray-600 dark:text-gray-600">
+                    <p className="text-secondary-dark-bg dark:text-light-gray m-3 ml-2 mt-4 uppercase">
                       {text}
                     </p>
                   </div>
