@@ -69,11 +69,7 @@ const Sidebar = () => {
         <>
           <div className="flex items-center justify-center">
             <Link to="/" onClick={() => {}} className="mt-6">
-              <img
-                src={OmNomDarkLogo}
-                alt="Om Nom logo"
-                className="w-32"
-              />
+              <img src={OmNomDarkLogo} alt="Om Nom logo" className="w-32" />
             </Link>
           </div>
           <div className="mt-8">
