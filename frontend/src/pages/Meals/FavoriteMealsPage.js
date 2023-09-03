@@ -2,7 +2,7 @@ import React from 'react'
 
 const FavoriteMealsPage = () => {
   return (
-    <div>FavoriteMealsPage</div>
+    <div>FavoriteMealsPage coming soon!</div>
   )
 }
 

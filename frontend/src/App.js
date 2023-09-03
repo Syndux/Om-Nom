@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { Route, Switch, Redirect } from "react-router-dom";
 
-import { ComingSoonPage, ExplorePage, ShowcasePage, AllIngredientsPage, OwnedMealsPage } from "./pages";
-import { Meals, Meal, Navbar, Sidebar } from "./components";
+import { ComingSoonPage, ExplorePage, ShowcasePage, AllIngredientsPage, OwnedMealsPage, MealDetailsPage, AllMealsPage } from "./pages";
+import { Navbar, Sidebar } from "./components";
 
 import * as sessionActions from "./store/session";
 
@@ -54,9 +54,9 @@ function App() {
           {/* SIDEBAR - View favorite/saved meals - Coming soon! */}
           <Route path="/meals/saved" component={ComingSoonPage} />
           {/* View singular meal */}
-          <Route path="/meals/:mealId" component={Meal} />
+          <Route path="/meals/:mealId" component={MealDetailsPage} />
           {/* SIDEBAR - View all meals */}
-          <Route path="/meals" component={Meals} />
+          <Route path="/meals" component={AllMealsPage} />
 
           {/* Ingredients */}
           {/* SIDEBAR - View all ingredients */}
@@ -67,7 +67,9 @@ function App() {
           <Route path="/meal-plan" component={ComingSoonPage} />
 
           {/* User Profile */}
-          {/* NAVBAR - View followers/following after clicking text in profile dropdown - Coming soon! */}
+          {/* NAVBAR - View profile after dropdown - Coming soon! */}
+          <Route path ="/profile" component={ComingSoonPage} />
+          {/* NAVBAR - View followers/following after dropdown - Coming soon! */}
           <Route path="/following" component={ComingSoonPage} />
           {/* NAVBAR - View all reviews you made - Coming soon! */}
           <Route path="/reviews" component={ComingSoonPage} />
