@@ -2,7 +2,7 @@ import React from "react";
 import { Link, NavLink } from "react-router-dom";
 
 import { FaHouse } from "react-icons/fa6";
-import { BiSolidFoodMenu } from "react-icons/bi";
+import { MdMenuBook } from "react-icons/md";
 import { PiBowlFoodFill } from "react-icons/pi";
 import { FaBookmark } from "react-icons/fa6";
 import { FaCarrot } from "react-icons/fa6";
@@ -25,7 +25,7 @@ const sidebarItems = [
   },
   {
     text: "All Meals",
-    icon: <BiSolidFoodMenu />,
+    icon: <MdMenuBook />,
     link: "meals",
   },
   {
