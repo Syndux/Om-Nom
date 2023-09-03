@@ -11,8 +11,9 @@ module.exports = {
         'light-gray': '#EBEBEB',
         'navy-blue': '#010079',
         'bright-navy-blue': '#1B73D3',
-        'american-gold': '#D5AD36',
         'chinese-gold': '#CD9703',
+        'strong-blue': '#265185',
+        'american-gold': '#D5AD36',
         'half-transparent': 'rgba(0, 0, 0, 0.5)',
       },
       backgroundImage: {
