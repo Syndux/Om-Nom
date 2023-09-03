@@ -24,14 +24,14 @@ function App() {
   }, [dispatch]);
 
   // Temp vars
-  const activeMenu = true;
+  const sidebarOpen = true;
   const currentMode = "light";
 
   return (
     isLoaded && (
       <div className={currentMode === "Dark" ? "dark" : ""}>
         <div className="relative flex dark:bg-main-dark-bg">
-          {activeMenu ? (
+          {sidebarOpen ? (
             <div className="sidebar fixed w-60 bg-white dark:bg-secondary-dark-bg">
               <Sidebar />
             </div>
@@ -42,7 +42,7 @@ function App() {
           )}
           <div
             className={`min-h-screen w-full bg-main-bg dark:bg-main-bg ${
-              activeMenu ? `md:ml-60` : `flex-2`
+              sidebarOpen ? `md:ml-60` : `flex-2`
             }`}
           >
             <div className="navbar fixed w-full bg-main-bg dark:bg-main-dark-bg md:static">
