@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { Route, Switch, Redirect } from "react-router-dom";
 
-import { ComingSoonPage, Explore, Showcase, AllIngredientsPage, OwnedMealsPage } from "./pages";
+import { ComingSoonPage, ExplorePage, ShowcasePage, AllIngredientsPage, OwnedMealsPage } from "./pages";
 import { Meals, Meal, Navbar, Sidebar } from "./components";
 
 import * as sessionActions from "./store/session";
@@ -44,9 +44,9 @@ function App() {
         <Switch>
           {/* Home */}
           {/* SIDEBAR - View for logged-out (showcase) */}
-          <Route exact path="/" component={Showcase} />
+          <Route exact path="/" component={ShowcasePage} />
           {/* SIDEBAR - View for logged-in (home) */}
-          <Route path="/home" component={Explore} />
+          <Route path="/home" component={ExplorePage} />
 
           {/* Meals */}
           {/* SIDEBAR - View all of your meals */}

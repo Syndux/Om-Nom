@@ -1,5 +1,5 @@
-export { default as Showcase } from './Home_Landing/Showcase';
-export { default as Explore } from './Home_Landing/Explore';
+export { default as ShowcasePage } from './Home_Landing/ShowcasePage';
+export { default as ExplorePage } from './Home_Landing/ExplorePage';
 
 export { default as AllMealsPage } from './Meals/AllMealsPage';
 export { default as FavoriteMealsPage } from './Meals/FavoriteMealsPage';
