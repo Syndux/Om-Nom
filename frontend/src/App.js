@@ -15,7 +15,9 @@ function App() {
     dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
   }, [dispatch]);
 
+  // Temp vars
   const activeMenu = true;
+  const currentMode = "light";
 
   return (
     <div className={currentMode === "Dark" ? "dark" : ""}>
