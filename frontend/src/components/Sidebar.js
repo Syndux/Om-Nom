@@ -1,7 +1,7 @@
 import React from "react";
 import { Link, NavLink } from "react-router-dom";
 
-import { MdRestaurantMenu } from "react-icons/md";
+import { FaXmark } from "react-icons/fa6";
 import { FaHouse } from "react-icons/fa6";
 import { MdMenuBook } from "react-icons/md";
 import { PiBowlFoodFill } from "react-icons/pi";
@@ -77,9 +77,9 @@ const Sidebar = () => {
             <button
               type="button"
               onClick={() => setSidebarOpen(false)}
-              className="border-secondary-dark-bg text-secondary-dark-bg dark:text-light-gray dark:border-light-gray absolute left-[2px] top-4 ml-4 rounded-full border-2 border-solid text-l transition-transform duration-300 hover:scale-110"
+              className=" text-secondary-dark-bg dark:text-light-gray absolute left-[2px] top-6 ml-4 rounded-full text-xl transition-transform duration-300 hover:scale-110"
             >
-              <MdRestaurantMenu />
+              <FaXmark />
             </button>
             <Link to="/" onClick={() => {}} className="mt-6">
               <img src={logoSrc} alt="Om Nom logo" className="w-32" />
