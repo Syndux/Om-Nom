@@ -26,6 +26,12 @@ module.exports = {
       borderWidth: {
         1: '1px',
       },
+      colors: {
+        'main-bg': '#F9FBFC',
+        'main-dark-bg': '#23272F',
+        'secondary-dark-bg': '#2E3238',
+        'light-gray': '#EBEBEB',
+      },
       fontSize: {
         14: "14px",
       },
