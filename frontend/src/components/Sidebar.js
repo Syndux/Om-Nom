@@ -7,8 +7,9 @@ import { PiBowlFoodFill } from "react-icons/pi";
 import { FaBookmark } from "react-icons/fa6";
 import { FaCarrot } from "react-icons/fa6";
 import { FaCalendarDays } from "react-icons/fa6";
-
 import OmNomDarkLogo from "../assets/Logos/ONDark.png";
+
+import { useAppContext } from "../context/AppContext";
 
 const sidebarItems = [
   {
@@ -55,14 +56,14 @@ const sidebarItems = [
   },
 ];
 
-// Temp vars
-const sidebarOpen = true;
 const activePage =
   "flex items-center gap-4 pl-3 pt-2 pb-2 rounded-lg text-white text-md m-2";
 const inactivePage =
   "flex items-center gap-4 pl-3 pt-2 pb-2 rounded-lg text-md text-gray-700 dark:text-gray-200 dark:hover:text-black hover:bg-light-gray m-2";
 
 const Sidebar = () => {
+  const { sidebarOpen, setSidebarOpen } = useAppContext();
+
   return (
     <div className="mx-2 h-screen overflow-auto pb-10 md:overflow-hidden md:hover:overflow-auto">
       {sidebarOpen && (
