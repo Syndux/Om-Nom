@@ -4,6 +4,7 @@ const AppContext = createContext();
 
 export const useAppContext = () => useContext(AppContext);
 
+// Navbar icon states
 const initialState = {
   groceryList: false,
   notification: false,
