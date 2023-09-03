@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { Route, Switch, Redirect } from "react-router-dom";
 
+import { Navbar, Sidebar } from "./components";
 import {
   ComingSoonPage,
   ExplorePage,
@@ -11,21 +12,19 @@ import {
   MealDetailsPage,
   AllMealsPage,
 } from "./pages";
-import { Navbar, Sidebar } from "./components";
 
 import * as sessionActions from "./store/session";
+
+import { useAppContext } from "./context/AppContext";
 
 function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
+  const { sidebarOpen, currentMode } = useAppContext();
 
   useEffect(() => {
     dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
   }, [dispatch]);
-
-  // Temp vars
-  const sidebarOpen = true;
-  const currentMode = "light";
 
   return (
     isLoaded && (

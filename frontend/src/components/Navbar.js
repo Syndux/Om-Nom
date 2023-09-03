@@ -1,10 +1,10 @@
-import React from 'react';
-import { NavLink } from 'react-router-dom';
+import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import ProfileButton from './Navigation/ProfileButton';
-import './Navigation/Navbar.css';
 
-function Navbar({ isLoaded }){
+
+
+
+const Navbar = () => {
   const sessionUser = useSelector(state => state.session.user);
 
   return (

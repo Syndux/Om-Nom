@@ -5,9 +5,12 @@ import { Provider as ReduxProvider } from "react-redux";
 
 import "./index.css";
 import App from "./App";
+
 import configureStore from "./store";
 import { restoreCSRF, csrfFetch } from "./store/csrf";
 import * as sessionActions from "./store/session";
+
+import { AppProvider } from "./context/AppContext";
 import { ModalProvider } from "./context/Modal";
 
 const store = configureStore();
@@ -24,9 +27,11 @@ function Root() {
   return (
     <ReduxProvider store={store}>
       <BrowserRouter>
-        <ModalProvider>
-          <App />
-        </ModalProvider>
+        <AppProvider>
+          <ModalProvider>
+            <App />
+          </ModalProvider>
+        </AppProvider>
       </BrowserRouter>
     </ReduxProvider>
   );
@@ -36,5 +41,5 @@ ReactDOM.render(
   <React.StrictMode>
     <Root />
   </React.StrictMode>,
-  document.getElementById("root")
+  document.getElementById("root"),
 );
