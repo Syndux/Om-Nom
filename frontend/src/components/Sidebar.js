@@ -77,7 +77,7 @@ const Sidebar = () => {
             <button
               type="button"
               onClick={() => setSidebarOpen(false)}
-              className="border-secondary-dark-bg text-secondary-dark-bg dark:text-light-gray dark:border-light-gray absolute left-0 top-6 ml-4 rounded-full border-2 border-solid text-xl transition-transform duration-300 hover:scale-110"
+              className="border-secondary-dark-bg text-secondary-dark-bg dark:text-light-gray dark:border-light-gray absolute left-[2px] top-4 ml-4 rounded-full border-2 border-solid text-l transition-transform duration-300 hover:scale-110"
             >
               <MdRestaurantMenu />
             </button>
