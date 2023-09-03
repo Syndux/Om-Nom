@@ -3,7 +3,7 @@ import { Link, NavLink } from "react-router-dom";
 
 import { FaHouse } from "react-icons/fa6";
 import { BiSolidFoodMenu } from "react-icons/bi";
-import { PiBowlFood } from "react-icons/pi";
+import { PiBowlFoodFill } from "react-icons/pi";
 import { FaBookmark } from "react-icons/fa6";
 import { FaCarrot } from "react-icons/fa6";
 import { FaCalendarDays } from "react-icons/fa6";
@@ -27,7 +27,7 @@ const sidebarItems = [
   },
   {
     text: "Your Meals",
-    icon: <PiBowlFood />,
+    icon: <PiBowlFoodFill />,
     link: "meals/current",
   },
   {
