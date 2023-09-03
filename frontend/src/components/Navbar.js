@@ -1,8 +1,8 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import ProfileButton from './ProfileButton';
-import './Navbar.css';
+import ProfileButton from './Navigation/ProfileButton';
+import './Navigation/Navbar.css';
 
 function Navbar({ isLoaded }){
   const sessionUser = useSelector(state => state.session.user);
