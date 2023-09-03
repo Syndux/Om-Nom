@@ -1,6 +1,7 @@
 import React from "react";
 import { Link, NavLink } from "react-router-dom";
 
+import { MdRestaurantMenu } from "react-icons/md";
 import { FaHouse } from "react-icons/fa6";
 import { MdMenuBook } from "react-icons/md";
 import { PiBowlFoodFill } from "react-icons/pi";
@@ -61,7 +62,7 @@ const sidebarItems = [
 const activePage =
   "flex items-center gap-4 pl-3 pt-2 pb-2 rounded-lg text-white text-md m-2";
 const inactivePage =
-  "flex items-center gap-4 pl-3 pt-2 pb-2 rounded-lg text-md text-gray-700 dark:text-gray-200 dark:hover:text-black hover:bg-light-gray m-2";
+  "flex items-center gap-4 pl-3 pt-2 pb-2 rounded-lg text-md text-gray-700 dark:text-gray-200 dark:hover:text-black hover:bg-light-gray m-2 transition-transform duration-300 hover:scale-105";
 
 const Sidebar = () => {
   const { sidebarOpen, setSidebarOpen, currentMode } = useAppContext();
@@ -73,6 +74,13 @@ const Sidebar = () => {
       {sidebarOpen && (
         <>
           <div className="flex items-center justify-center">
+            <button
+              type="button"
+              onClick={() => setSidebarOpen(!sidebarOpen)}
+              className="absolute left-6 top-6 rounded-full text-xl transition-transform duration-300 hover:scale-110"
+            >
+              <MdRestaurantMenu />
+            </button>
             <Link to="/" onClick={() => {}} className="mt-6">
               <img src={logoSrc} alt="Om Nom logo" className="w-32" />
             </Link>
