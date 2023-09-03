@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { Route, Switch, Redirect } from "react-router-dom";
 
-import { ComingSoon, Explore, Showcase, AllIngredientsPage, OwnedMealsPage } from "./pages";
+import { ComingSoonPage, Explore, Showcase, AllIngredientsPage, OwnedMealsPage } from "./pages";
 import { Meals, Meal, Navbar, Sidebar } from "./components";
 
 import * as sessionActions from "./store/session";
@@ -41,16 +41,16 @@ function App() {
         {/* Preparing to update ReactRouterDom v6 */}
         <Switch>
           {/* Home */}
-          {/* View for logged-out (showcase) */}
+          {/* SIDEBAR - View for logged-out (showcase) */}
           <Route exact path="/" component={Showcase} />
-          {/* View for logged-in (home) */}
+          {/* SIDEBAR - View for logged-in (home) */}
           <Route path="/home" component={Explore} />
 
           {/* Meals */}
           {/* SIDEBAR - View all of your meals */}
           <Route path="/meals/current" component={OwnedMealsPage} />
           {/* SIDEBAR - View favorite/saved meals - Coming soon! */}
-          <Route path="/meals/saved" component={ComingSoon} />
+          <Route path="/meals/saved" component={ComingSoonPage} />
           {/* View singular meal */}
           <Route path="/meals/:mealId" component={Meal} />
           {/* SIDEBAR - View all meals */}
@@ -62,15 +62,15 @@ function App() {
 
           {/* Meal Planning */}
           {/* SIDEBAR - Calendar for meals - Coming soon!*/}
-          <Route path="/meal-plan" component={ComingSoon} />
+          <Route path="/meal-plan" component={ComingSoonPage} />
 
           {/* User Profile */}
           {/* NAVBAR - View followers/following after clicking text in profile dropdown - Coming soon! */}
-          <Route path="/following" component={ComingSoon} />
+          <Route path="/following" component={ComingSoonPage} />
           {/* NAVBAR - View all reviews you made - Coming soon! */}
-          <Route path="/reviews" component={ComingSoon} />
+          <Route path="/reviews" component={ComingSoonPage} />
           {/* NAVBAR - View your messages - Coming soon! */}
-          <Route path="/messages" component={ComingSoon} />
+          <Route path="/messages" component={ComingSoonPage} />
           {/* Logout */}
           <Route path="/logout">
             <Redirect to="/" />

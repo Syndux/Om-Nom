@@ -7,4 +7,4 @@ export { default as OwnedMealsPage } from './Meals/OwnedMealsPage';
 
 export { default as AllIngredientsPage } from './Ingredients/AllIngredientsPage';
 
-export { default as ComingSoon } from './ComingSoon';
+export { default as ComingSoonPage } from './ComingSoonPage';
