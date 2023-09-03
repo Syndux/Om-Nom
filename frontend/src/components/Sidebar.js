@@ -7,7 +7,9 @@ import { PiBowlFoodFill } from "react-icons/pi";
 import { FaBookmark } from "react-icons/fa6";
 import { FaCarrot } from "react-icons/fa6";
 import { FaCalendarDays } from "react-icons/fa6";
+
 import OmNomDarkLogo from "../assets/Logos/ONDark.png";
+import OmNomLightLogo from "../assets/Logos/ONLight.png";
 
 import { useAppContext } from "../context/AppContext";
 
@@ -62,7 +64,9 @@ const inactivePage =
   "flex items-center gap-4 pl-3 pt-2 pb-2 rounded-lg text-md text-gray-700 dark:text-gray-200 dark:hover:text-black hover:bg-light-gray m-2";
 
 const Sidebar = () => {
-  const { sidebarOpen, setSidebarOpen } = useAppContext();
+  const { sidebarOpen, setSidebarOpen, currentMode } = useAppContext();
+
+  const logoSrc = currentMode === "Dark" ? OmNomLightLogo : OmNomDarkLogo;
 
   return (
     <div className="mx-2 h-screen overflow-auto pb-10 md:overflow-hidden md:hover:overflow-auto">
@@ -70,7 +74,7 @@ const Sidebar = () => {
         <>
           <div className="flex items-center justify-center">
             <Link to="/" onClick={() => {}} className="mt-6">
-              <img src={OmNomDarkLogo} alt="Om Nom logo" className="w-32" />
+              <img src={logoSrc} alt="Om Nom logo" className="w-32" />
             </Link>
           </div>
           <div className="mt-8">
