@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { Route, Switch, Redirect } from "react-router-dom";
 
-import { Explore, Showcase, AllIngredientsPage, OwnedMealsPage } from "./pages";
-import { ComingSoon, Meals, Meal, Navbar, Sidebar } from "./components";
+import { ComingSoon, Explore, Showcase, AllIngredientsPage, OwnedMealsPage } from "./pages";
+import { Meals, Meal, Navbar, Sidebar } from "./components";
 
 import * as sessionActions from "./store/session";
 

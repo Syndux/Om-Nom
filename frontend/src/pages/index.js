@@ -6,3 +6,5 @@ export { default as FavoriteMealsPage } from './Meals/FavoriteMealsPage';
 export { default as OwnedMealsPage } from './Meals/OwnedMealsPage';
 
 export { default as AllIngredientsPage } from './Ingredients/AllIngredientsPage';
+
+export { default as ComingSoon } from './ComingSoon';
