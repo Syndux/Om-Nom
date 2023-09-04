@@ -87,6 +87,9 @@ function App() {
             <Route path="/logout">
               <Redirect to="/" />
             </Route>
+            <Route>
+              Page not found
+            </Route>
           </Switch>
         </div>
       </div>
