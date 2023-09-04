@@ -18,9 +18,9 @@ export const AppProvider = ({ children }) => {
   const [currentMode, setCurrentMode] = useState("Light");
   const [themeSettings, setThemeSettings] = useState(false);
 
-  const setMode = (e) => {
-    setCurrentMode(e.target.value);
-    localStorage.setItem("themeSetting", e.target.value);
+  const setMode = (mode) => {
+    setCurrentMode(mode);
+    localStorage.setItem("themeSetting", mode);
   };
 
   const handleClick = (clicked) =>
