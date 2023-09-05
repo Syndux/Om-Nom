@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
 import { FaBars } from "react-icons/fa6";
@@ -84,10 +84,7 @@ const Navbar = () => {
               <FaAngleDown />
             </div>
           ) : (
-            <div className="flex items-center gap-2">
-              <p>Login / Signup</p>
-              <FaAngleDown />
-            </div>
+            <p className="font-bold">Login/Signup</p>
           )}
         </div>
       </div>
