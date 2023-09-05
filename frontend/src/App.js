@@ -11,6 +11,7 @@ import {
   OwnedMealsPage,
   MealDetailsPage,
   AllMealsPage,
+  FavoriteMealsPage,
 } from "./pages";
 
 import * as sessionActions from "./store/session";
@@ -27,7 +28,7 @@ function App() {
   }, [dispatch]);
 
   useEffect(() => {
-    const currentThemeSetting = localStorage.getItem('themeSetting');
+    const currentThemeSetting = localStorage.getItem("themeSetting");
     if (currentThemeSetting) setCurrentMode(currentThemeSetting);
   }, []);
 
@@ -52,50 +53,48 @@ function App() {
             <div className="navbar fixed w-full bg-main-bg dark:bg-main-dark-bg md:static">
               <Navbar />
             </div>
+            {/* Preparing to update ReactRouterDom v6 */}
+            <Switch>
+              {/* Home */}
+              {/* SIDEBAR - View for logged-out (showcase) */}
+              <Route exact path="/" component={ShowcasePage} />
+              {/* SIDEBAR - View for logged-in (home) */}
+              <Route path="/home" component={ExplorePage} />
+
+              {/* Meals */}
+              {/* SIDEBAR - View all of your meals */}
+              <Route path="/meals/current" component={OwnedMealsPage} />
+              {/* SIDEBAR - View favorite/saved meals - Coming soon! */}
+              <Route path="/meals/saved" component={FavoriteMealsPage} />
+              {/* View singular meal */}
+              <Route path="/meals/:mealId" component={MealDetailsPage} />
+              {/* SIDEBAR - View all meals */}
+              <Route path="/meals" component={AllMealsPage} />
+
+              {/* Ingredients */}
+              {/* SIDEBAR - View all ingredients */}
+              <Route path="/ingredients" component={AllIngredientsPage} />
+
+              {/* Meal Planning */}
+              {/* SIDEBAR - Calendar for meals - Coming soon!*/}
+              <Route path="/meal-plan" component={ComingSoonPage} />
+
+              {/* User Profile */}
+              {/* NAVBAR - View profile after dropdown - Coming soon! */}
+              <Route path="/profile" component={ComingSoonPage} />
+              {/* NAVBAR - View followers/following after dropdown - Coming soon! */}
+              <Route path="/following" component={ComingSoonPage} />
+              {/* NAVBAR - View all reviews you made - Coming soon! */}
+              <Route path="/reviews" component={ComingSoonPage} />
+              {/* NAVBAR - View your messages - Coming soon! */}
+              <Route path="/messages" component={ComingSoonPage} />
+              {/* Logout */}
+              <Route path="/logout">
+                <Redirect to="/" />
+              </Route>
+              <Route>Page not found</Route>
+            </Switch>
           </div>
-          {/* Preparing to update ReactRouterDom v6 */}
-          <Switch>
-            {/* Home */}
-            {/* SIDEBAR - View for logged-out (showcase) */}
-            <Route exact path="/" component={ShowcasePage} />
-            {/* SIDEBAR - View for logged-in (home) */}
-            <Route path="/home" component={ExplorePage} />
-
-            {/* Meals */}
-            {/* SIDEBAR - View all of your meals */}
-            <Route path="/meals/current" component={OwnedMealsPage} />
-            {/* SIDEBAR - View favorite/saved meals - Coming soon! */}
-            <Route path="/meals/saved" component={ComingSoonPage} />
-            {/* View singular meal */}
-            <Route path="/meals/:mealId" component={MealDetailsPage} />
-            {/* SIDEBAR - View all meals */}
-            <Route path="/meals" component={AllMealsPage} />
-
-            {/* Ingredients */}
-            {/* SIDEBAR - View all ingredients */}
-            <Route path="/ingredients" component={AllIngredientsPage} />
-
-            {/* Meal Planning */}
-            {/* SIDEBAR - Calendar for meals - Coming soon!*/}
-            <Route path="/meal-plan" component={ComingSoonPage} />
-
-            {/* User Profile */}
-            {/* NAVBAR - View profile after dropdown - Coming soon! */}
-            <Route path="/profile" component={ComingSoonPage} />
-            {/* NAVBAR - View followers/following after dropdown - Coming soon! */}
-            <Route path="/following" component={ComingSoonPage} />
-            {/* NAVBAR - View all reviews you made - Coming soon! */}
-            <Route path="/reviews" component={ComingSoonPage} />
-            {/* NAVBAR - View your messages - Coming soon! */}
-            <Route path="/messages" component={ComingSoonPage} />
-            {/* Logout */}
-            <Route path="/logout">
-              <Redirect to="/" />
-            </Route>
-            <Route>
-              Page not found
-            </Route>
-          </Switch>
         </div>
       </div>
     )
