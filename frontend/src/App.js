@@ -8,11 +8,11 @@ import {
   ExplorePage,
   ShowcasePage,
   AllIngredientsPage,
-  OwnedMealsPage,
-  MealDetailsPage,
-  AllMealsPage,
-  FavoriteMealsPage,
-  MealPlanPage,
+  OwnedFoodsPage,
+  FoodDetailsPage,
+  AllFoodsPage,
+  FavoriteFoodsPage,
+  FoodPlanPage,
 } from "./pages";
 
 import * as sessionActions from "./store/session";
@@ -62,23 +62,23 @@ function App() {
               {/* SIDEBAR - View for logged-in (home) */}
               <Route path="/home" component={ExplorePage} />
 
-              {/* Meals */}
-              {/* SIDEBAR - View all of your meals */}
-              <Route path="/meals/current" component={OwnedMealsPage} />
-              {/* SIDEBAR - View favorite/saved meals - Coming soon! */}
-              <Route path="/meals/saved" component={FavoriteMealsPage} />
-              {/* View singular meal */}
-              <Route path="/meals/:mealId" component={MealDetailsPage} />
-              {/* SIDEBAR - View all meals */}
-              <Route path="/meals" component={AllMealsPage} />
+              {/* Foods */}
+              {/* SIDEBAR - View all of your foods */}
+              <Route path="/foods/current" component={OwnedFoodsPage} />
+              {/* SIDEBAR - View favorite/saved foods - Coming soon! */}
+              <Route path="/foods/saved" component={FavoriteFoodsPage} />
+              {/* View singular food */}
+              <Route path="/foods/:foodId" component={FoodDetailsPage} />
+              {/* SIDEBAR - View all foods */}
+              <Route path="/foods" component={AllFoodsPage} />
 
               {/* Ingredients */}
               {/* SIDEBAR - View all ingredients */}
               <Route path="/ingredients" component={AllIngredientsPage} />
 
-              {/* Meal Planning */}
-              {/* SIDEBAR - Calendar for meals - Coming soon!*/}
-              <Route path="/meal-plan" component={MealPlanPage} />
+              {/* Food Planning */}
+              {/* SIDEBAR - Calendar for foods - Coming soon!*/}
+              <Route path="/food-plan" component={FoodPlanPage} />
 
               {/* User Profile */}
               {/* NAVBAR - View profile after dropdown - Coming soon! */}
