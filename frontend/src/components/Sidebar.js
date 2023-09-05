@@ -21,23 +21,23 @@ const sidebarItems = [
     link: "home",
   },
   {
-    text: "Meals",
+    text: "Foods",
     icon: null,
   },
   {
-    text: "All Meals",
+    text: "All Foods",
     icon: <MdMenuBook />,
-    link: "meals",
+    link: "foods",
   },
   {
-    text: "Your Owned Meals",
+    text: "Your Owned Foods",
     icon: <PiBowlFoodFill />,
-    link: "meals/current",
+    link: "foods/current",
   },
   {
-    text: "Your Saved Meals",
+    text: "Your Saved Foods",
     icon: <FaBookmark />,
-    link: "meals/saved",
+    link: "foods/saved",
   },
   {
     text: "Ingredients",
@@ -49,13 +49,13 @@ const sidebarItems = [
     link: "ingredients",
   },
   {
-    text: "Meal Planning",
+    text: "Food Planning",
     icon: null,
   },
   {
-    text: "Meal Schedule",
+    text: "Food Schedule",
     icon: <FaCalendarDays />,
-    link: "meal-plan",
+    link: "food-plan",
   },
 ];
 

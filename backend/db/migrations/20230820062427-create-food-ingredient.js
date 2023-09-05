@@ -8,16 +8,16 @@ if (process.env.NODE_ENV === "production") {
 
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('MealIngredients', {
+    await queryInterface.createTable('FoodIngredients', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      mealId: {
+      foodId: {
         type: Sequelize.INTEGER,
-        references: { model: "Meals", key: "id" },
+        references: { model: "Foods", key: "id" },
         onUpdate: "CASCADE",
         onDelete: "CASCADE"
       },
@@ -48,6 +48,6 @@ module.exports = {
     }, options);
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('MealIngredients', options);
+    await queryInterface.dropTable('FoodIngredients', options);
   }
 };

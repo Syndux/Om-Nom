@@ -1,14 +1,14 @@
 export { default as ShowcasePage } from "./Home_Landing/ShowcasePage";
 export { default as ExplorePage } from "./Home_Landing/ExplorePage";
 
-export { default as AllMealsPage } from "./Meals/AllMealsPage";
-export { default as FavoriteMealsPage } from "./Meals/FavoriteMealsPage";
-export { default as MealDetailsPage } from "./Meals/MealDetailsPage";
-export { default as OwnedMealsPage } from "./Meals/OwnedMealsPage";
+export { default as AllFoodsPage } from "./Foods/AllFoodsPage";
+export { default as FavoriteFoodsPage } from "./Foods/FavoriteFoodsPage";
+export { default as FoodDetailsPage } from "./Foods/FoodDetailsPage";
+export { default as OwnedFoodsPage } from "./Foods/OwnedFoodsPage";
 
 export { default as AllIngredientsPage } from "./Ingredients/AllIngredientsPage";
 
-export { default as MealPlanPage} from "./MealPlanning/MealPlanPage";
+export { default as FoodPlanPage} from "./FoodPlanning/FoodPlanPage";
 
 export { default as ProfileFollowingsPage } from "./Profile/ProfileFollowingsPage";
 export { default as ProfileMessagesPage } from "./Profile/ProfileMessagesPage";
