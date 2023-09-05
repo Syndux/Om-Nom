@@ -10,11 +10,10 @@ const Explore = () => {
     if (!sessionUser) history.push("/");
   }, [sessionUser, history]);
 
-
   return (
-    <div className="my-2">
+    <div className="dark:text-light-gray text-secondary-dark-bg bg-light-gray dark:bg-secondary-dark-bg">
       <div className="flex flex-wrap justify-center lg:flex-nowrap">
-        <div className="dark:text-light-gray text-main-dark-bg m-3 flex h-screen w-full flex-col items-center justify-center rounded-xl bg-light-gray dark:bg-secondary-dark-bg">
+        <div className="m-3 flex h-screen w-full flex-col items-center justify-center rounded-xl bg-main-bg dark:bg-main-dark-bg">
           <p className="m-4 text-xl font-bold">Home for logged-in users</p>
         </div>
       </div>
