@@ -24,7 +24,7 @@ const Navbar = () => {
     "text-secondary-dark-bg dark:text-light-gray dark:hover:text-secondary-dark-bg relative rounded-lg p-1.5 text-xl transition-transform duration-300 hover:scale-110 hover:bg-light-gray";
 
   return (
-    <div className="relative mx-4 flex justify-between p-2 pt-5">
+    <div className="relative mx-2 flex justify-between p-3 pt-5">
       <div className="flex gap-4">
         <button
           type="button"
