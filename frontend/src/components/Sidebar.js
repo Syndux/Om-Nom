@@ -107,7 +107,6 @@ const Sidebar = () => {
               return (
                 <NavLink
                   exact to={`/${link}`}
-                  end
                   key={text}
                   onClick={handleCloseSidebar}
                   style={isActive => ({
