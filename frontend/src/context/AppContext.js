@@ -23,7 +23,10 @@ export const AppProvider = ({ children }) => {
   };
 
   const handleClick = (clicked) =>
-    setIsClicked({ ...initialState, [clicked]: true });
+    setIsClicked((prevClicked) => ({
+      ...initialState,
+      [clicked]: !prevClicked[clicked],
+    }));
 
   return (
     <AppContext.Provider
