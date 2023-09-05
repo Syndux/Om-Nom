@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 
 import { FaBars } from "react-icons/fa6";
@@ -7,7 +7,6 @@ import { FaCartShopping } from "react-icons/fa6";
 import { IoNotifications } from "react-icons/io5";
 import { BsSunFill } from "react-icons/bs";
 import { FaMoon } from "react-icons/fa6";
-import { FaUser } from "react-icons/fa6";
 import { FaAngleDown } from "react-icons/fa6";
 
 import { GroceryList, Notification, UserProfile } from ".";
@@ -36,7 +35,7 @@ const Navbar = () => {
     handleResize();
 
     return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  }, [setScreenSize]);
 
   useEffect(() => {
     if (screenSize <= 768) {
@@ -44,7 +43,7 @@ const Navbar = () => {
     } else {
       setSidebarOpen(true);
     }
-  }, [screenSize]);
+  }, [screenSize, setSidebarOpen]);
 
   return (
     <div className="relative mx-2 flex justify-between p-2">

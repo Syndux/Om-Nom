@@ -1,15 +1,32 @@
 import { csrfFetch } from './csrf';
 
-const GET_ALL_FOODS = 'foods/GET_ALL_FOODS';
+const LOAD_ALL_FOODS = 'foods/LOAD_ALL_FOODS';
 
+// AC - Action Creator
+const loadAllFoodsAC = (foods) => ({
+  type: LOAD_ALL_FOODS,
+  payload: foods,
+});
+
+// Thunk Action Creator
+export const loadAllFoods = () => async dispatch => {
+  const res = await csrfFetch("/api/foods");
+
+  if (res.ok) {
+    const foods = await res.json();
+    dispatch(loadAllFoodsAC(foods));
+    return foods;
+  }
+}
 
 const initialState = {};
 
 const foodsReducer = (state = initialState, action) => {
   let newState = { ...state };
   switch (action.type) {
-    case GET_ALL_FOODS:
-      return newState;
+    case LOAD_ALL_FOODS:
+      
+      return action.payload;
     default:
       return state;
   }

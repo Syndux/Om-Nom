@@ -8,7 +8,7 @@ if (process.env.NODE_ENV === "production") {
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    options.tableName = "Foods";
+    options.tableName = "Food";
     return queryInterface.bulkInsert(
       options,
       [
@@ -138,7 +138,7 @@ module.exports = {
   },
 
   down: async (queryInterface, Sequelize) => {
-    options.tableName = "Foods";
+    options.tableName = "Food";
     return queryInterface.bulkDelete(options, null, {});
   },
 };
