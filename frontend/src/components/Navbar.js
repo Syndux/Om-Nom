@@ -101,8 +101,8 @@ const Navbar = () => {
         >
           {sessionUser ? (
             <div className="flex items-center gap-2">
-              <img
-                src={sessionUser.imgUrl}
+              <img // DEVNOTE - All users should have imgUrl apart from seeded
+                src={sessionUser.imgUrl ? sessionUser.imgUrl : "https://cdn-icons-png.flaticon.com/512/3135/3135715.png"}
                 alt="user-profile"
                 className="h-5 rounded-full"
               />
@@ -115,7 +115,7 @@ const Navbar = () => {
         </div>
         {isClicked.groceryList && (<GroceryList />)}
         {isClicked.notification && (<Notification />)}
-        {isClicked.userProfile && (<UserProfile />)}
+        {isClicked.userProfile && (<UserProfile user={sessionUser} />)}
       </div>
     </div>
   );
