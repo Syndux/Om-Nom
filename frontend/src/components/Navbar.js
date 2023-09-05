@@ -10,10 +10,9 @@ import { FaMoon } from "react-icons/fa6";
 import { FaUser } from "react-icons/fa6";
 import { FaAngleDown } from "react-icons/fa6";
 
+import { OpenModalButton } from ".";
+import { LoginFormModal } from "../pages";
 import { useAppContext } from "../context/AppContext";
-
-import LoginFormModal from "../pages/Login-Signup/LoginFormModal";
-import OpenModalButton from "./OpenModalButton";
 
 const Navbar = () => {
   const sessionUser = useSelector((state) => state.session.user);
