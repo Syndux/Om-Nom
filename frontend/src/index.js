@@ -11,7 +11,7 @@ import { restoreCSRF, csrfFetch } from "./store/csrf";
 import * as sessionActions from "./store/session";
 
 import { AppProvider } from "./context/AppContext";
-import { ModalProvider } from "./context/Modal";
+import { ModalProvider, Modal } from "./context/ModalContext";
 
 const store = configureStore();
 
@@ -30,6 +30,7 @@ function Root() {
         <AppProvider>
           <ModalProvider>
             <App />
+            <Modal />
           </ModalProvider>
         </AppProvider>
       </BrowserRouter>

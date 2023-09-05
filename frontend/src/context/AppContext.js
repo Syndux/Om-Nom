@@ -16,7 +16,6 @@ export const AppProvider = ({ children }) => {
   const [screenSize, setScreenSize] = useState(undefined);
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [currentMode, setCurrentMode] = useState("Light");
-  const [themeSettings, setThemeSettings] = useState(false);
 
   const setMode = (mode) => {
     setCurrentMode(mode);
@@ -37,8 +36,6 @@ export const AppProvider = ({ children }) => {
         setSidebarOpen,
         currentMode,
         setCurrentMode,
-        themeSettings,
-        setThemeSettings,
         setMode,
         handleClick,
         initialState,
