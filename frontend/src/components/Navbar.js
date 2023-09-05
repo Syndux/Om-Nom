@@ -10,8 +10,7 @@ import { FaMoon } from "react-icons/fa6";
 import { FaUser } from "react-icons/fa6";
 import { FaAngleDown } from "react-icons/fa6";
 
-import { GroceryList, Notification, OpenModalButton, UserProfile } from ".";
-import { LoginFormModal } from "../pages";
+import { GroceryList, Notification, UserProfile } from ".";
 import { useAppContext } from "../context/AppContext";
 
 const Navbar = () => {
