@@ -1,6 +1,8 @@
 import React, { useRef, useState, useContext } from "react";
 import ReactDOM from "react-dom";
 
+import { useAppContext } from "./AppContext";
+
 const ModalContext = React.createContext();
 
 export function ModalProvider({ children }) {
@@ -39,6 +41,7 @@ export function ModalProvider({ children }) {
 
 export function Modal() {
   const { modalRef, modalContent, closeModal } = useContext(ModalContext);
+  const { currentMode } = useAppContext();
   // If there is no div referenced by the modalRef or modalContent is not a
   // truthy value, render nothing:
   if (!modalRef || !modalRef.current || !modalContent) return null;
@@ -47,14 +50,14 @@ export function Modal() {
   return ReactDOM.createPortal(
     <div
       id="modal"
-      className="fixed bottom-0 left-0 right-0 top-0 flex items-center justify-center"
+      className={`fixed bottom-0 left-0 right-0 top-0 flex items-center justify-center ${currentMode === "Dark" ? "dark" : ""}`}
     >
       <div
         id="modal-background"
         onClick={closeModal}
         className="fixed bottom-0 left-0 right-0 top-0 bg-black/70"
       />
-      <div id="modal-content" className="absolute bg-light-gray">{modalContent}</div>
+      <div id="modal-content" className="absolute bg-light-gray dark:bg-secondary-dark-bg">{modalContent}</div>
     </div>,
     modalRef.current,
   );
