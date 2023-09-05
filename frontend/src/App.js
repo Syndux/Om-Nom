@@ -31,7 +31,7 @@ function App() {
   useEffect(() => {
     const currentThemeSetting = localStorage.getItem("themeSetting");
     if (currentThemeSetting) setCurrentMode(currentThemeSetting);
-  }, []);
+  }, [setCurrentMode]);
 
   return (
     isLoaded && (
