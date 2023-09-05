@@ -16,11 +16,35 @@ import { useAppContext } from "../context/AppContext";
 
 const Navbar = () => {
   const sessionUser = useSelector((state) => state.session.user);
-  const { sidebarOpen, setSidebarOpen, handleClick, currentMode, setMode } =
-    useAppContext();
+  const {
+    sidebarOpen,
+    setSidebarOpen,
+    handleClick,
+    currentMode,
+    setMode,
+    screenSize,
+    setScreenSize,
+  } = useAppContext();
 
   const buttonClasses =
     "text-secondary-dark-bg dark:text-light-gray dark:hover:text-secondary-dark-bg relative rounded-lg p-1.5 text-xl transition-transform duration-300 hover:scale-110 hover:bg-light-gray";
+
+  useEffect(() => {
+    const handleResize = () => setScreenSize(window.innerWidth);
+    window.addEventListener("resize", handleResize);
+
+    handleResize();
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  useEffect(() => {
+    if (screenSize <= 768) {
+      setSidebarOpen(false);
+    } else {
+      setSidebarOpen(true);
+    }
+  }, [screenSize]);
 
   return (
     <div className="relative mx-2 flex justify-between p-3 pt-5">
