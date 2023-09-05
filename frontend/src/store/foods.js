@@ -5,7 +5,7 @@ const LOAD_ALL_FOODS = 'foods/LOAD_ALL_FOODS';
 // AC - Action Creator
 const loadAllFoodsAC = (foods) => ({
   type: LOAD_ALL_FOODS,
-  foods,
+  payload: foods,
 });
 
 // Thunk Action Creator
@@ -25,7 +25,8 @@ const foodsReducer = (state = initialState, action) => {
   let newState = { ...state };
   switch (action.type) {
     case LOAD_ALL_FOODS:
-      return newState;
+      
+      return action.payload;
     default:
       return state;
   }
