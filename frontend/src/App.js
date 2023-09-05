@@ -20,11 +20,16 @@ import { useAppContext } from "./context/AppContext";
 function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
-  const { sidebarOpen, currentMode } = useAppContext();
+  const { sidebarOpen, currentMode, setCurrentMode } = useAppContext();
 
   useEffect(() => {
     dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
   }, [dispatch]);
+
+  useEffect(() => {
+    const currentThemeSetting = localStorage.getItem('themeSetting');
+    if (currentThemeSetting) setCurrentMode(currentThemeSetting);
+  }, []);
 
   return (
     isLoaded && (
