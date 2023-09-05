@@ -97,7 +97,7 @@ const Sidebar = () => {
               if (!icon) {
                 return (
                   <div key={text}>
-                    <p className="text-secondary-dark-bg dark:text-light-gray m-3 ml-2 mt-4 uppercase">
+                    <p className="text-secondary-dark-bg dark:text-light-gray m-3 ml-2 mt-4 font-bold">
                       {text}
                     </p>
                   </div>
