@@ -77,18 +77,18 @@ const Sidebar = () => {
   const logoSrc = currentMode === "Dark" ? OmNomLightLogo : OmNomDarkLogo;
 
   return (
-    <div className="mx-2 h-screen overflow-auto pb-10 md:overflow-hidden">
+    <div className="mx-2 h-screen overflow-auto md:overflow-hidden">
       {sidebarOpen && (
         <>
           <div className="relative flex items-center justify-center">
             <button
               type="button"
               onClick={() => setSidebarOpen(false)}
-              className=" text-secondary-dark-bg dark:text-light-gray absolute left-0 top-5 ml-4 rounded-full p-1 text-xl transition-transform duration-300 hover:scale-110 hover:bg-light-gray dark:hover:text-black"
+              className=" text-secondary-dark-bg dark:text-light-gray absolute left-3 top-3 rounded-full p-1 text-xl transition-transform duration-300 hover:scale-110 hover:bg-light-gray dark:hover:text-black"
             >
               <FaXmark />
             </button>
-            <Link to="/" onClick={handleCloseSidebar} className="mt-6">
+            <Link to="/" onClick={handleCloseSidebar} className="mt-5">
               <img src={logoSrc} alt="Om Nom logo" className="w-32" />
             </Link>
           </div>
