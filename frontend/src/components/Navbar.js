@@ -47,7 +47,7 @@ const Navbar = () => {
   }, [screenSize]);
 
   return (
-    <div className="relative mx-2 flex justify-between p-3 pt-5">
+    <div className="relative mx-2 flex justify-between p-2">
       <div className="flex gap-4">
         <button
           type="button"
