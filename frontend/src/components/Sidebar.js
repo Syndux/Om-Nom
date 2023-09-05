@@ -30,7 +30,7 @@ const sidebarItems = [
     link: "meals",
   },
   {
-    text: "Your Meals",
+    text: "Your Owned Meals",
     icon: <PiBowlFoodFill />,
     link: "meals/current",
   },
