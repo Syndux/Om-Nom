@@ -12,6 +12,7 @@ import {
   MealDetailsPage,
   AllMealsPage,
   FavoriteMealsPage,
+  MealPlanPage,
 } from "./pages";
 
 import * as sessionActions from "./store/session";
@@ -77,7 +78,7 @@ function App() {
 
               {/* Meal Planning */}
               {/* SIDEBAR - Calendar for meals - Coming soon!*/}
-              <Route path="/meal-plan" component={ComingSoonPage} />
+              <Route path="/meal-plan" component={MealPlanPage} />
 
               {/* User Profile */}
               {/* NAVBAR - View profile after dropdown - Coming soon! */}
