@@ -8,7 +8,9 @@ const AllFoodsPage = () => {
   const foods = useSelector((state) => state.foods);
 
   useEffect(() => {
-    dispatch(loadAllFoods());
+    (async () => {
+      await dispatch(loadAllFoods());
+    })();
   }, [dispatch]);
 
   return (
@@ -16,8 +18,8 @@ const AllFoodsPage = () => {
       <div className="flex flex-wrap justify-center lg:flex-nowrap">
         <div className="m-3 flex h-screen w-full flex-col items-center justify-center rounded-xl bg-main-bg dark:bg-main-dark-bg">
           <p className="m-4 text-xl font-bold">Browse all available foods</p>
-          {foods.map((food) => (
-            <p>{food.name}</p>
+          {foods?.map((food) => (
+            <p>{food?.name}</p>
           ))}
         </div>
       </div>
