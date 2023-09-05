@@ -77,7 +77,7 @@ const Sidebar = () => {
             <button
               type="button"
               onClick={() => setSidebarOpen(false)}
-              className=" text-secondary-dark-bg dark:text-light-gray absolute left-[2px] top-6 ml-4 rounded-full text-xl transition-transform duration-300 hover:scale-110"
+              className=" text-secondary-dark-bg dark:text-light-gray absolute left-0 top-5 ml-4 rounded-full p-1 text-xl transition-transform duration-300 hover:scale-110 hover:bg-light-gray dark:hover:text-black"
             >
               <FaXmark />
             </button>

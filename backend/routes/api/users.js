@@ -19,6 +19,7 @@ router.get("/current", (req, res) => {
       username: user.username,
       firstName: user.firstName,
       lastName: user.lastName,
+      imgUrl: user.imgUrl,
     };
     return res.json({
       user: safeUser,
@@ -71,6 +72,7 @@ router.post("/", validateSignup, async (req, res) => {
     firstName,
     lastName,
     hashedPassword,
+    imgUrl: "https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
   });
 
   const safeUser = {
@@ -79,6 +81,7 @@ router.post("/", validateSignup, async (req, res) => {
     username: user.username,
     firstName: user.firstName,
     lastName: user.lastName,
+    imgUrl: user.imgUrl,
   };
 
   await setTokenCookie(res, safeUser);

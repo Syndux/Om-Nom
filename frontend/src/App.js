@@ -30,15 +30,15 @@ function App() {
     isLoaded && (
       <div className={currentMode === "Dark" ? "dark" : ""}>
         <div className="relative flex dark:bg-main-dark-bg">
-          {sidebarOpen ? (
-            <div className="sidebar fixed w-60 bg-white dark:bg-secondary-dark-bg">
-              <Sidebar />
-            </div>
-          ) : (
-            <div className="w-0 dark:bg-secondary-dark-bg">
-              <Sidebar />
-            </div>
-          )}
+          <div
+            className={`${
+              sidebarOpen
+                ? "sidebar fixed w-60 bg-main-bg dark:bg-secondary-dark-bg"
+                : "w-0 dark:bg-secondary-dark-bg"
+            }`}
+          >
+            <Sidebar />
+          </div>
           <div
             className={`min-h-screen w-full bg-main-bg dark:bg-main-bg ${
               sidebarOpen ? `md:ml-60` : `flex-2`
@@ -86,6 +86,9 @@ function App() {
             {/* Logout */}
             <Route path="/logout">
               <Redirect to="/" />
+            </Route>
+            <Route>
+              Page not found
             </Route>
           </Switch>
         </div>
