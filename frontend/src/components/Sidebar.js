@@ -60,9 +60,9 @@ const sidebarItems = [
 ];
 
 const activePage =
-  "flex items-center gap-4 pl-3 pt-2 pb-2 rounded-lg text-light-gray text-md m-2";
+  "flex items-center gap-4 pl-3 pt-2 pb-2 rounded-lg text-md text-secondary-dark-bg dark:text-light-gray bg-light-gray dark:bg-secondary-dark-bg  m-2";
 const inactivePage =
-  "flex items-center gap-4 pl-3 pt-2 pb-2 rounded-lg text-md text-secondary-dark-bg dark:text-light-gray dark:hover:text-secondary-dark-bg hover:bg-light-gray m-2 transition-transform duration-300 hover:scale-105";
+  "flex items-center gap-4 pl-3 pt-2 pb-2 rounded-lg text-md text-secondary-dark-bg dark:text-light-gray dark:hover:bg-secondary-dark-bg hover:bg-light-gray m-2 transition-transform duration-300 hover:scale-105";
 
 const Sidebar = () => {
   const { sidebarOpen, setSidebarOpen, currentMode, screenSize } =
@@ -84,7 +84,7 @@ const Sidebar = () => {
             <button
               type="button"
               onClick={() => setSidebarOpen(false)}
-              className=" text-secondary-dark-bg dark:text-light-gray absolute left-3 top-3 rounded-full p-1 text-xl transition-transform duration-300 hover:scale-110 hover:bg-light-gray dark:hover:text-black"
+              className=" text-secondary-dark-bg dark:text-light-gray absolute left-3 top-3 rounded-full p-1 text-xl transition-transform duration-300 hover:scale-110 hover:bg-light-gray dark:hover:bg-secondary-dark-bg"
             >
               <FaXmark />
             </button>
@@ -106,14 +106,14 @@ const Sidebar = () => {
 
               return (
                 <NavLink
-                  exact to={`/${link}`}
+                  exact
+                  to={`/${link}`}
                   key={text}
                   onClick={handleCloseSidebar}
-                  style={isActive => ({
-                    backgroundColor: isActive ? "#EBEBEB" : "",
-                    color: isActive ? "#2E3238" : "",
-                  })}
-                  className={({ isActive }) =>
+                  // style={isActive => ({
+                  //   backgroundColor: isActive ? "#2E3238" : "",
+                  // })}
+                  className={(isActive) =>
                     isActive ? activePage : inactivePage
                   }
                 >

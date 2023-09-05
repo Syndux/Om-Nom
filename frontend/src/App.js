@@ -40,7 +40,7 @@ function App() {
           <div
             className={`${
               sidebarOpen
-                ? "sidebar fixed w-60 bg-main-bg dark:bg-secondary-dark-bg"
+                ? "sidebar fixed w-60 bg-main-bg dark:bg-main-dark-bg"
                 : "w-0 dark:bg-secondary-dark-bg"
             }`}
           >

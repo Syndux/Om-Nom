@@ -7,7 +7,7 @@ module.exports = {
       backgroundColor: {
         'main-bg': '#F9FBFC',
         'main-dark-bg': '#23272F',
-        'secondary-dark-bg': '#2E3238',
+        'secondary-dark-bg': '#40464F',
         'light-gray': '#EBEBEB',
         'navy-blue': '#010079',
         'bright-navy-blue': '#1B73D3',
