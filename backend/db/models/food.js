@@ -1,25 +1,25 @@
 "use strict";
 const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
-  class Meal extends Model {
+  class Food extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      Meal.belongsTo(models.User, {
+      Food.belongsTo(models.User, {
         foreignKey: "creatorId",
         as: "creator",
       });
-      Meal.belongsToMany(models.Ingredient, {
-        through: "MealIngredients",
-        foreignKey: "mealId",
+      Food.belongsToMany(models.Ingredient, {
+        through: "FoodIngredients",
+        foreignKey: "foodId",
         as: "ingredients",
       });
     }
   }
-  Meal.init(
+  Food.init(
     {
       creatorId: {
         type: DataTypes.INTEGER,
@@ -34,15 +34,15 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         validate: {
           len: [2, 120],
-          async isUniqueMeal(val) {
-            const existingMeal = await Meal.findOne({
+          async isUniqueFood(val) {
+            const existingFood = await Food.findOne({
               where: {
                 creatorId: this.creatorId,
                 name: val,
               },
             });
-            if (existingMeal) {
-              throw new Error("You already have an existing meal with this name!");
+            if (existingFood) {
+              throw new Error("You already have an existing food with this name!");
             }
           },
         },
@@ -63,8 +63,8 @@ module.exports = (sequelize, DataTypes) => {
     },
     {
       sequelize,
-      modelName: "Meal",
+      modelName: "Food",
     }
   );
-  return Meal;
+  return Food;
 };
