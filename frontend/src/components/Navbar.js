@@ -27,7 +27,7 @@ const Navbar = () => {
   } = useAppContext();
 
   const buttonClasses =
-    "text-secondary-dark-bg dark:text-light-gray dark:hover:text-secondary-dark-bg relative rounded-lg p-1.5 text-xl transition-transform duration-300 hover:scale-110 hover:bg-light-gray";
+    "text-secondary-dark-bg dark:text-light-gray dark:hover:text-light-gray dark:hover:bg-secondary-dark-bg relative rounded-lg p-1.5 text-xl transition-transform duration-300 hover:scale-110 hover:bg-light-gray";
 
   useEffect(() => {
     const handleResize = () => setScreenSize(window.innerWidth);
@@ -96,7 +96,7 @@ const Navbar = () => {
           </button>
         )}
         <div
-          className="text-secondary-dark-bg dark:text-light-gray dark:hover:text-secondary-dark-bg relative flex items-center gap-1 rounded-lg px-1.5 transition-transform duration-200 hover:scale-105 hover:bg-light-gray"
+          className="text-secondary-dark-bg dark:text-light-gray dark:hover:text-light-gray dark:hover:bg-secondary-dark-bg relative flex items-center gap-1 rounded-lg px-1.5 transition-transform duration-200 hover:scale-105 hover:bg-light-gray"
           onClick={() => handleClick("userProfile")}
         >
           {sessionUser ? (
