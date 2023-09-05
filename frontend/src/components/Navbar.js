@@ -10,20 +10,21 @@ import { FaMoon } from "react-icons/fa6";
 import { FaUser } from "react-icons/fa6";
 import { FaAngleDown } from "react-icons/fa6";
 
-import { OpenModalButton } from ".";
+import { GroceryList, Notification, OpenModalButton, UserProfile } from ".";
 import { LoginFormModal } from "../pages";
 import { useAppContext } from "../context/AppContext";
 
 const Navbar = () => {
   const sessionUser = useSelector((state) => state.session.user);
   const {
-    sidebarOpen,
-    setSidebarOpen,
-    handleClick,
-    currentMode,
-    setMode,
+    isClicked,
     screenSize,
     setScreenSize,
+    sidebarOpen,
+    setSidebarOpen,
+    currentMode,
+    handleClick,
+    setMode,
   } = useAppContext();
 
   const buttonClasses =
@@ -110,12 +111,12 @@ const Navbar = () => {
               <FaAngleDown />
             </div>
           ) : (
-            <OpenModalButton
-              modalComponent={<LoginFormModal />}
-              buttonText="Login/Signup"
-            />
+            <p className="font-bold">Login/Signup</p>
           )}
         </div>
+        {isClicked.groceryList && (<GroceryList />)}
+        {isClicked.notification && (<Notification />)}
+        {isClicked.userProfile && (<UserProfile />)}
       </div>
     </div>
   );
