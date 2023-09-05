@@ -78,7 +78,8 @@ function LoginFormModal() {
         </div>
         <button
           type="submit"
-          className=""
+          className="disabled:opacity-50"
+          disabled={formDisable}
         >
           Log In
         </button>
