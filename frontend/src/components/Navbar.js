@@ -12,6 +12,9 @@ import { FaAngleDown } from "react-icons/fa6";
 
 import { useAppContext } from "../context/AppContext";
 
+import LoginFormModal from "../pages/Login-Signup/LoginFormModal";
+import OpenModalButton from "./OpenModalButton";
+
 const Navbar = () => {
   const sessionUser = useSelector((state) => state.session.user);
   const { sidebarOpen, setSidebarOpen, handleClick, currentMode, setMode } =
@@ -84,7 +87,10 @@ const Navbar = () => {
               <FaAngleDown />
             </div>
           ) : (
-            <p className="font-bold">Login/Signup</p>
+            <OpenModalButton
+              modalComponent={<LoginFormModal />}
+              buttonText="Login/Signup"
+            />
           )}
         </div>
       </div>
