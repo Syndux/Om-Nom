@@ -5,7 +5,7 @@ import { Redirect } from "react-router-dom";
 import * as sessionActions from "../../store/session";
 import { useModal } from "../../context/ModalContext";
 
-function LoginFormModal() {
+const LoginFormModal = () => {
   const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
   const [credential, setCredential] = useState("");
@@ -87,6 +87,9 @@ function LoginFormModal() {
       <div className="" onClick={loginDemo}>
         Demo User
       </div>
+      <div className="">
+          Don't have an account? Sign up.
+        </div>
     </div>
   );
 }
