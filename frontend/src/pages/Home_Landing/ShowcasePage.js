@@ -7,7 +7,7 @@ const Showcase = () => {
   const sessionUser = useSelector((state) => state.session.user); // User logged in?
 
   useEffect(() => {
-    if (!sessionUser) history.push("/");
+    if (sessionUser) history.push("/home");
   }, [sessionUser, history]);
 
   return (
