@@ -1,9 +1,43 @@
-import React from 'react'
+import React from "react";
+import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
 
-const UserProfile = () => {
+import { OpenModalButton } from ".";
+import { LoginFormModal, SignupFormModal } from "../pages";
+import * as sessionActions from "../store/session";
+
+const UserProfile = ({ user }) => {
+  const dispatch = useDispatch();
+  const history = useHistory();
+
+  const logout = (e) => {
+    e.preventDefault();
+    dispatch(sessionActions.logout());
+    history.push("/");
+  };
+
   return (
-    <div>UserProfile</div>
-  )
-}
+    <>
+      {user ? (
+        <div>
+          <button className="" onClick={logout}>
+            Log Out
+          </button>
+        </div>
+      ) : (
+        <div>
+          <OpenModalButton
+            modalComponent={<LoginFormModal />}
+            buttonText="Login"
+          />
+          <OpenModalButton
+            modalComponent={<SignupFormModal />}
+            buttonText="Signup"
+          />
+        </div>
+      )}
+    </>
+  );
+};
 
-export default UserProfile
+export default UserProfile;

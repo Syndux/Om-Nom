@@ -10,21 +10,44 @@ import { FaMoon } from "react-icons/fa6";
 import { FaUser } from "react-icons/fa6";
 import { FaAngleDown } from "react-icons/fa6";
 
+import { GroceryList, Notification, UserProfile } from ".";
 import { useAppContext } from "../context/AppContext";
-
-import LoginFormModal from "../pages/Login-Signup/LoginFormModal";
-import OpenModalButton from "./OpenModalButton";
 
 const Navbar = () => {
   const sessionUser = useSelector((state) => state.session.user);
-  const { sidebarOpen, setSidebarOpen, handleClick, currentMode, setMode } =
-    useAppContext();
+  const {
+    isClicked,
+    screenSize,
+    setScreenSize,
+    sidebarOpen,
+    setSidebarOpen,
+    currentMode,
+    handleClick,
+    setMode,
+  } = useAppContext();
 
   const buttonClasses =
     "text-secondary-dark-bg dark:text-light-gray dark:hover:text-secondary-dark-bg relative rounded-lg p-1.5 text-xl transition-transform duration-300 hover:scale-110 hover:bg-light-gray";
 
+  useEffect(() => {
+    const handleResize = () => setScreenSize(window.innerWidth);
+    window.addEventListener("resize", handleResize);
+
+    handleResize();
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  useEffect(() => {
+    if (screenSize <= 768) {
+      setSidebarOpen(false);
+    } else {
+      setSidebarOpen(true);
+    }
+  }, [screenSize]);
+
   return (
-    <div className="relative mx-4 flex justify-between p-2 pt-5">
+    <div className="relative mx-2 flex justify-between p-3 pt-5">
       <div className="flex gap-4">
         <button
           type="button"
@@ -78,8 +101,8 @@ const Navbar = () => {
         >
           {sessionUser ? (
             <div className="flex items-center gap-2">
-              <img
-                src={sessionUser.imgUrl}
+              <img // DEVNOTE - All users should have imgUrl apart from seeded
+                src={sessionUser.imgUrl ? sessionUser.imgUrl : "https://cdn-icons-png.flaticon.com/512/3135/3135715.png"}
                 alt="user-profile"
                 className="h-5 rounded-full"
               />
@@ -87,12 +110,12 @@ const Navbar = () => {
               <FaAngleDown />
             </div>
           ) : (
-            <OpenModalButton
-              modalComponent={<LoginFormModal />}
-              buttonText="Login/Signup"
-            />
+            <p className="font-bold">Login/Signup</p>
           )}
         </div>
+        {isClicked.groceryList && (<GroceryList />)}
+        {isClicked.notification && (<Notification />)}
+        {isClicked.userProfile && (<UserProfile user={sessionUser} />)}
       </div>
     </div>
   );

@@ -15,4 +15,7 @@ export { default as ProfileMessagesPage } from "./Profile/ProfileMessagesPage";
 export { default as ProfilePage } from "./Profile/ProfilePage";
 export { default as ProfileReviewsPage } from "./Profile/ProfileReviewsPage";
 
+export { default as LoginFormModal } from "./Login-Signup/LoginFormModal.js";
+export { default as SignupFormModal } from "./Login-Signup/SignupFormModal.js";
+
 export { default as ComingSoonPage } from "./ComingSoonPage";

@@ -62,10 +62,17 @@ const sidebarItems = [
 const activePage =
   "flex items-center gap-4 pl-3 pt-2 pb-2 rounded-lg text-light-gray text-md m-2";
 const inactivePage =
-  "flex items-center gap-4 pl-3 pt-2 pb-2 rounded-lg text-md text-secondary-dark-bg dark:text-light-gray dark:hover:text-black hover:bg-light-gray m-2 transition-transform duration-300 hover:scale-105";
+  "flex items-center gap-4 pl-3 pt-2 pb-2 rounded-lg text-md text-secondary-dark-bg dark:text-light-gray dark:hover:text-secondary-dark-bg hover:bg-light-gray m-2 transition-transform duration-300 hover:scale-105";
 
 const Sidebar = () => {
-  const { sidebarOpen, setSidebarOpen, currentMode } = useAppContext();
+  const { sidebarOpen, setSidebarOpen, currentMode, screenSize } =
+    useAppContext();
+
+  const handleCloseSidebar = () => {
+    if (sidebarOpen && screenSize <= 768) {
+      setSidebarOpen(false);
+    }
+  };
 
   const logoSrc = currentMode === "Dark" ? OmNomLightLogo : OmNomDarkLogo;
 
@@ -81,7 +88,7 @@ const Sidebar = () => {
             >
               <FaXmark />
             </button>
-            <Link to="/" onClick={() => {}} className="mt-6">
+            <Link to="/" onClick={handleCloseSidebar} className="mt-6">
               <img src={logoSrc} alt="Om Nom logo" className="w-32" />
             </Link>
           </div>
@@ -90,7 +97,7 @@ const Sidebar = () => {
               if (!icon) {
                 return (
                   <div key={text}>
-                    <p className="text-secondary-dark-bg dark:text-light-gray m-3 ml-2 mt-4 uppercase">
+                    <p className="text-secondary-dark-bg dark:text-light-gray m-3 ml-2 mt-4 font-bold">
                       {text}
                     </p>
                   </div>
@@ -99,12 +106,13 @@ const Sidebar = () => {
 
               return (
                 <NavLink
-                  to={`/${link}`}
+                  exact to={`/${link}`}
                   key={text}
-                  onClick={() => {}}
-                  // style={({ isActive }) => ({
-                  //   backgroundColor: isActive ? currentColor : "",
-                  // })}
+                  onClick={handleCloseSidebar}
+                  style={isActive => ({
+                    backgroundColor: isActive ? "#EBEBEB" : "",
+                    color: isActive ? "#2E3238" : "",
+                  })}
                   className={({ isActive }) =>
                     isActive ? activePage : inactivePage
                   }
