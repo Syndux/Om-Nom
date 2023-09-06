@@ -24,8 +24,8 @@ const AllFoodsPage = () => {
               <p className="m-4 text-xl font-bold">
                 Browse all available foods
               </p>
-              {foods?.map((food) => (
-                <p>{food?.name}</p>
+              {foods.map((food) => (
+                <p>{food.name}</p>
               ))}
             </>
           )}
