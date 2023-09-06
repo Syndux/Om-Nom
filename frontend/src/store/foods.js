@@ -25,7 +25,6 @@ const foodsReducer = (state = initialState, action) => {
   let newState = { ...state };
   switch (action.type) {
     case LOAD_ALL_FOODS:
-      
       return action.payload;
     default:
       return state;
