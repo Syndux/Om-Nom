@@ -16,6 +16,7 @@ const AllFoodsPage = () => {
   }, [dispatch]);
 
   return (
+    // DEVNOTE - make component for the same divs across pages?
     <div className="dark:text-light-gray text-secondary-dark-bg bg-light-gray dark:bg-secondary-dark-bg">
       <div className="flex flex-wrap justify-center lg:flex-nowrap">
         <div className="h-[calc(100vh-73px)] m-3 flex w-full flex-col overflow-y-scroll rounded-xl bg-main-bg dark:bg-main-dark-bg">
