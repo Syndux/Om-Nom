@@ -18,3 +18,17 @@ export const loadAllIngredients = () => async dispatch => {
         return ingredients;
     }
 }
+
+const initialState = {};
+
+const ingredientsReducer = (state = initialState, action) => {
+    let newState = { ...state };
+    switch (action.type) {
+        case LOAD_ALL_INGREDIENTS:
+            return action.payload;
+        default:
+            return state;
+    }
+}
+
+export default ingredientsReducer;
