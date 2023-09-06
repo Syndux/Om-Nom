@@ -51,7 +51,7 @@ function App() {
               sidebarOpen ? `md:ml-60` : `flex-2`
             }`}
           >
-            <div className="navbar fixed w-full bg-main-bg dark:bg-main-dark-bg md:static">
+            <div className="navbar static w-full bg-main-bg dark:bg-main-dark-bg">
               <Navbar />
             </div>
             <div>
