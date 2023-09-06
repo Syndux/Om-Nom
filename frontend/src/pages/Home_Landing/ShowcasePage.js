@@ -13,7 +13,7 @@ const Showcase = () => {
   return (
     <div className="dark:text-light-gray text-secondary-dark-bg bg-light-gray dark:bg-secondary-dark-bg">
       <div className="flex flex-wrap justify-center lg:flex-nowrap">
-        <div className="justify-center items-center m-3 flex h-[calc(100vh-73px)] w-full flex-col overflow-y-scroll rounded-xl bg-main-bg dark:bg-main-dark-bg">
+        <div className="justify-center items-center m-3 flex h-[calc(100dvh-87px)] w-full flex-col overflow-x-hidden overflow-y-scroll rounded-xl bg-main-bg dark:bg-main-dark-bg md:h-[calc(100dvh-72px)]">
           <p className="m-4 text-xl font-bold">Showcase for all users</p>
         </div>
       </div>
