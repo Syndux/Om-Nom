@@ -18,7 +18,7 @@ const AllIngredientsPage = () => {
   return (
     <div className="dark:text-light-gray text-secondary-dark-bg bg-light-gray dark:bg-secondary-dark-bg">
       <div className="flex flex-wrap justify-center lg:flex-nowrap">
-        <div className="m-3 flex h-screen w-full flex-col items-center rounded-xl bg-main-bg dark:bg-main-dark-bg">
+        <div className="m-3 flex h-[calc(100vh-73px)] w-full flex-col overflow-y-scroll rounded-xl bg-main-bg dark:bg-main-dark-bg">
           {loaded && (
             <>
               <p className="m-4 text-xl font-bold">
