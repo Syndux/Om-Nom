@@ -60,9 +60,9 @@ const sidebarItems = [
 ];
 
 const activePage =
-  "flex items-center gap-4 pl-3 pt-2 pb-2 rounded-lg text-md text-secondary-dark-bg dark:text-light-gray bg-light-gray dark:bg-secondary-dark-bg  m-2";
+  "flex items-center gap-4 pl-3 pt-2 pb-2 rounded-lg text-md text-secondary-dark-bg dark:text-light-gray bg-light-gray dark:bg-secondary-dark-bg m-2";
 const inactivePage =
-  "flex items-center gap-4 pl-3 pt-2 pb-2 rounded-lg text-md text-secondary-dark-bg dark:text-light-gray dark:hover:bg-secondary-dark-bg hover:bg-light-gray m-2 transition-transform duration-300 hover:scale-105";
+  "flex items-center gap-4 pl-3 pt-2 pb-2 rounded-lg text-md text-secondary-dark-bg dark:text-light-gray dark:hover:bg-secondary-dark-bg hover:bg-light-gray m-2 ease-in duration-100 hover:scale-105";
 
 const Sidebar = () => {
   const { sidebarOpen, setSidebarOpen, currentMode, screenSize } =

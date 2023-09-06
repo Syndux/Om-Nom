@@ -3,10 +3,12 @@ import thunk from "redux-thunk";
 
 import sessionReducer from "./session";
 import foodsReducer from "./foods";
+import ingredientsReducer from "./ingredients";
 
 const rootReducer = combineReducers({
   session: sessionReducer,
   foods: foodsReducer,
+  ingredients: ingredientsReducer,
 });
 
 let enhancer;

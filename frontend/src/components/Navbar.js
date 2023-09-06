@@ -95,7 +95,7 @@ const Navbar = () => {
           </button>
         )}
         <div
-          className="text-secondary-dark-bg dark:text-light-gray dark:hover:text-light-gray dark:hover:bg-secondary-dark-bg relative flex items-center gap-1 rounded-lg px-1.5 transition-transform duration-200 hover:scale-105 hover:bg-light-gray"
+          className="text-secondary-dark-bg dark:text-light-gray dark:hover:text-light-gray dark:hover:bg-secondary-dark-bg relative flex items-center gap-1 rounded-lg px-1.5 ease-in duration-200 hover:scale-105 hover:bg-light-gray"
           onClick={() => handleClick("userProfile")}
         >
           {sessionUser ? (
