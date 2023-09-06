@@ -27,7 +27,7 @@ const OwnedFoodsPage = () => {
                 {foods
                   .filter((food) => food.creatorId === sessionUser.id)
                   .map((food) => (
-                    <div className="px-10 border-b">
+                    <div className="border-t px-10">
                       <p>{food.name}</p>
                       <p>{food.cuisine}</p>
                     </div>
