@@ -27,9 +27,9 @@ const OwnedFoodsPage = () => {
                 {foods
                   .filter((food) => food.creatorId === sessionUser.id)
                   .map((food) => (
-                    <div className="border-t px-10">
-                      <p>{food.name}</p>
-                      <p>{food.cuisine}</p>
+                    <div className="border-t px-10 py-3">
+                      <p className="text-lg">{food.name}</p>
+                      <p className="text-sm opacity-60">{food.cuisine}</p>
                     </div>
                   ))}
               </>
