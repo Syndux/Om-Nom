@@ -54,47 +54,49 @@ function App() {
             <div className="navbar fixed w-full bg-main-bg dark:bg-main-dark-bg md:static">
               <Navbar />
             </div>
-            {/* Preparing to update ReactRouterDom v6 */}
-            <Switch>
-              {/* Home */}
-              {/* SIDEBAR - View for logged-out (showcase) */}
-              <Route exact path="/" component={ShowcasePage} />
-              {/* SIDEBAR - View for logged-in (home) */}
-              <Route path="/home" component={ExplorePage} />
+            <div>
+              {/* Preparing to update ReactRouterDom v6 */}
+              <Switch>
+                {/* Home */}
+                {/* SIDEBAR - View for logged-out (showcase) */}
+                <Route exact path="/" component={ShowcasePage} />
+                {/* SIDEBAR - View for logged-in (home) */}
+                <Route path="/home" component={ExplorePage} />
 
-              {/* Foods */}
-              {/* SIDEBAR - View all of your foods */}
-              <Route path="/foods/current" component={OwnedFoodsPage} />
-              {/* SIDEBAR - View favorite/saved foods - Coming soon! */}
-              <Route path="/foods/saved" component={FavoriteFoodsPage} />
-              {/* View singular food */}
-              <Route path="/foods/:foodId" component={FoodDetailsPage} />
-              {/* SIDEBAR - View all foods */}
-              <Route path="/foods" component={AllFoodsPage} />
+                {/* Foods */}
+                {/* SIDEBAR - View all of your foods */}
+                <Route path="/foods/current" component={OwnedFoodsPage} />
+                {/* SIDEBAR - View favorite/saved foods - Coming soon! */}
+                <Route path="/foods/saved" component={FavoriteFoodsPage} />
+                {/* View singular food */}
+                <Route path="/foods/:foodId" component={FoodDetailsPage} />
+                {/* SIDEBAR - View all foods */}
+                <Route path="/foods" component={AllFoodsPage} />
 
-              {/* Ingredients */}
-              {/* SIDEBAR - View all ingredients */}
-              <Route path="/ingredients" component={AllIngredientsPage} />
+                {/* Ingredients */}
+                {/* SIDEBAR - View all ingredients */}
+                <Route path="/ingredients" component={AllIngredientsPage} />
 
-              {/* Food Planning */}
-              {/* SIDEBAR - Calendar for foods - Coming soon!*/}
-              <Route path="/food-plan" component={FoodPlanPage} />
+                {/* Food Planning */}
+                {/* SIDEBAR - Calendar for foods - Coming soon!*/}
+                <Route path="/food-plan" component={FoodPlanPage} />
 
-              {/* User Profile */}
-              {/* NAVBAR - View profile after dropdown - Coming soon! */}
-              <Route path="/profile" component={ComingSoonPage} />
-              {/* NAVBAR - View followers/following after dropdown - Coming soon! */}
-              <Route path="/following" component={ComingSoonPage} />
-              {/* NAVBAR - View all reviews you made - Coming soon! */}
-              <Route path="/reviews" component={ComingSoonPage} />
-              {/* NAVBAR - View your messages - Coming soon! */}
-              <Route path="/messages" component={ComingSoonPage} />
-              {/* Logout */}
-              <Route path="/logout">
-                <Redirect to="/" />
-              </Route>
-              <Route>Page not found</Route>
-            </Switch>
+                {/* User Profile */}
+                {/* NAVBAR - View profile after dropdown - Coming soon! */}
+                <Route path="/profile" component={ComingSoonPage} />
+                {/* NAVBAR - View followers/following after dropdown - Coming soon! */}
+                <Route path="/following" component={ComingSoonPage} />
+                {/* NAVBAR - View all reviews you made - Coming soon! */}
+                <Route path="/reviews" component={ComingSoonPage} />
+                {/* NAVBAR - View your messages - Coming soon! */}
+                <Route path="/messages" component={ComingSoonPage} />
+                {/* Logout */}
+                <Route path="/logout">
+                  <Redirect to="/" />
+                </Route>
+                <Route>Page not found</Route>
+              </Switch>
+            </div>
           </div>
         </div>
       </div>
