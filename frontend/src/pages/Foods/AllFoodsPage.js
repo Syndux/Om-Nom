@@ -8,7 +8,7 @@ import { FoodFormPage } from "../";
 
 const AllFoodsPage = () => {
   const dispatch = useDispatch();
-  const foods = useSelector((state) => state.foods);
+  const foods = useSelector((state) => Object.values(state.foods));
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
