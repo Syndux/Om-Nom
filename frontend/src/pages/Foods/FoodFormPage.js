@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import {
   loadAllFoods,
   loadSingleFood,
@@ -8,10 +8,12 @@ import {
   updateFood,
 } from "../../store/foods";
 
-// Require auth, handle API errors: {name: "ERROR HERE" }
+// handle API errors: {name: "ERROR HERE" }
+// render in edit mode
 
 const FoodFormPage = () => {
   const dispatch = useDispatch();
+  const history = useHistory();
   const { routeId } = useParams();
   const isEdit = !!routeId;
   const foodToEdit = useSelector((state) => state.foods[routeId]);
@@ -43,14 +45,17 @@ const FoodFormPage = () => {
     }
   }, [isEdit, foodToEdit]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-
+    let foodId;
+    
     if (isEdit) {
-      dispatch(updateFood(routeId, formData));
+      foodId = await dispatch(updateFood(routeId, formData));
     } else {
-      dispatch(createFood(formData));
+      foodId = await dispatch(createFood(formData));
     }
+
+    history.push(`/foods/${foodId}`);
 
     setFormData({
       name: "",
