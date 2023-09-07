@@ -297,12 +297,12 @@ router.post("/", requireAuth, async (req, res, next) => {
     return name.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
   };
 
-  const titlecasedName = titleCase(name);
+  const titleCasedName = titleCase(name);
   const titleCasedCuisine = titleCase(cuisine);
 
   const newFood = await Food.create({
     creatorId: userId,
-    name: titlecasedName,
+    name: titleCasedName,
     imgUrl,
     cuisine: titleCasedCuisine,
   });
