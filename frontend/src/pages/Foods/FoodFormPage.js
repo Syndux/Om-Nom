@@ -108,9 +108,9 @@ const FoodFormPage = () => {
                 required
               />
             </div>
-            <div className="flex justify-center mt-5">
+            <div className="mt-5 flex justify-center">
               <button
-                className="rounded-lg bg-[#3454D1] text-light-gray px-3 py-1 dark:bg-chinese-gold dark:text-main-bg"
+                className="text-light-gray dark:bg-chinese-gold dark:text-main-bg rounded-lg bg-[#3454D1] px-3 py-1 duration-100 ease-in hover:scale-105"
                 type="submit"
               >
                 {isEdit ? "Update this food" : "Create this food"}
