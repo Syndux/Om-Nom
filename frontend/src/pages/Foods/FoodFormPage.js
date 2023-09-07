@@ -8,6 +8,7 @@ import {
   updateFood,
 } from "../../store/foods";
 
+// ingredients on creation
 // handle API errors: {name: "ERROR HERE" }
 // render in edit mode
 
