@@ -27,7 +27,7 @@ const AllFoodsPage = () => {
             <>
               <div className="m-4 flex items-center justify-between text-xl font-bold">
                 <p>Browse all available foods</p>
-                <button onClick={() => history.push("/foods/new")}>
+                <button className="p-1.5 rounded-lg text-secondary-dark-bg dark:text-light-gray dark:hover:bg-secondary-dark-bg hover:bg-light-gray ease-in duration-100 hover:scale-110" onClick={() => history.push("/foods/new")}>
                   <AiOutlinePlus />
                 </button>
               </div>
