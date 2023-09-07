@@ -10,7 +10,7 @@ const loadAllIngredientsAC = (ingredients) => ({
 
 // Thunk AC
 export const loadAllIngredients = () => async dispatch => {
-    const res = await csrfFetch("api/ingredients");
+    const res = await csrfFetch("/api/ingredients");
 
     if (res.ok) {
         const ingredients = await res.json();
