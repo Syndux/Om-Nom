@@ -34,7 +34,6 @@ export const loadAllFoods = () => async (dispatch) => {
   if (res.ok) {
     const foods = await res.json();
     dispatch(loadAllFoodsAC(foods));
-    console.log(foods);
     return foods;
   }
 };
