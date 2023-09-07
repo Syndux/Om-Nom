@@ -34,6 +34,7 @@ export const loadAllFoods = () => async (dispatch) => {
   if (res.ok) {
     const foods = await res.json();
     dispatch(loadAllFoodsAC(foods));
+    console.log(foods);
     return foods;
   }
 };
@@ -82,7 +83,7 @@ const initialState = {};
 const foodsReducer = (state = initialState, action) => {
   switch (action.type) {
     case LOAD_ALL_FOODS:
-      return { ...state, ...action.payload };
+      return action.payload;
     case LOAD_SINGLE_FOOD:
       return { ...state, [action.payload.id]: action.payload };
     case CREATE_FOOD:
