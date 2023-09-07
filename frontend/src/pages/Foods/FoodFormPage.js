@@ -9,8 +9,8 @@ import {
 } from "../../store/foods";
 import { loadAllIngredients } from "../../store/ingredients";
 
-// ingredients on creation
 // handle API errors: {name: "ERROR HERE" }
+// anchor to newest ingredient cell
 // render in edit mode
 
 const FoodFormPage = () => {
@@ -211,7 +211,7 @@ const FoodFormPage = () => {
                 {/* Submit button */}
                 <div className="my-5 flex justify-center">
                   <button
-                    className="text-light-gray dark:bg-chinese-gold dark:text-main-bg rounded-lg bg-[#3454D1] px-3 py-1 duration-100 ease-in hover:scale-105"
+                    className="text-light-gray bg-chinese-gold dark:text-main-bg rounded-lg px-3 py-1 duration-100 ease-in hover:scale-105"
                     type="submit"
                   >
                     {isEdit ? "Update this food" : "Create this food"}
