@@ -60,48 +60,65 @@ const FoodFormPage = () => {
   };
 
   return (
-    <div>
-      <h2>{isEdit ? "Edit Food" : "Create Food"}</h2>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="name">Name:</label>
-          <input
-            type="text"
-            id="name"
-            name="name"
-            value={formData.name}
-            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-            required
-          />
+    <div className="dark:text-light-gray text-secondary-dark-bg bg-light-gray dark:bg-secondary-dark-bg">
+      <div className="flex h-[calc(100dvh-48px)] flex-wrap items-center justify-center lg:flex-nowrap">
+        <div className="m-3 flex h-3/4 w-3/4 flex-col items-center justify-center overflow-y-auto overflow-x-hidden rounded-xl bg-main-bg dark:bg-main-dark-bg">
+          <p className="mb-10 text-3xl">
+            {isEdit ? "Edit Food" : "Create a new food"}
+          </p>
+          <form className="flex flex-col" onSubmit={handleSubmit}>
+            <div className="my-2">
+              <input
+                className="rounded-lg bg-light-gray p-1.5 dark:bg-secondary-dark-bg"
+                placeholder="Name"
+                type="text"
+                id="name"
+                name="name"
+                value={formData.name}
+                onChange={(e) =>
+                  setFormData({ ...formData, name: e.target.value })
+                }
+                required
+              />
+            </div>
+            <div className="my-2">
+              <input
+                className="rounded-lg bg-light-gray p-1.5 dark:bg-secondary-dark-bg"
+                placeholder="Image url"
+                type="text"
+                id="imgUrl"
+                name="imgUrl"
+                value={formData.imgUrl}
+                onChange={(e) =>
+                  setFormData({ ...formData, imgUrl: e.target.value })
+                }
+              />
+            </div>
+            <div className="my-2">
+              <input
+                className="rounded-lg bg-light-gray p-1.5 dark:bg-secondary-dark-bg"
+                placeholder="Cuisine"
+                type="text"
+                id="cuisine"
+                name="cuisine"
+                value={formData.cuisine}
+                onChange={(e) =>
+                  setFormData({ ...formData, cuisine: e.target.value })
+                }
+                required
+              />
+            </div>
+            <div className="flex justify-center mt-5">
+              <button
+                className="rounded-lg bg-[#3454D1] text-light-gray px-3 py-1 dark:bg-chinese-gold dark:text-main-bg"
+                type="submit"
+              >
+                {isEdit ? "Update this food" : "Create this food"}
+              </button>
+            </div>
+          </form>
         </div>
-        <div>
-          <label htmlFor="imgUrl">Image URL:</label>
-          <input
-            type="text"
-            id="imgUrl"
-            name="imgUrl"
-            value={formData.imgUrl}
-            onChange={(e) =>
-              setFormData({ ...formData, imgUrl: e.target.value })
-            }
-            required
-          />
-        </div>
-        <div>
-          <label htmlFor="cuisine">Cuisine:</label>
-          <input
-            type="text"
-            id="cuisine"
-            name="cuisine"
-            value={formData.cuisine}
-            onChange={(e) =>
-              setFormData({ ...formData, cuisine: e.target.value })
-            }
-            required
-          />
-        </div>
-        <button type="submit">{isEdit ? "Update Food" : "Create Food"}</button>
-      </form>
+      </div>
     </div>
   );
 };
