@@ -82,8 +82,7 @@ const initialState = {};
 const foodsReducer = (state = initialState, action) => {
   switch (action.type) {
     case LOAD_ALL_FOODS:
-      // return { ...state, ...action.payload };
-      return action.payload;
+      return { ...state, ...action.payload };
     case LOAD_SINGLE_FOOD:
       return { ...state, [action.payload.id]: action.payload };
     case CREATE_FOOD:
