@@ -10,7 +10,6 @@ import {
 import { loadAllIngredients, createFoodIngredient } from "../../store/ingredients";
 
 // handle API errors: {name: "ERROR HERE" }
-// actions to add ingredients
 // render in edit mode
 
 const FoodFormPage = () => {
