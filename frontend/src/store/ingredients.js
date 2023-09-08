@@ -34,7 +34,7 @@ export const createFoodIngredient = (foodId, ingredientId, ingredientData) => as
     if (res.ok) {
         const newFoodIngredient = await res.json();
         dispatch(createFoodIngredientAC(newFoodIngredient));
-        return newFoodIngredient;
+        //return newFoodIngredient;
     }
 };
 
