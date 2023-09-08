@@ -13,6 +13,7 @@ import {
   AllFoodsPage,
   FavoriteFoodsPage,
   FoodPlanPage,
+  FoodFormPage,
 } from "./pages";
 
 import * as sessionActions from "./store/session";
@@ -68,6 +69,10 @@ function App() {
                 <Route path="/foods/current" component={OwnedFoodsPage} />
                 {/* SIDEBAR - View favorite/saved foods - Coming soon! */}
                 <Route path="/foods/saved" component={FavoriteFoodsPage} />
+                {/* Create new food form */}
+                <Route path="/foods/new" component={FoodFormPage} />
+                {/* Edit singular food */}
+                <Route path="/foods/:foodId/edit" component={FoodFormPage} />
                 {/* View singular food */}
                 <Route path="/foods/:foodId" component={FoodDetailsPage} />
                 {/* SIDEBAR - View all foods */}

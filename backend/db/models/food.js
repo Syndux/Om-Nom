@@ -1,5 +1,5 @@
 "use strict";
-const { Model } = require("sequelize");
+const { Model, Validator } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class Food extends Model {
     /**
@@ -57,7 +57,11 @@ module.exports = (sequelize, DataTypes) => {
       imgUrl: {
         type: DataTypes.STRING,
         validate: {
-          isUrl: true,
+          isNullableUrl(value) {
+            if (value && !Validator.isURL(value)) {
+              throw new Error('Invalid URL format');
+            }
+          },
         },
       },
     },

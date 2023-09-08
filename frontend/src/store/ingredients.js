@@ -10,7 +10,7 @@ const loadAllIngredientsAC = (ingredients) => ({
 
 // Thunk AC
 export const loadAllIngredients = () => async dispatch => {
-    const res = await csrfFetch("api/ingredients");
+    const res = await csrfFetch("/api/ingredients");
 
     if (res.ok) {
         const ingredients = await res.json();
@@ -22,7 +22,6 @@ export const loadAllIngredients = () => async dispatch => {
 const initialState = {};
 
 const ingredientsReducer = (state = initialState, action) => {
-    let newState = { ...state };
     switch (action.type) {
         case LOAD_ALL_INGREDIENTS:
             return action.payload;

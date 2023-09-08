@@ -292,12 +292,19 @@ router.get("/", async (req, res, next) => {
 router.post("/", requireAuth, async (req, res, next) => {
   const { name, imgUrl, cuisine } = req.body;
   const userId = req.user.id;
+  
+  const titleCase = (name) => {
+    return name.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+  };
+
+  const titleCasedName = titleCase(name);
+  const titleCasedCuisine = titleCase(cuisine);
 
   const newFood = await Food.create({
     creatorId: userId,
-    name,
+    name: titleCasedName,
     imgUrl,
-    cuisine,
+    cuisine: titleCasedCuisine,
   });
 
   return res.status(201).json(newFood);
