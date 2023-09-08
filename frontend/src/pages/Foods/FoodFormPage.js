@@ -10,7 +10,7 @@ import {
 import { loadAllIngredients } from "../../store/ingredients";
 
 // handle API errors: {name: "ERROR HERE" }
-// anchor to newest ingredient cell
+// actions to add ingredients
 // render in edit mode
 
 const FoodFormPage = () => {
@@ -31,7 +31,7 @@ const FoodFormPage = () => {
       {
         ingredientId: "",
         quantity: "",
-        units: "",
+        unit: "",
       },
     ],
   });
@@ -85,7 +85,7 @@ const FoodFormPage = () => {
         {
           ingredientId: "",
           quantity: "",
-          units: "",
+          unit: "",
         },
       ],
     }));
@@ -96,13 +96,13 @@ const FoodFormPage = () => {
   };
 
   // Update the selected ingredient at a specific index
-  const handleIngredientChange = (index, ingredientId, quantity, units) => {
+  const handleIngredientChange = (index, ingredientId, quantity, unit) => {
     setFormData((prevData) => {
       const updatedIngredients = [...prevData.ingredients];
       updatedIngredients[index] = {
         ingredientId,
         quantity,
-        units,
+        unit,
       };
       return {
         ...prevData,
@@ -208,15 +208,15 @@ const FoodFormPage = () => {
                           0,
                           formData.ingredients[0].ingredientId,
                           e.target.value,
-                          formData.ingredients[0].units,
+                          formData.ingredients[0].unit,
                         )
                       }
                     />
                     <input
                       type="text"
                       className="ml-2 w-1/4 rounded-lg bg-light-gray p-1.5 dark:bg-secondary-dark-bg"
-                      placeholder="Units"
-                      value={formData.ingredients[0].units || ""}
+                      placeholder="Unit"
+                      value={formData.ingredients[0].unit || ""}
                       onChange={(e) =>
                         handleIngredientChange(
                           0,
@@ -250,7 +250,7 @@ const FoodFormPage = () => {
                             index + 1,
                             e.target.value,
                             ingredient.quantity,
-                            ingredient.units,
+                            ingredient.unit,
                           )
                         }
                       >
@@ -271,15 +271,15 @@ const FoodFormPage = () => {
                             index + 1,
                             ingredient.ingredientId,
                             e.target.value,
-                            ingredient.units,
+                            ingredient.unit,
                           )
                         }
                       />
                       <input
                         type="text"
                         className="ml-2 w-1/4 rounded-lg bg-light-gray p-1.5 dark:bg-secondary-dark-bg"
-                        placeholder="Units"
-                        value={ingredient.units || ""}
+                        placeholder="Unit"
+                        value={ingredient.unit || ""}
                         onChange={(e) =>
                           handleIngredientChange(
                             index + 1,
