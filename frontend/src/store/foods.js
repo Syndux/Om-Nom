@@ -50,10 +50,10 @@ export const loadSingleFood = (foodId) => async (dispatch) => {
 };
 
 // Create new food
-export const createFood = (foodData, ingredientsData) => async (dispatch) => {
+export const createFood = (foodData) => async (dispatch) => {
   const res = await csrfFetch("/api/foods", {
     method: "POST",
-    body: JSON.stringify({ ...foodData, ingredientsData }),
+    body: JSON.stringify(foodData),
   });
 
   if (res.ok) {
