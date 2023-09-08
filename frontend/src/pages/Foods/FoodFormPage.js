@@ -7,7 +7,7 @@ import {
   createFood,
   updateFood,
 } from "../../store/foods";
-import { loadAllIngredients } from "../../store/ingredients";
+import { loadAllIngredients, createFoodIngredient } from "../../store/ingredients";
 
 // handle API errors: {name: "ERROR HERE" }
 // actions to add ingredients
@@ -64,6 +64,11 @@ const FoodFormPage = () => {
       foodId = await dispatch(updateFood(routeId, formData));
     } else {
       foodId = await dispatch(createFood(formData));
+
+      formData.ingredients.map((ingredientData) => {
+        const { ingredientId, quantity, unit } = ingredientData;
+        return dispatch(createFoodIngredient(foodId, ingredientId, { quantity, unit }));
+      });
     }
 
     history.push(`/foods/${foodId}`);
