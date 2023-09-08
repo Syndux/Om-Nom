@@ -25,10 +25,10 @@ export const loadAllIngredients = () => async (dispatch) => {
   }
 };
 
-export const createFoodIngredient = (foodId, ingredientId, foodData) => async (dispatch) => {
+export const createFoodIngredient = (foodId, ingredientId, ingredientData) => async (dispatch) => {
     const res = await csrfFetch(`/api/foods/${foodId}/ingredients/${ingredientId}`, {
         method: "POST",
-        body: JSON.stringify(foodData),
+        body: JSON.stringify(ingredientData),
     });
 
     if (res.ok) {
