@@ -26,7 +26,13 @@ const FoodFormPage = () => {
     name: "",
     imgUrl: "",
     cuisine: "",
-    ingredients: [],
+    ingredients: [
+      {
+        ingredientId: "",
+        quantity: "",
+        units: "",
+      },
+    ],
   });
 
   useEffect(() => {
@@ -73,15 +79,26 @@ const FoodFormPage = () => {
   const addIngredientDropdown = () => {
     setFormData((prevData) => ({
       ...prevData,
-      ingredients: [...prevData.ingredients, ""],
+      ingredients: [
+        ...prevData.ingredients,
+        {
+          ingredientId: "",
+          quantity: "",
+          units: "",
+        },
+      ],
     }));
   };
 
   // Update the selected ingredient at a specific index
-  const handleIngredientChange = (index, value) => {
+  const handleIngredientChange = (index, ingredientId, quantity, units) => {
     setFormData((prevData) => {
       const updatedIngredients = [...prevData.ingredients];
-      updatedIngredients[index] = value;
+      updatedIngredients[index] = {
+        ingredientId,
+        quantity,
+        units,
+      };
       return {
         ...prevData,
         ingredients: updatedIngredients,
@@ -103,8 +120,8 @@ const FoodFormPage = () => {
 
   return (
     <div className="dark:text-light-gray text-secondary-dark-bg bg-light-gray dark:bg-secondary-dark-bg">
-      <div className="flex h-[calc(100dvh-48px)] flex-wrap items-center justify-center lg:flex-nowrap">
-        <div className="m-3 flex h-3/4 w-3/4 flex-col items-center justify-start overflow-y-auto overflow-x-hidden rounded-xl bg-main-bg dark:bg-main-dark-bg">
+      <div className="flex flex-wrap items-center justify-center lg:flex-nowrap">
+        <div className="m-3 flex h-[calc(100dvh-72px)] w-full flex-col items-center justify-start overflow-y-auto overflow-x-hidden rounded-xl bg-main-bg p-4 dark:bg-main-dark-bg">
           {sessionUser ? (
             <>
               <p className="my-10 text-3xl ">
@@ -153,16 +170,18 @@ const FoodFormPage = () => {
                     required
                   />
                 </div>
-                {/* Ingredient dropdown */}
+
+                {/* Ingredient add */}
                 <div className="my-2">
                   <select
-                  className="rounded-lg bg-light-gray p-1.5 dark:bg-secondary-dark-bg w-full"
+                    className="w-full rounded-lg bg-light-gray p-1.5 dark:bg-secondary-dark-bg"
                     id="ingredientDropdown"
                     name="selectedIngredient"
                     value={formData.ingredients[0] || ""}
                     onChange={(e) => handleIngredientChange(0, e.target.value)}
                   >
                     <option value="">Select an ingredient...</option>
+                    {/* Ingredient dropdown */}
                     {ingredients.map((ingredient) => (
                       <option key={ingredient.id} value={ingredient.id}>
                         {ingredient.name}
@@ -170,17 +189,23 @@ const FoodFormPage = () => {
                     ))}
                   </select>
                 </div>
-                {/* More ingredient dropdowns */}
-                {formData.ingredients.slice(1).map((ingredientId, index) => (
+
+                {/* More ingredient adds */}
+                {formData.ingredients.map((ingredient, index) => (
                   <div className="my-2" key={index}>
-                    <div className="flex relative">
+                    <div className="relative flex">
                       <select
-                      className="rounded-lg bg-light-gray p-1.5 dark:bg-secondary-dark-bg w-full"
+                        className="w-full rounded-lg bg-light-gray p-1.5 dark:bg-secondary-dark-bg"
                         id={`ingredientDropdown_${index}`}
                         name={`selectedIngredient_${index}`}
-                        value={ingredientId || ""}
+                        value={ingredient.ingredientId || ""}
                         onChange={(e) =>
-                          handleIngredientChange(index + 1, e.target.value)
+                          handleIngredientChange(
+                            index,
+                            e.target.value,
+                            ingredient.quantity,
+                            ingredient.units,
+                          )
                         }
                       >
                         <option value="">Select an ingredient...</option>
@@ -190,16 +215,45 @@ const FoodFormPage = () => {
                           </option>
                         ))}
                       </select>
+                      <input
+                        type="text"
+                        className="ml-2 w-1/3 rounded-lg bg-light-gray p-1.5 dark:bg-secondary-dark-bg"
+                        placeholder="Quantity"
+                        value={ingredient.quantity || ""}
+                        onChange={(e) =>
+                          handleIngredientChange(
+                            index,
+                            ingredient.ingredientId,
+                            e.target.value,
+                            ingredient.units,
+                          )
+                        }
+                      />
+                      <input
+                        type="text"
+                        className="ml-2 w-1/3 rounded-lg bg-light-gray p-1.5 dark:bg-secondary-dark-bg"
+                        placeholder="Units"
+                        value={ingredient.units || ""}
+                        onChange={(e) =>
+                          handleIngredientChange(
+                            index,
+                            ingredient.ingredientId,
+                            ingredient.quantity,
+                            e.target.value,
+                          )
+                        }
+                      />
                       <button
                         type="button"
                         onClick={() => removeIngredientDropdown(index)}
-                        className="ml-2 text-red-500 absolute left-48 bottom-1"
+                        className="px-2 text-red-500"
                       >
                         &#10005;
                       </button>
                     </div>
                   </div>
                 ))}
+
                 {/* Add more ingredient dropdown button */}
                 <button
                   type="button"
@@ -208,6 +262,7 @@ const FoodFormPage = () => {
                 >
                   Add Ingredient
                 </button>
+
                 {/* Submit button */}
                 <div className="my-5 flex justify-center">
                   <button
