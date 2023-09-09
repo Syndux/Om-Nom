@@ -5,7 +5,8 @@ import { loadAllIngredients } from "../../store/ingredients";
 
 const AllIngredientsPage = () => {
   const dispatch = useDispatch();
-  const ingredients = useSelector((state) => state.ingredients);
+  const allIngredients = useSelector((state) => Object.values(state.ingredients));
+  const ingredients = allIngredients.sort((a, b) => a.name.localeCompare(b.name));
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
