@@ -1,4 +1,5 @@
 import { csrfFetch } from "./csrf";
+import { createFoodIngredient } from "./ingredients";
 
 const LOAD_ALL_FOODS = "foods/LOAD_ALL_FOODS";
 const LOAD_SINGLE_FOOD = "foods/LOAD_SINGLE_FOOD";
@@ -50,7 +51,9 @@ export const loadSingleFood = (foodId) => async (dispatch) => {
 };
 
 // Create new food
-export const createFood = (foodData) => async (dispatch) => {
+export const createFood = ({ ingredients, ...foodData }) => async (dispatch) => {
+  console.log(ingredients);
+  console.log(foodData);
   const res = await csrfFetch("/api/foods", {
     method: "POST",
     body: JSON.stringify(foodData),
@@ -59,6 +62,11 @@ export const createFood = (foodData) => async (dispatch) => {
   if (res.ok) {
     const food = await res.json();
     dispatch(createFoodAC(food));
+
+    for (const ingredient of ingredients) {
+      const { ingredientId, quantity, unit } = ingredient;
+      await dispatch(createFoodIngredient(food.id, ingredientId, { quantity, unit }));
+    }
     return food.id;
   }
 };

@@ -7,9 +7,9 @@ import {
   createFood,
   updateFood,
 } from "../../store/foods";
-import { loadAllIngredients, createFoodIngredient } from "../../store/ingredients";
+import { loadAllIngredients } from "../../store/ingredients";
 
-// handle API errors: {name: "ERROR HERE" }
+// handle API errors
 // render in edit mode
 
 const FoodFormPage = () => {
@@ -63,11 +63,6 @@ const FoodFormPage = () => {
       foodId = await dispatch(updateFood(routeId, formData));
     } else {
       foodId = await dispatch(createFood(formData));
-
-      formData.ingredients.map((ingredientData) => {
-        const { ingredientId, quantity, unit } = ingredientData;
-        return dispatch(createFoodIngredient(foodId, ingredientId, { quantity, unit }));
-      });
     }
 
     history.push(`/foods/${foodId}`);
@@ -76,7 +71,13 @@ const FoodFormPage = () => {
       name: "",
       imgUrl: "",
       cuisine: "",
-      ingredients: [],
+      ingredients: [
+        {
+          ingredientId: "",
+          quantity: "",
+          unit: "",
+        },
+      ],
     });
   };
 
