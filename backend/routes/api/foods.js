@@ -196,7 +196,7 @@ router.get("/:foodId", async (req, res, next) => {
         attributes: ["quantity", "unit"],
       },
       attributes: {
-        exclude: ["id", "createdAt", "updatedAt"],
+        exclude: ["createdAt", "updatedAt"],
       },
     },
     // raw: true,
