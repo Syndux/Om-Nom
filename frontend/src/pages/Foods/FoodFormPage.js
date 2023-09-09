@@ -66,7 +66,7 @@ const FoodFormPage = () => {
         quantity: ingredientObj.FoodIngredients.quantity,
         unit: ingredientObj.FoodIngredients.unit,
       }));
-      
+
       setFormData({
         name: foodToEdit.name,
         imgUrl: foodToEdit.imgUrl,
@@ -147,6 +147,7 @@ const FoodFormPage = () => {
 
     const quantityRegex = /^\d+(\.\d{1,2})?$/;
     const unitRegex = /^[a-zA-Z]+$/;
+    const ingredientSet = new Set();
 
     formData.ingredients.forEach((ingredient, index) => {
       if (!ingredient.ingredientId) {
@@ -174,17 +175,28 @@ const FoodFormPage = () => {
           }: Unit must consist of only alphabet characters.`,
         );
       }
+
+      const ingredientKey = `${ingredient.ingredientId}-${ingredient.quantity}-${ingredient.unit}`;
+      if (ingredientSet.has(ingredientKey)) {
+        errors.push(`Ingredient ${index + 1}: Duplicate ingredient.`);
+      } else {
+        ingredientSet.add(ingredientKey);
+      }
     });
 
     return errors;
   };
 
-  const handleApiError = async (thunkAC, formData) => {
+  const handleApiError = async (thunkAC) => {
     try {
       return await thunkAC();
     } catch (error) {
       const res = await error.json();
-      setValidationErrors(Object.values(res.errors));
+      if (res.errors) {
+        setValidationErrors(Object.values(res.errors));
+      } else if (res.message) {
+        setValidationErrors([res.message]);
+      }
       return null;
     }
   };
@@ -202,15 +214,11 @@ const FoodFormPage = () => {
 
     let foodId;
     if (isEdit) {
-      foodId = await handleApiError(
-        () => dispatch(updateFood(foodId, formData)),
-        formData,
+      foodId = await handleApiError(() =>
+        dispatch(updateFood(foodId, formData)),
       );
     } else {
-      foodId = await handleApiError(
-        () => dispatch(createFood(formData)),
-        formData,
-      );
+      foodId = await handleApiError(() => dispatch(createFood(formData)));
     }
 
     if (foodId !== null) {
@@ -287,7 +295,6 @@ const FoodFormPage = () => {
                 {/* Ingredient add */}
                 <div className="mt-2">
                   <div className="relative flex">
-                    {console.log("formData", formData)}
                     <select
                       className="w-1/2 rounded-lg bg-light-gray p-1 dark:bg-secondary-dark-bg"
                       id="ingredientDropdown"
