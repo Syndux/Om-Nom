@@ -62,41 +62,41 @@ function App() {
                 {/* SIDEBAR - View for logged-out (showcase) */}
                 <Route exact path="/" component={ShowcasePage} />
                 {/* SIDEBAR - View for logged-in (home) */}
-                <Route path="/home" component={ExplorePage} />
+                <Route exact path="/home" component={ExplorePage} />
 
                 {/* Foods */}
                 {/* SIDEBAR - View all of your foods */}
-                <Route path="/foods/current" component={OwnedFoodsPage} />
+                <Route exact path="/foods/current" component={OwnedFoodsPage} />
                 {/* SIDEBAR - View favorite/saved foods - Coming soon! */}
-                <Route path="/foods/saved" component={FavoriteFoodsPage} />
+                <Route exact path="/foods/saved" component={FavoriteFoodsPage} />
                 {/* Create new food form */}
-                <Route path="/foods/new" component={FoodFormPage} />
+                <Route exact path="/foods/new" component={FoodFormPage} />
                 {/* Edit singular food */}
-                <Route path="/foods/:foodId/edit" component={FoodFormPage} />
+                <Route exact path="/foods/:foodId/edit" component={FoodFormPage} />
                 {/* View singular food */}
-                <Route path="/foods/:foodId" component={FoodDetailsPage} />
+                <Route exact path="/foods/:foodId" component={FoodDetailsPage} />
                 {/* SIDEBAR - View all foods */}
-                <Route path="/foods" component={AllFoodsPage} />
+                <Route exact path="/foods" component={AllFoodsPage} />
 
                 {/* Ingredients */}
                 {/* SIDEBAR - View all ingredients */}
-                <Route path="/ingredients" component={AllIngredientsPage} />
+                <Route exact path="/ingredients" component={AllIngredientsPage} />
 
                 {/* Food Planning */}
                 {/* SIDEBAR - Calendar for foods - Coming soon!*/}
-                <Route path="/food-plan" component={FoodPlanPage} />
+                <Route exact path="/food-plan" component={FoodPlanPage} />
 
                 {/* User Profile */}
                 {/* NAVBAR - View profile after dropdown - Coming soon! */}
-                <Route path="/profile" component={ComingSoonPage} />
+                <Route exact path="/profile" component={ComingSoonPage} />
                 {/* NAVBAR - View followers/following after dropdown - Coming soon! */}
-                <Route path="/following" component={ComingSoonPage} />
+                <Route exact path="/following" component={ComingSoonPage} />
                 {/* NAVBAR - View all reviews you made - Coming soon! */}
-                <Route path="/reviews" component={ComingSoonPage} />
+                <Route exact path="/reviews" component={ComingSoonPage} />
                 {/* NAVBAR - View your messages - Coming soon! */}
-                <Route path="/messages" component={ComingSoonPage} />
+                <Route exact path="/messages" component={ComingSoonPage} />
                 {/* Logout */}
-                <Route path="/logout">
+                <Route exact path="/logout">
                   <Redirect to="/" />
                 </Route>
                 <Route>Page not found</Route>
