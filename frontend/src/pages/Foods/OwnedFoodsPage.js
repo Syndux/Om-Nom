@@ -7,6 +7,7 @@ import { FaTrash } from "react-icons/fa";
 import { loadAllFoods } from "../../store/foods";
 
 import { OpenModalButton } from "../../components";
+import ConfirmDeleteFoodModal from "../ConfirmDeleteFoodModal";
 
 const OwnedFoodsPage = () => {
   const dispatch = useDispatch();
@@ -26,9 +27,7 @@ const OwnedFoodsPage = () => {
     history.push(`/foods/${foodId}/edit`);
   };
 
-  const handleDelete = (foodId) => {
-    
-  }
+  const handleDelete = (foodId) => {};
 
   return (
     <div className="dark:text-light-gray text-secondary-dark-bg bg-light-gray dark:bg-secondary-dark-bg">
@@ -37,7 +36,9 @@ const OwnedFoodsPage = () => {
           {sessionUser ? (
             loaded && (
               <>
-                <p className="m-4 flex items-center justify-between text-xl font-bold">All owned foods</p>
+                <p className="m-4 flex items-center justify-between text-xl font-bold">
+                  All owned foods
+                </p>
                 {foods
                   .filter((food) => food.creatorId === sessionUser.id)
                   .map((food) => (
@@ -51,20 +52,22 @@ const OwnedFoodsPage = () => {
                       </div>
                       {sessionUser && sessionUser?.id === food.creatorId && (
                         <div className="flex flex-row gap-4">
-                          <button
-                            className="text-secondary-dark-bg dark:text-light-gray rounded-lg px-1 text-xl duration-100 ease-in hover:scale-110 hover:bg-light-gray dark:hover:bg-secondary-dark-bg"
-                            onClick={() => handleEdit(food.id)}
-                          >
-                            <FaEdit />
-                          </button>
-                          <OpenModalButton
-                            modalComponent={""}
-                            buttonText={<FaTrash />}
-                          />
-                          <button
-                            className="text-secondary-dark-bg dark:text-light-gray rounded-lg px-1 text-xl duration-100 ease-in hover:scale-110 hover:bg-light-gray dark:hover:bg-secondary-dark-bg"
-                            onClick={() => handleDelete(food.id)}
-                          ></button>
+                          <div className="text-secondary-dark-bg dark:text-light-gray flex justify-center rounded-lg px-2 duration-100 ease-in hover:scale-110 hover:bg-light-gray dark:hover:bg-secondary-dark-bg">
+                            <button
+                              className="text-xl"
+                              onClick={() => handleEdit(food.id)}
+                            >
+                              <FaEdit />
+                            </button>
+                          </div>
+                          <div className="text-secondary-dark-bg dark:text-light-gray flex justify-center rounded-lg px-2 duration-100 ease-in hover:scale-110 hover:bg-light-gray dark:hover:bg-secondary-dark-bg">
+                            <OpenModalButton
+                              modalComponent={
+                                <ConfirmDeleteFoodModal foodId={food.id} />
+                              }
+                              buttonText={<FaTrash />}
+                            />
+                          </div>
                         </div>
                       )}
                     </div>
