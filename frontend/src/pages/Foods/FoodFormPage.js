@@ -9,7 +9,6 @@ import {
 } from "../../store/foods";
 import { loadAllIngredients } from "../../store/ingredients";
 
-// handle API errors
 // render in edit mode
 
 const FoodFormPage = () => {
@@ -159,6 +158,8 @@ const FoodFormPage = () => {
     return errors;
   };
 
+
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     let foodId;
@@ -173,7 +174,13 @@ const FoodFormPage = () => {
     }
 
     if (isEdit) {
-      foodId = await dispatch(updateFood(routeId, formData));
+      try {
+        foodId = await dispatch(updateFood(routeId, formData));
+      } catch (error) {
+        const res = await error.json();
+        setValidationErrors(Object.values(res.errors));
+        return;
+      }
     } else {
       try {
         foodId = await dispatch(createFood(formData));
