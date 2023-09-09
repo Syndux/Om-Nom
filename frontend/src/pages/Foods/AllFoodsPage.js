@@ -66,7 +66,6 @@ const AllFoodsPage = () => {
                       <OpenModalButton
                         modalComponent={<ConfirmDeleteModal foodId={food.id} />}
                         buttonText={<FaTrash />}
-                        // onButtonClick={() => setSidebarOpen(false)}
                       />
                     </div>
                   )}
