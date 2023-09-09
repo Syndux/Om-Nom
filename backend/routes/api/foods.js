@@ -314,22 +314,6 @@ router.post("/", requireAuth, async (req, res, next) => {
     const titleCasedName = titleCase(name);
     const titleCasedCuisine = titleCase(cuisine);
 
-    // const existingFood = await Food.findOne({
-    //   where: {
-    //     name: titleCasedName,
-    //     creatorId: userId
-    //   },
-    // });
-
-    // if (existingFood) {
-    //   const err = new Error("Food already exists.");
-    //   err.status = 400;
-    //   err.title = "Title: Food already exists";
-    //   err.errors = [];
-    //   err.errors.push("Err: Food with that name already exists")
-    //   return next(err);
-    // }
-
     const newFood = await Food.create({
       creatorId: userId,
       name: titleCasedName,
