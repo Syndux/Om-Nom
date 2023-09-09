@@ -33,6 +33,7 @@ const FoodFormPage = () => {
   const foodToEdit = useSelector((state) => state.foods[foodId]);
   const ingredients = useSelector((state) => Object.values(state.ingredients));
   const [validationErrors, setValidationErrors] = useState([]);
+  const [ready, setReady] = useState(false);
 
   const [formData, setFormData] = useState({
     name: "",
@@ -48,65 +49,32 @@ const FoodFormPage = () => {
   });
 
   useEffect(() => {
-    dispatch(loadAllFoods());
-    dispatch(loadAllIngredients());
-
-    if(isEdit) {
-      dispatch(loadSingleFood(foodId));
-    }
+    // dispatch(loadAllFoods());
+    (async () => {
+      await dispatch(loadAllIngredients());
+      if (isEdit) {
+        await dispatch(loadSingleFood(foodId));
+        setReady(true);
+      }
+    })();
   }, [dispatch]);
 
   useEffect(() => {
-    if (isEdit && foodToEdit) {
+    if (isEdit && foodToEdit && ready) {
       const ingredientData = foodToEdit.ingredients.map((ingredientObj) => ({
         name: ingredientObj.name,
         quantity: ingredientObj.FoodIngredients.quantity,
         unit: ingredientObj.FoodIngredients.unit,
       }));
-
-      // const foodToTest = {
-      //   id: 1,
-      //   creatorId: 1,
-      //   name: "Dol Sot Bi Bim Bap",
-      //   cuisine: "Korean",
-      //   imgUrl: "",
-      //   ingredients: [
-      //     {
-      //       name: "Soy Sauce",
-      //       imgUrl: "",
-      //       FoodIngredients: {
-      //         quantity: 132,
-      //         unit: "grams",
-      //       },
-      //     },
-      //     {
-      //       name: "White Sugar",
-      //       imgUrl: "",
-      //       FoodIngredients: {
-      //         quantity: 20,
-      //         unit: "grams",
-      //       },
-      //     },
-      //   ],
-      // };
-
-      // const testData = foodToTest.ingredients.map((ingredientObj) => ({
-      //   name: ingredientObj.name,
-      //   quantity: ingredientObj.FoodIngredients.quantity,
-      //   unit: ingredientObj.FoodIngredients.unit,
-      // }));
-
-      console.log("foodToEdit", foodToEdit);
       
       setFormData({
         name: foodToEdit.name,
         imgUrl: foodToEdit.imgUrl,
         cuisine: foodToEdit.cuisine,
         ingredients: ingredientData,
-        // ingredients: testData,
       });
     }
-  }, [isEdit, foodToEdit]);
+  }, [isEdit, foodToEdit, ready]);
 
   // Add a new dropdown for selecting ingredients
   const addIngredientDropdown = () => {
