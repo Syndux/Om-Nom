@@ -206,22 +206,21 @@ const FoodFormPage = () => {
     const foodValErrors = validateFood();
     const ingredientValErrors = validateIngredients();
     const valErrors = [...foodValErrors, ...ingredientValErrors];
-  
+
     if (valErrors.length > 0) {
       setValidationErrors(valErrors);
       return;
     }
-  
+
     let foodId;
-  
+
     try {
-      // if (isEdit) {
-      //   foodId = await dispatch(updateFood(foodId, formData));
-      // } else {
-      //   foodId = await dispatch(createFood(formData));
-      // }
-      foodId = await dispatch(createFood(formData));
-  
+      if (isEdit) {
+        foodId = await dispatch(updateFood(foodId, formData));
+      } else {
+        foodId = await dispatch(createFood(formData));
+      }
+
       if (foodId !== null) {
         setFormData({ ...initialFormData });
         setValidationErrors([]);
@@ -236,7 +235,6 @@ const FoodFormPage = () => {
       }
     }
   };
-  
 
   return (
     <div className="dark:text-light-gray text-secondary-dark-bg bg-light-gray dark:bg-secondary-dark-bg">
@@ -309,18 +307,20 @@ const FoodFormPage = () => {
                       className="w-1/2 rounded-lg bg-light-gray p-1 dark:bg-secondary-dark-bg"
                       id="ingredientDropdown"
                       name="selectedIngredient"
-                      value={formData.ingredients[0].ingredientId || ""}
+                      value={Object.values(formData.ingredients[0])[0] || ""} // Set the selected value
                       onChange={(e) =>
                         handleIngredientChange(0, e.target.value)
                       }
                     >
                       <option value="">Select an ingredient</option>
                       {/* Ingredient dropdown */}
-                      {ingredients.map((ingredient) => (
-                        <option key={ingredient.id} value={ingredient.id}>
-                          {ingredient.name}
-                        </option>
-                      ))}
+                      {ingredients.map((ingredient) => {
+                        return (
+                          <option key={ingredient.id} value={ingredient.name}>
+                            {ingredient.name}
+                          </option>
+                        );
+                      })}
                     </select>
                     <input
                       type="text"
@@ -368,7 +368,7 @@ const FoodFormPage = () => {
                         className="w-1/2 rounded-lg bg-light-gray p-1 dark:bg-secondary-dark-bg"
                         id={`ingredientDropdown_${index}`}
                         name={`selectedIngredient_${index}`}
-                        value={ingredient.ingredientId || ""}
+                        value={ingredient.name || ""}
                         onChange={(e) =>
                           handleIngredientChange(
                             index + 1,
