@@ -16,7 +16,7 @@ router.get("/:ingredientId", async (req, res, next) => {
 // Get all ingredients
 router.get("/", async (req, res, next) => {
   const ingredients = await Ingredient.findAll({
-    order: ["name"],
+    order: ["id"],
   });
 
   return res.json(ingredients);
