@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useHistory } from "react-router-dom";
+
 import { loadSingleFood, createFood, updateFood } from "../../store/foods";
 import { loadAllIngredients } from "../../store/ingredients";
 
@@ -26,6 +27,7 @@ const FoodFormPage = () => {
   const sessionUser = useSelector((state) => state.session.user);
   const foodToEdit = useSelector((state) => state.foods[foodId]);
   const ingredients = useSelector((state) => Object.values(state.ingredients));
+
   const [validationErrors, setValidationErrors] = useState([]);
   const [ready, setReady] = useState(false);
 
@@ -286,7 +288,6 @@ const FoodFormPage = () => {
                       className="w-1/2 rounded-lg bg-light-gray p-1 dark:bg-secondary-dark-bg"
                       id="ingredientDropdown"
                       name="selectedIngredient"
-                      defaultValue={""}
                       value={formData.ingredients[0].ingredientId || ""}
                       onChange={(e) =>
                         handleIngredientChange(0, e.target.value)
