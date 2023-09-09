@@ -6,12 +6,18 @@ import { FaEdit } from "react-icons/fa";
 import { FaTrash } from "react-icons/fa6";
 
 import { loadAllFoods } from "../../store/foods";
+import { useAppContext } from "../../context/AppContext";
+
+import { OpenModalButton } from "../../components";
+import ConfirmDeleteModal from "../ConfirmDeleteModal";
 
 const AllFoodsPage = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const foods = useSelector((state) => Object.values(state.foods));
+  const sessionUser = useSelector((state) => state.session.user);
   const [loaded, setLoaded] = useState(false);
+  const { setSidebarOpen } = useAppContext();
 
   useEffect(() => {
     (async () => {
@@ -23,10 +29,6 @@ const AllFoodsPage = () => {
   const handleEdit = (foodId) => {
     history.push(`/foods/${foodId}/edit`);
   };
-
-  const handleDelete = (foodId) => {
-    
-  }
 
   return (
     // DEVNOTE - make component for the same divs across pages?
@@ -53,20 +55,21 @@ const AllFoodsPage = () => {
                     <p className="text-lg">{food.name}</p>
                     <p className="text-sm opacity-60">{food.cuisine}</p>
                   </div>
-                  <div className="flex flex-row gap-4">
-                    <button
-                      className="text-secondary-dark-bg dark:text-light-gray rounded-lg px-1 text-xl duration-100 ease-in hover:scale-110 hover:bg-light-gray dark:hover:bg-secondary-dark-bg"
-                      onClick={() => handleEdit(food.id)}
-                    >
-                      <FaEdit />
-                    </button>
-                    <button
-                      className="text-secondary-dark-bg dark:text-light-gray rounded-lg px-1 text-xl duration-100 ease-in hover:scale-110 hover:bg-light-gray dark:hover:bg-secondary-dark-bg"
-                      onClick={() => handleDelete(food.id)}
-                    >
-                      <FaTrash />
-                    </button>
-                  </div>
+                  {sessionUser && sessionUser?.id === food.creatorId && (
+                    <div className="flex flex-row gap-4">
+                      <button
+                        className="text-secondary-dark-bg dark:text-light-gray rounded-lg px-1 text-xl duration-100 ease-in hover:scale-110 hover:bg-light-gray dark:hover:bg-secondary-dark-bg"
+                        onClick={() => handleEdit(food.id)}
+                      >
+                        <FaEdit />
+                      </button>
+                      <OpenModalButton
+                        modalComponent={<ConfirmDeleteModal foodId={food.id} />}
+                        buttonText={<FaTrash />}
+                        // onButtonClick={() => setSidebarOpen(false)}
+                      />
+                    </div>
+                  )}
                 </div>
               ))}
             </>
