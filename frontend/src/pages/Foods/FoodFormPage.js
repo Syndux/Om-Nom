@@ -1,15 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useHistory } from "react-router-dom";
-import {
-  loadAllFoods,
-  loadSingleFood,
-  createFood,
-  updateFood,
-} from "../../store/foods";
+import { loadSingleFood, createFood, updateFood } from "../../store/foods";
 import { loadAllIngredients } from "../../store/ingredients";
 
-// render in edit mode
 const initialFormData = {
   name: "",
   imgUrl: "",
@@ -62,11 +56,10 @@ const FoodFormPage = () => {
   useEffect(() => {
     if (isEdit && foodToEdit && ready) {
       const ingredientData = foodToEdit.ingredients.map((ingredientObj) => ({
-        name: ingredientObj.name,
+        ingredientId: ingredientObj.id,
         quantity: ingredientObj.FoodIngredients.quantity,
         unit: ingredientObj.FoodIngredients.unit,
       }));
-
       setFormData({
         name: foodToEdit.name,
         imgUrl: foodToEdit.imgUrl,
@@ -187,45 +180,30 @@ const FoodFormPage = () => {
     return errors;
   };
 
-  const handleApiError = async (thunkAC) => {
-    try {
-      return await thunkAC();
-    } catch (error) {
-      const res = await error.json();
-      if (res.errors) {
-        setValidationErrors(Object.values(res.errors));
-      } else if (res.message) {
-        setValidationErrors([res.message]);
-      }
-      return null;
-    }
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     const foodValErrors = validateFood();
     const ingredientValErrors = validateIngredients();
     const valErrors = [...foodValErrors, ...ingredientValErrors];
-  
+
     if (valErrors.length > 0) {
       setValidationErrors(valErrors);
       return;
     }
-  
-    let foodId;
-  
+
+    let newFoodId;
+
     try {
-      // if (isEdit) {
-      //   foodId = await dispatch(updateFood(foodId, formData));
-      // } else {
-      //   foodId = await dispatch(createFood(formData));
-      // }
-      foodId = await dispatch(createFood(formData));
-  
-      if (foodId !== null) {
+      if (isEdit) {
+        newFoodId = await dispatch(updateFood(foodId, formData));
+      } else {
+        newFoodId = await dispatch(createFood(formData));
+      }
+
+      if (newFoodId !== null) {
         setFormData({ ...initialFormData });
         setValidationErrors([]);
-        history.push(`/foods/${foodId}`);
+        history.push(`/foods/${newFoodId}`);
       }
     } catch (error) {
       const res = await error.json();
@@ -236,7 +214,6 @@ const FoodFormPage = () => {
       }
     }
   };
-  
 
   return (
     <div className="dark:text-light-gray text-secondary-dark-bg bg-light-gray dark:bg-secondary-dark-bg">
@@ -309,6 +286,7 @@ const FoodFormPage = () => {
                       className="w-1/2 rounded-lg bg-light-gray p-1 dark:bg-secondary-dark-bg"
                       id="ingredientDropdown"
                       name="selectedIngredient"
+                      defaultValue={""}
                       value={formData.ingredients[0].ingredientId || ""}
                       onChange={(e) =>
                         handleIngredientChange(0, e.target.value)
@@ -316,11 +294,13 @@ const FoodFormPage = () => {
                     >
                       <option value="">Select an ingredient</option>
                       {/* Ingredient dropdown */}
-                      {ingredients.map((ingredient) => (
-                        <option key={ingredient.id} value={ingredient.id}>
-                          {ingredient.name}
-                        </option>
-                      ))}
+                      {ingredients.map((ingredient) => {
+                        return (
+                          <option key={ingredient.id} value={ingredient.id}>
+                            {ingredient.name}
+                          </option>
+                        );
+                      })}
                     </select>
                     <input
                       type="text"
@@ -368,6 +348,7 @@ const FoodFormPage = () => {
                         className="w-1/2 rounded-lg bg-light-gray p-1 dark:bg-secondary-dark-bg"
                         id={`ingredientDropdown_${index}`}
                         name={`selectedIngredient_${index}`}
+                        defaultValue={""}
                         value={ingredient.ingredientId || ""}
                         onChange={(e) =>
                           handleIngredientChange(
@@ -379,11 +360,13 @@ const FoodFormPage = () => {
                         }
                       >
                         <option value="">Select an ingredient</option>
-                        {ingredients.map((ingredient) => (
-                          <option key={ingredient.id} value={ingredient.id}>
-                            {ingredient.name}
-                          </option>
-                        ))}
+                        {ingredients.map((ingredient) => {
+                          return (
+                            <option key={ingredient.id} value={ingredient.id}>
+                              {ingredient.name}
+                            </option>
+                          );
+                        })}
                       </select>
                       <input
                         type="text"
