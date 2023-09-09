@@ -62,11 +62,10 @@ const FoodFormPage = () => {
   useEffect(() => {
     if (isEdit && foodToEdit && ready) {
       const ingredientData = foodToEdit.ingredients.map((ingredientObj) => ({
-        name: ingredientObj.name,
+        ingredientId: ingredientObj.id,
         quantity: ingredientObj.FoodIngredients.quantity,
         unit: ingredientObj.FoodIngredients.unit,
       }));
-
       setFormData({
         name: foodToEdit.name,
         imgUrl: foodToEdit.imgUrl,
@@ -187,20 +186,6 @@ const FoodFormPage = () => {
     return errors;
   };
 
-  const handleApiError = async (thunkAC) => {
-    try {
-      return await thunkAC();
-    } catch (error) {
-      const res = await error.json();
-      if (res.errors) {
-        setValidationErrors(Object.values(res.errors));
-      } else if (res.message) {
-        setValidationErrors([res.message]);
-      }
-      return null;
-    }
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     const foodValErrors = validateFood();
@@ -212,19 +197,19 @@ const FoodFormPage = () => {
       return;
     }
 
-    let foodId;
+    let newFoodId;
 
     try {
       if (isEdit) {
-        foodId = await dispatch(updateFood(foodId, formData));
+        newFoodId = await dispatch(updateFood(foodId, formData));
       } else {
-        foodId = await dispatch(createFood(formData));
+        newFoodId = await dispatch(createFood(formData));
       }
 
-      if (foodId !== null) {
+      if (newFoodId !== null) {
         setFormData({ ...initialFormData });
         setValidationErrors([]);
-        history.push(`/foods/${foodId}`);
+        history.push(`/foods/${newFoodId}`);
       }
     } catch (error) {
       const res = await error.json();
@@ -307,7 +292,8 @@ const FoodFormPage = () => {
                       className="w-1/2 rounded-lg bg-light-gray p-1 dark:bg-secondary-dark-bg"
                       id="ingredientDropdown"
                       name="selectedIngredient"
-                      value={Object.values(formData.ingredients[0])[0] || ""} // Set the selected value
+                      defaultValue={""}
+                      value={formData.ingredients[0].ingredientId || ""}
                       onChange={(e) =>
                         handleIngredientChange(0, e.target.value)
                       }
@@ -316,7 +302,7 @@ const FoodFormPage = () => {
                       {/* Ingredient dropdown */}
                       {ingredients.map((ingredient) => {
                         return (
-                          <option key={ingredient.id} value={ingredient.name}>
+                          <option key={ingredient.id} value={ingredient.id}>
                             {ingredient.name}
                           </option>
                         );
@@ -368,7 +354,8 @@ const FoodFormPage = () => {
                         className="w-1/2 rounded-lg bg-light-gray p-1 dark:bg-secondary-dark-bg"
                         id={`ingredientDropdown_${index}`}
                         name={`selectedIngredient_${index}`}
-                        value={ingredient.name || ""}
+                        defaultValue={""}
+                        value={ingredient.ingredientId || ""}
                         onChange={(e) =>
                           handleIngredientChange(
                             index + 1,
@@ -379,11 +366,13 @@ const FoodFormPage = () => {
                         }
                       >
                         <option value="">Select an ingredient</option>
-                        {ingredients.map((ingredient) => (
-                          <option key={ingredient.id} value={ingredient.id}>
-                            {ingredient.name}
-                          </option>
-                        ))}
+                        {ingredients.map((ingredient) => {
+                          return (
+                            <option key={ingredient.id} value={ingredient.id}>
+                              {ingredient.name}
+                            </option>
+                          );
+                        })}
                       </select>
                       <input
                         type="text"
