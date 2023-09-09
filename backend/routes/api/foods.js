@@ -6,142 +6,153 @@ const { Food, Ingredient, FoodIngredient, sequelize } = require("../../db/models
 const router = express.Router();
 
 // Create/add ingredients for a food with foodId
-router.post("/:foodId/ingredients/:ingredientId", requireAuth, async (req, res, next) => {
-  const { foodId, ingredientId } = req.params;
-  const { quantity, unit } = req.body;
-  const userId = req.user.id;
+router.post(
+  "/:foodId/ingredients/:ingredientId",
+  requireAuth,
+  async (req, res, next) => {
+    const { foodId, ingredientId } = req.params;
+    const { quantity, unit } = req.body;
+    const userId = req.user.id;
 
-  const food = await Food.findByPk(foodId);
-  const ingredient = await Ingredient.findByPk(ingredientId);
+    const food = await Food.findByPk(foodId);
+    const ingredient = await Ingredient.findByPk(ingredientId);
 
-  if (!food || !ingredient) {
-    return next({
-      status: 404,
-      message: "Food or ingredient could not be found",
-    })
-  }
+    if (!food || !ingredient) {
+      return next({
+        status: 404,
+        message: "Food or ingredient could not be found",
+      });
+    }
 
-  if (userId !== food.creatorId) {
-    const err = new Error("Authorization required");
-    err.status = 403;
-    err.message = "You are not allowed to edit this food's ingredients.";
-    return next(err);
-  }
+    if (userId !== food.creatorId) {
+      const err = new Error("Authorization required");
+      err.status = 403;
+      err.message = "You are not allowed to edit this food's ingredients.";
+      return next(err);
+    }
 
-  const existingFoodIngredient = await FoodIngredient.findOne({
-    where: {
-      foodId: food.id,
-      ingredientId: ingredient.id,
-    },
-  });
-
-  if (existingFoodIngredient) {
-    return next({
-      status: 404,
-      message: "Ingredient for food already exists. Try updating instead."
+    const existingFoodIngredient = await FoodIngredient.findOne({
+      where: {
+        foodId: food.id,
+        ingredientId: ingredient.id,
+      },
     });
 
-  } else {
-    const newFoodIngredient = await FoodIngredient.create({
+    if (existingFoodIngredient) {
+      return next({
+        status: 404,
+        message: "Ingredient for food already exists. Try updating instead.",
+      });
+    } else {
+      const newFoodIngredient = await FoodIngredient.create({
+        foodId: food.id,
+        ingredientId: ingredient.id,
+        quantity,
+        unit,
+      });
+
+      return res.status(201).json({ newFoodIngredient });
+    }
+  }
+);
+
+// Update ingredient info for a food with foodId and ingredientId
+router.put(
+  "/:foodId/ingredients/:ingredientId",
+  requireAuth,
+  async (req, res, next) => {
+    const { foodId, ingredientId } = req.params;
+    const { quantity, unit } = req.body;
+    const userId = req.user.id;
+
+    const food = await Food.findByPk(foodId);
+    const ingredient = await Ingredient.findByPk(ingredientId);
+
+    if (!food || !ingredient) {
+      return next({
+        status: 404,
+        message: "Food or ingredient could not be found",
+      });
+    }
+
+    if (userId !== food.creatorId) {
+      const err = new Error("Authorization required");
+      err.status = 403;
+      err.message = "You are not allowed to edit this food's ingredients.";
+      return next(err);
+    }
+
+    const foodIngredient = await FoodIngredient.findOne({
+      where: {
+        foodId: food.id,
+        ingredientId: ingredient.id,
+      },
+    });
+
+    if (!foodIngredient) {
+      return next({
+        status: 404,
+        message: "Ingredient not found for this food",
+      });
+    }
+
+    const updatedFoodIngredient = await foodIngredient.update({
       foodId: food.id,
       ingredientId: ingredient.id,
       quantity,
       unit,
     });
-    
-    return res.status(201).json({ newFoodIngredient });
+
+    return res.status(200).json({ updatedFoodIngredient });
   }
-});
-
-// Update ingredient info for a food with foodId and ingredientId
-router.put("/:foodId/ingredients/:ingredientId", requireAuth, async (req, res, next) => {
-  const { foodId, ingredientId } = req.params;
-  const { quantity, unit } = req.body;
-  const userId = req.user.id;
-  
-  const food = await Food.findByPk(foodId);
-  const ingredient = await Ingredient.findByPk(ingredientId);
-
-  if (!food || !ingredient) {
-    return next({
-      status: 404,
-      message: "Food or ingredient could not be found",
-    })
-  }
-
-  if (userId !== food.creatorId) {
-    const err = new Error("Authorization required");
-    err.status = 403;
-    err.message = "You are not allowed to edit this food's ingredients.";
-    return next(err);
-  }
-
-  const foodIngredient = await FoodIngredient.findOne({
-    where: {
-      foodId: food.id,
-      ingredientId: ingredient.id,
-    },
-  });
-
-  if (!foodIngredient) {
-    return next({
-      status: 404,
-      message: "Ingredient not found for this food"
-    })
-  }
-
-  const updatedFoodIngredient = await foodIngredient.update({
-    foodId: food.id,
-    ingredientId: ingredient.id,
-    quantity,
-    unit
-  });
-
-  return res.status(200).json({ updatedFoodIngredient });
-});
+);
 
 // Delete ingredient in a food with foodId and ingredientId
-router.delete("/:foodId/ingredients/:ingredientId", requireAuth, async (req, res, next) => {
-  const { foodId, ingredientId } = req.params;
-  const userId = req.user.id;
+router.delete(
+  "/:foodId/ingredients/:ingredientId",
+  requireAuth,
+  async (req, res, next) => {
+    const { foodId, ingredientId } = req.params;
+    const userId = req.user.id;
 
-  const food = await Food.findByPk(foodId);
+    const food = await Food.findByPk(foodId);
 
-  if (!food) {
-    return next({
-      status: 404,
-      message: "Food could not be found",
+    if (!food) {
+      return next({
+        status: 404,
+        message: "Food could not be found",
+      });
+    }
+
+    const foodIngredient = await FoodIngredient.findOne({
+      where: {
+        foodId,
+        ingredientId,
+      },
+    });
+
+    if (!foodIngredient) {
+      return next({
+        status: 404,
+        message: "Ingredient could not be found.",
+      });
+    }
+
+    if (userId !== food.creatorId) {
+      const err = new Error("Authorization required");
+      err.status = 403;
+      err.message = "You are not allowed to edit this food's ingredients.";
+      return next(err);
+    }
+
+    await foodIngredient.destroy();
+
+    return res.json({
+      status: 200,
+      message: "Successfully deleted",
     });
   }
-
-  const foodIngredient = await FoodIngredient.findOne({
-    where: {
-      foodId,
-      ingredientId,
-    },
-  });
-
-  if (!foodIngredient) {
-    return next({
-      status: 404,
-      message: "Ingredient could not be found.",
-    });
-  }
-
-  if (userId !== food.creatorId) {
-    const err = new Error("Authorization required");
-    err.status = 403;
-    err.message = "You are not allowed to edit this food's ingredients.";
-    return next(err);
-  }
-
-  await foodIngredient.destroy();
-
-  return res.json({
-    status: 200,
-    message: "Successfully deleted",
-  });
-});
+);
 
 // Read ingredients for a food with foodId
 router.get("/:foodId/ingredients", async (req, res, next) => {
@@ -288,17 +299,32 @@ router.get("/", async (req, res, next) => {
   return res.json(foods);
 });
 
-// Create a new food
 router.post("/", requireAuth, async (req, res, next) => {
   const { name, imgUrl, cuisine } = req.body;
   const userId = req.user.id;
-  
+
   const titleCase = (name) => {
-    return name.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+    return name
+      .split(" ")
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(" ");
   };
 
   const titleCasedName = titleCase(name);
   const titleCasedCuisine = titleCase(cuisine);
+
+  const existingFood = await Food.findOne({
+    where: {
+      name: titleCasedName,
+    },
+  });
+
+  if (existingFood) {
+    return next({
+      status: 400,
+      message: "A food with the same name already exists.",
+    });
+  }
 
   const newFood = await Food.create({
     creatorId: userId,
