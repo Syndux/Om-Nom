@@ -1,5 +1,5 @@
 import { csrfFetch } from "./csrf";
-import { createFoodIngredient } from "./ingredients";
+import { createFoodIngredient, updateFoodIngredient } from "./ingredients";
 
 const LOAD_ALL_FOODS = "foods/LOAD_ALL_FOODS";
 const LOAD_SINGLE_FOOD = "foods/LOAD_SINGLE_FOOD";
@@ -76,7 +76,7 @@ export const createFood = ({ ingredients, ...foodData }) => async (dispatch) => 
 };
 
 // Edit a food
-export const updateFood = (foodId, formData) => async (dispatch) => {
+export const updateFood = (foodId, {ingredients, ...formData}) => async (dispatch) => {
   const res = await csrfFetch(`/api/foods/${foodId}`, {
     method: "PUT",
     body: JSON.stringify(formData),
@@ -85,6 +85,11 @@ export const updateFood = (foodId, formData) => async (dispatch) => {
   if (res.ok) {
     const food = await res.json();
     dispatch(updateFoodAC(food));
+
+    for (const ingredient of ingredients) {
+      const { ingredientId, quantity, unit } = ingredient;
+      await dispatch(updateFoodIngredient(food.id, ingredientId, { quantity, unit }));
+    }
     return food.id;
   }
 };
@@ -111,7 +116,13 @@ const foodsReducer = (state = initialState, action) => {
     case CREATE_FOOD:
       return { ...state, [action.payload.id]: action.payload };
     case UPDATE_FOOD:
-      return { ...state, [action.payload.id]: action.payload };
+      return {
+        ...state,
+        foods: {
+          ...state.foods,
+          [action.payload.id]: action.payload,
+        },
+      };
     case DELETE_FOOD:
       let newState = {...state};
       delete newState[action.payload.id];

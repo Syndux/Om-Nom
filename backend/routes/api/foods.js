@@ -196,7 +196,7 @@ router.get("/:foodId", async (req, res, next) => {
         attributes: ["quantity", "unit"],
       },
       attributes: {
-        exclude: ["id", "createdAt", "updatedAt"],
+        exclude: ["createdAt", "updatedAt"],
       },
     },
     // raw: true,
@@ -237,7 +237,6 @@ router.put("/:foodId", requireAuth, async (req, res, next) => {
     return next(err);
   }
 
-  console.log(name, imgUrl, cuisine);
   const updatedFood = await food.update({
     name,
     imgUrl,

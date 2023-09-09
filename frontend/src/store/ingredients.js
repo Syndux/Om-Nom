@@ -2,6 +2,7 @@ import { csrfFetch } from "./csrf";
 
 const LOAD_ALL_INGREDIENTS = "ingredients/LOAD_ALL_INGREDIENTS";
 const CREATE_FOOD_INGREDIENT = "ingredients/CREATE_FOOD_INGREDIENT";
+const UPDATE_FOOD_INGREDIENT = "ingredients/UPDATE_FOOD_INGREDIENT";
 
 // AC - Action creator
 const loadAllIngredientsAC = (ingredients) => ({
@@ -11,6 +12,11 @@ const loadAllIngredientsAC = (ingredients) => ({
 
 const createFoodIngredientAC = (ingredient) => ({
   type: CREATE_FOOD_INGREDIENT,
+  payload: ingredient,
+});
+
+const updateFoodIngredientAC = (ingredient) => ({
+  type: UPDATE_FOOD_INGREDIENT,
   payload: ingredient,
 });
 
@@ -38,6 +44,19 @@ export const createFoodIngredient = (foodId, ingredientId, ingredientData) => as
     }
 };
 
+export const updateFoodIngredient = (foodId, ingredientId, ingredientData) => async (dispatch) => {
+  const res = await csrfFetch(`/api/foods/${foodId}/ingredients/${ingredientId}`, {
+      method: "PUT",
+      body: JSON.stringify(ingredientData),
+  });
+
+  if (res.ok) {
+      const updatedFoodIngredient = await res.json();
+      dispatch(updateFoodIngredientAC(updatedFoodIngredient));
+      //return updatedFoodIngredient;
+  }
+};
+
 const initialState = {};
 
 const ingredientsReducer = (state = initialState, action) => {
@@ -46,6 +65,8 @@ const ingredientsReducer = (state = initialState, action) => {
       return action.payload;
     case CREATE_FOOD_INGREDIENT:
       return [...state, action.payload];
+    case UPDATE_FOOD_INGREDIENT:
+        return { ...state, [action.payload.id]: action.payload };
     default:
       return state;
   }
