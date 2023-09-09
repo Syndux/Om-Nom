@@ -41,7 +41,7 @@ router.post(
     if (existingFoodIngredient) {
       return next({
         status: 404,
-        message: "Ingredient for food already exists. Try updating instead.",
+        message: "Duplicate ingredient. Please remove one.",
       });
     } else {
       const newFoodIngredient = await FoodIngredient.create({
