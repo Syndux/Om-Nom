@@ -300,40 +300,47 @@ router.get("/", async (req, res, next) => {
 });
 
 router.post("/", requireAuth, async (req, res, next) => {
-  const { name, imgUrl, cuisine } = req.body;
-  const userId = req.user.id;
+  try {
+    const { name, imgUrl, cuisine } = req.body;
+    const userId = req.user.id;
 
-  const titleCase = (name) => {
-    return name
-      .split(" ")
-      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-      .join(" ");
-  };
+    const titleCase = (name) => {
+      return name
+        .split(" ")
+        .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+        .join(" ");
+    };
 
-  const titleCasedName = titleCase(name);
-  const titleCasedCuisine = titleCase(cuisine);
+    const titleCasedName = titleCase(name);
+    const titleCasedCuisine = titleCase(cuisine);
 
-  const existingFood = await Food.findOne({
-    where: {
+    // const existingFood = await Food.findOne({
+    //   where: {
+    //     name: titleCasedName,
+    //     creatorId: userId
+    //   },
+    // });
+
+    // if (existingFood) {
+    //   const err = new Error("Food already exists.");
+    //   err.status = 400;
+    //   err.title = "Title: Food already exists";
+    //   err.errors = [];
+    //   err.errors.push("Err: Food with that name already exists")
+    //   return next(err);
+    // }
+
+    const newFood = await Food.create({
+      creatorId: userId,
       name: titleCasedName,
-    },
-  });
-
-  if (existingFood) {
-    return next({
-      status: 400,
-      message: "A food with the same name already exists.",
+      imgUrl,
+      cuisine: titleCasedCuisine,
     });
+
+    return res.status(201).json(newFood);
+  } catch (err) {
+    return next(err);
   }
-
-  const newFood = await Food.create({
-    creatorId: userId,
-    name: titleCasedName,
-    imgUrl,
-    cuisine: titleCasedCuisine,
-  });
-
-  return res.status(201).json(newFood);
 });
 
 module.exports = router;
