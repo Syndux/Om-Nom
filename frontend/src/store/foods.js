@@ -52,8 +52,6 @@ export const loadSingleFood = (foodId) => async (dispatch) => {
 
 // Create new food
 export const createFood = ({ ingredients, ...foodData }) => async (dispatch) => {
-  console.log(ingredients);
-  console.log(foodData);
   const res = await csrfFetch("/api/foods", {
     method: "POST",
     body: JSON.stringify(foodData),
