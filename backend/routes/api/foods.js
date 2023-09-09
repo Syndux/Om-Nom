@@ -31,28 +31,14 @@ router.post(
       return next(err);
     }
 
-    const existingFoodIngredient = await FoodIngredient.findOne({
-      where: {
-        foodId: food.id,
-        ingredientId: ingredient.id,
-      },
+    const newFoodIngredient = await FoodIngredient.create({
+      foodId: food.id,
+      ingredientId: ingredient.id,
+      quantity,
+      unit,
     });
 
-    if (existingFoodIngredient) {
-      return next({
-        status: 404,
-        message: "Duplicate ingredient. Please remove one.",
-      });
-    } else {
-      const newFoodIngredient = await FoodIngredient.create({
-        foodId: food.id,
-        ingredientId: ingredient.id,
-        quantity,
-        unit,
-      });
-
-      return res.status(201).json({ newFoodIngredient });
-    }
+    return res.status(201).json({ newFoodIngredient });
   }
 );
 

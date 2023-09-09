@@ -176,7 +176,7 @@ const FoodFormPage = () => {
         );
       }
 
-      const ingredientKey = `${ingredient.ingredientId}-${ingredient.quantity}-${ingredient.unit}`;
+      const ingredientKey = `${ingredient.ingredientId}`;
       if (ingredientSet.has(ingredientKey)) {
         errors.push(`Ingredient ${index + 1}: Duplicate ingredient.`);
       } else {
@@ -206,27 +206,37 @@ const FoodFormPage = () => {
     const foodValErrors = validateFood();
     const ingredientValErrors = validateIngredients();
     const valErrors = [...foodValErrors, ...ingredientValErrors];
-
+  
     if (valErrors.length > 0) {
       setValidationErrors(valErrors);
       return;
     }
-
+  
     let foodId;
-    if (isEdit) {
-      foodId = await handleApiError(() =>
-        dispatch(updateFood(foodId, formData)),
-      );
-    } else {
-      foodId = await handleApiError(() => dispatch(createFood(formData)));
-    }
-
-    if (foodId !== null) {
-      setFormData({ ...initialFormData });
-      setValidationErrors([]);
-      history.push(`/foods/${foodId}`);
+  
+    try {
+      // if (isEdit) {
+      //   foodId = await dispatch(updateFood(foodId, formData));
+      // } else {
+      //   foodId = await dispatch(createFood(formData));
+      // }
+      foodId = await dispatch(createFood(formData));
+  
+      if (foodId !== null) {
+        setFormData({ ...initialFormData });
+        setValidationErrors([]);
+        history.push(`/foods/${foodId}`);
+      }
+    } catch (error) {
+      const res = await error.json();
+      if (res.errors) {
+        setValidationErrors(Object.values(res.errors));
+      } else if (res.message) {
+        setValidationErrors([res.message]);
+      }
     }
   };
+  
 
   return (
     <div className="dark:text-light-gray text-secondary-dark-bg bg-light-gray dark:bg-secondary-dark-bg">
