@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { AiOutlinePlus } from "react-icons/ai";
+import { FaEdit } from "react-icons/fa";
+import { FaTrash } from "react-icons/fa6";
 
 import { loadAllFoods } from "../../store/foods";
 
@@ -18,6 +20,14 @@ const AllFoodsPage = () => {
     })();
   }, [dispatch]);
 
+  const handleEdit = (foodId) => {
+    history.push(`/foods/${foodId}/edit`);
+  };
+
+  const handleDelete = (foodId) => {
+    
+  }
+
   return (
     // DEVNOTE - make component for the same divs across pages?
     <div className="dark:text-light-gray text-secondary-dark-bg bg-light-gray dark:bg-secondary-dark-bg">
@@ -27,17 +37,36 @@ const AllFoodsPage = () => {
             <>
               <div className="m-4 flex items-center justify-between text-xl font-bold">
                 <p>Browse all available foods</p>
-                <button className="p-1.5 rounded-lg text-secondary-dark-bg dark:text-light-gray dark:hover:bg-secondary-dark-bg hover:bg-light-gray ease-in duration-100 hover:scale-110" onClick={() => history.push("/foods/new")}>
+                <button
+                  className="text-secondary-dark-bg dark:text-light-gray rounded-lg p-1.5 duration-100 ease-in hover:scale-110 hover:bg-light-gray dark:hover:bg-secondary-dark-bg"
+                  onClick={() => history.push("/foods/new")}
+                >
                   <AiOutlinePlus />
                 </button>
               </div>
               {foods.map((food) => (
                 <div
                   key={food.id}
-                  className="border-t px-10 py-3 duration-100 ease-in hover:scale-[1.01] hover:shadow-[rgba(50,_50,_105,_0.15)_0px_2px_5px_0px,_rgba(0,_0,_0,_0.05)_0px_1px_1px_0px] dark:hover:shadow-[rgba(205,_205,_150,_0.15)_0px_2px_5px_0px,_rgba(255,_255,_255,_0.3)_0px_1px_1px_0px]"
+                  className="flex justify-between border-t px-10 py-3 duration-100 ease-in hover:scale-[1.01] hover:shadow-[rgba(50,_50,_105,_0.15)_0px_2px_5px_0px,_rgba(0,_0,_0,_0.05)_0px_1px_1px_0px] dark:hover:shadow-[rgba(205,_205,_150,_0.15)_0px_2px_5px_0px,_rgba(255,_255,_255,_0.3)_0px_1px_1px_0px]"
                 >
-                  <p className="text-lg">{food.name}</p>
-                  <p className="text-sm opacity-60">{food.cuisine}</p>
+                  <div>
+                    <p className="text-lg">{food.name}</p>
+                    <p className="text-sm opacity-60">{food.cuisine}</p>
+                  </div>
+                  <div className="flex flex-row gap-4">
+                    <button
+                      className="text-secondary-dark-bg dark:text-light-gray rounded-lg px-1 text-xl duration-100 ease-in hover:scale-110 hover:bg-light-gray dark:hover:bg-secondary-dark-bg"
+                      onClick={() => handleEdit(food.id)}
+                    >
+                      <FaEdit />
+                    </button>
+                    <button
+                      className="text-secondary-dark-bg dark:text-light-gray rounded-lg px-1 text-xl duration-100 ease-in hover:scale-110 hover:bg-light-gray dark:hover:bg-secondary-dark-bg"
+                      onClick={() => handleDelete(food.id)}
+                    >
+                      <FaTrash />
+                    </button>
+                  </div>
                 </div>
               ))}
             </>
