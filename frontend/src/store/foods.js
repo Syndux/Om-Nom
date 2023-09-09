@@ -112,6 +112,10 @@ const foodsReducer = (state = initialState, action) => {
       return { ...state, [action.payload.id]: action.payload };
     case UPDATE_FOOD:
       return { ...state, [action.payload.id]: action.payload };
+    case DELETE_FOOD:
+      let newState = {...state};
+      delete newState[action.payload.id];
+      return newState;
     default:
       return state;
   }
