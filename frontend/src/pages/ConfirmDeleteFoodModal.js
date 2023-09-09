@@ -1,17 +1,26 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+
 import { useModal } from "../context/ModalContext";
+import { deleteFood, loadAllFoods } from "../store/foods";
 
-const handleDelete = (foodId, closeModal) => {
-    
+const ConfirmDeleteFoodModal = ({ foodId }) => {
+  const dispatch = useDispatch();
+  const { closeModal } = useModal();
+
+  const handleDelete = (foodId) => {
+    (async () => {
+      await dispatch(deleteFood(foodId));
+      dispatch(loadAllFoods())
+    })();
+
     closeModal();
-}
+  };
 
-const handleCancel = (closeModal) => {
+  const handleCancel = () => {
     closeModal();
-}
+  };
 
-const ConfirmDeleteModal = ({ foodId }) => {
-    const { closeModal } = useModal();
   return (
     <div className="overflow-hidden text-left shadow-xl">
       <div className="flex items-start">
@@ -31,14 +40,14 @@ const ConfirmDeleteModal = ({ foodId }) => {
         <button
           type="button"
           className="inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 sm:ml-3 sm:w-auto"
-          onClick={() => handleDelete(foodId, closeModal)}
+          onClick={() => handleDelete(foodId)}
         >
           Delete
         </button>
         <button
           type="button"
           className="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm hover:bg-gray-50 sm:mt-0 sm:w-auto"
-        onClick={() => handleCancel(closeModal)}
+          onClick={() => handleCancel()}
         >
           Cancel
         </button>
@@ -47,4 +56,4 @@ const ConfirmDeleteModal = ({ foodId }) => {
   );
 };
 
-export default ConfirmDeleteModal;
+export default ConfirmDeleteFoodModal;
