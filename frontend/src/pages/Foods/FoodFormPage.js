@@ -172,28 +172,32 @@ const FoodFormPage = () => {
       return;
     }
 
-    if (isEdit) {
-      foodId = await dispatch(updateFood(routeId, formData));
-    } else {
-      foodId = await dispatch(createFood(formData));
+    try {
+      if (isEdit) {
+        foodId = await dispatch(updateFood(routeId, formData));
+      } else {
+        foodId = await dispatch(createFood(formData));
+      }
+
+      setFormData({
+        name: "",
+        imgUrl: "",
+        cuisine: "",
+        ingredients: [
+          {
+            ingredientId: "",
+            quantity: "",
+            unit: "",
+          },
+        ],
+      });
+
+      setValidationErrors([]);
+
+      history.push(`/foods/${foodId}`);
+    } catch (error) {
+      setValidationErrors(['An unexpected error occurred. Please try again later.']);
     }
-
-    setFormData({
-      name: "",
-      imgUrl: "",
-      cuisine: "",
-      ingredients: [
-        {
-          ingredientId: "",
-          quantity: "",
-          unit: "",
-        },
-      ],
-    });
-
-    setValidationErrors([]);
-
-    history.push(`/foods/${foodId}`);
   };
 
   return (
@@ -272,7 +276,9 @@ const FoodFormPage = () => {
                         handleIngredientChange(0, e.target.value)
                       }
                     >
-                      <option key="select" value="">Select an ingredient</option>
+                      <option key="select" value="">
+                        Select an ingredient
+                      </option>
                       {/* Ingredient dropdown */}
                       {ingredients.map((ingredient) => (
                         <option key={ingredient.id} value={ingredient.id}>
@@ -336,7 +342,9 @@ const FoodFormPage = () => {
                           )
                         }
                       >
-                        <option key="select" value="">Select an ingredient</option>
+                        <option key="select" value="">
+                          Select an ingredient
+                        </option>
                         {ingredients.map((ingredient) => (
                           <option key={ingredient.id} value={ingredient.id}>
                             {ingredient.name}
