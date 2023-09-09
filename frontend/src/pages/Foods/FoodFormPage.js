@@ -175,7 +175,13 @@ const FoodFormPage = () => {
     if (isEdit) {
       foodId = await dispatch(updateFood(routeId, formData));
     } else {
-      foodId = await dispatch(createFood(formData));
+      try {
+        foodId = await dispatch(createFood(formData));
+      } catch (error) {
+        const res = await error.json();
+        setValidationErrors(Object.values(res.errors));
+        return;
+      }
     }
 
     setFormData({
@@ -272,9 +278,7 @@ const FoodFormPage = () => {
                         handleIngredientChange(0, e.target.value)
                       }
                     >
-                      <option key="select" value="">
-                        Select an ingredient
-                      </option>
+                      <option value="">Select an ingredient</option>
                       {/* Ingredient dropdown */}
                       {ingredients.map((ingredient) => (
                         <option key={ingredient.id} value={ingredient.id}>
@@ -338,9 +342,7 @@ const FoodFormPage = () => {
                           )
                         }
                       >
-                        <option key="select" value="">
-                          Select an ingredient
-                        </option>
+                        <option value="">Select an ingredient</option>
                         {ingredients.map((ingredient) => (
                           <option key={ingredient.id} value={ingredient.id}>
                             {ingredient.name}
