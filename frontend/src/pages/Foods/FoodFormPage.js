@@ -349,7 +349,6 @@ const FoodFormPage = () => {
                         className="w-1/2 rounded-lg bg-light-gray p-1 dark:bg-secondary-dark-bg"
                         id={`ingredientDropdown_${index}`}
                         name={`selectedIngredient_${index}`}
-                        defaultValue={""}
                         value={ingredient.ingredientId || ""}
                         onChange={(e) =>
                           handleIngredientChange(
