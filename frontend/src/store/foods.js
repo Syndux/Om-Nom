@@ -5,6 +5,7 @@ const LOAD_ALL_FOODS = "foods/LOAD_ALL_FOODS";
 const LOAD_SINGLE_FOOD = "foods/LOAD_SINGLE_FOOD";
 const CREATE_FOOD = "foods/CREATE_FOOD";
 const UPDATE_FOOD = "foods/UPDATE_FOOD";
+const DELETE_FOOD = "foods/DELETE_FOOD";
 
 // AC - Action Creator
 const loadAllFoodsAC = (foods) => ({
@@ -26,6 +27,11 @@ const updateFoodAC = (food) => ({
   type: UPDATE_FOOD,
   payload: food,
 });
+
+const deleteFoodAC = (food) => ({
+  type: DELETE_FOOD,
+  payload: food,
+})
 
 // THUNK ACTION CREATOR
 // Get all foods
@@ -83,6 +89,17 @@ export const updateFood = (foodId, formData) => async (dispatch) => {
   }
 };
 
+// Delete a food
+export const deleteFood = (foodId) => async (dispatch) => {
+  const res = await csrfFetch(`/api/foods/${foodId}`, {
+    method: "DELETE",
+  });
+
+  if (res.ok) {
+    dispatch(deleteFoodAC(foodId));
+  }
+};
+
 const initialState = {};
 
 const foodsReducer = (state = initialState, action) => {
@@ -95,6 +112,10 @@ const foodsReducer = (state = initialState, action) => {
       return { ...state, [action.payload.id]: action.payload };
     case UPDATE_FOOD:
       return { ...state, [action.payload.id]: action.payload };
+    case DELETE_FOOD:
+      let newState = {...state};
+      delete newState[action.payload.id];
+      return newState;
     default:
       return state;
   }

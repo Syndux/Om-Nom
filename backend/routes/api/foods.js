@@ -41,7 +41,7 @@ router.post(
     if (existingFoodIngredient) {
       return next({
         status: 404,
-        message: "Ingredient for food already exists. Try updating instead.",
+        message: "Duplicate ingredient. Please remove one.",
       });
     } else {
       const newFoodIngredient = await FoodIngredient.create({
@@ -293,12 +293,13 @@ router.delete("/:foodId", requireAuth, async (req, res, next) => {
 // Get all foods
 router.get("/", async (req, res, next) => {
   const foods = await Food.findAll({
-    order: ["name"],
+    order: ["id"],
   });
 
   return res.json(foods);
 });
 
+// Create new food
 router.post("/", requireAuth, async (req, res, next) => {
   try {
     const { name, imgUrl, cuisine } = req.body;

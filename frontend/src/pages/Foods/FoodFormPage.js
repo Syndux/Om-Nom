@@ -10,17 +10,30 @@ import {
 import { loadAllIngredients } from "../../store/ingredients";
 
 // render in edit mode
+const initialFormData = {
+  name: "",
+  imgUrl: "",
+  cuisine: "",
+  ingredients: [
+    {
+      ingredientId: "",
+      quantity: "",
+      unit: "",
+    },
+  ],
+};
 
 const FoodFormPage = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const bottomDiv = useRef(null);
-  const { routeId } = useParams();
+  const { foodId } = useParams();
+  const isEdit = !!foodId;
   const sessionUser = useSelector((state) => state.session.user);
-  const foodToEdit = useSelector((state) => state.foods[routeId]);
+  const foodToEdit = useSelector((state) => state.foods[foodId]);
   const ingredients = useSelector((state) => Object.values(state.ingredients));
   const [validationErrors, setValidationErrors] = useState([]);
-  const isEdit = !!routeId;
+  const [ready, setReady] = useState(false);
 
   const [formData, setFormData] = useState({
     name: "",
@@ -36,24 +49,32 @@ const FoodFormPage = () => {
   });
 
   useEffect(() => {
-    dispatch(loadAllFoods());
-    dispatch(loadAllIngredients());
-
-    if (isEdit) {
-      dispatch(loadSingleFood(routeId));
-    }
-  }, [dispatch, isEdit, routeId]);
+    // dispatch(loadAllFoods());
+    (async () => {
+      await dispatch(loadAllIngredients());
+      if (isEdit) {
+        await dispatch(loadSingleFood(foodId));
+        setReady(true);
+      }
+    })();
+  }, [dispatch]);
 
   useEffect(() => {
-    if (isEdit && foodToEdit) {
+    if (isEdit && foodToEdit && ready) {
+      const ingredientData = foodToEdit.ingredients.map((ingredientObj) => ({
+        name: ingredientObj.name,
+        quantity: ingredientObj.FoodIngredients.quantity,
+        unit: ingredientObj.FoodIngredients.unit,
+      }));
+
       setFormData({
         name: foodToEdit.name,
         imgUrl: foodToEdit.imgUrl,
         cuisine: foodToEdit.cuisine,
-        ingredients: foodToEdit.ingredients,
+        ingredients: ingredientData,
       });
     }
-  }, [isEdit, foodToEdit]);
+  }, [isEdit, foodToEdit, ready]);
 
   // Add a new dropdown for selecting ingredients
   const addIngredientDropdown = () => {
@@ -126,6 +147,7 @@ const FoodFormPage = () => {
 
     const quantityRegex = /^\d+(\.\d{1,2})?$/;
     const unitRegex = /^[a-zA-Z]+$/;
+    const ingredientSet = new Set();
 
     formData.ingredients.forEach((ingredient, index) => {
       if (!ingredient.ingredientId) {
@@ -153,19 +175,36 @@ const FoodFormPage = () => {
           }: Unit must consist of only alphabet characters.`,
         );
       }
+
+      const ingredientKey = `${ingredient.ingredientId}-${ingredient.quantity}-${ingredient.unit}`;
+      if (ingredientSet.has(ingredientKey)) {
+        errors.push(`Ingredient ${index + 1}: Duplicate ingredient.`);
+      } else {
+        ingredientSet.add(ingredientKey);
+      }
     });
 
     return errors;
   };
 
-
+  const handleApiError = async (thunkAC) => {
+    try {
+      return await thunkAC();
+    } catch (error) {
+      const res = await error.json();
+      if (res.errors) {
+        setValidationErrors(Object.values(res.errors));
+      } else if (res.message) {
+        setValidationErrors([res.message]);
+      }
+      return null;
+    }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    let foodId;
     const foodValErrors = validateFood();
     const ingredientValErrors = validateIngredients();
-
     const valErrors = [...foodValErrors, ...ingredientValErrors];
 
     if (valErrors.length > 0) {
@@ -173,40 +212,20 @@ const FoodFormPage = () => {
       return;
     }
 
+    let foodId;
     if (isEdit) {
-      try {
-        foodId = await dispatch(updateFood(routeId, formData));
-      } catch (error) {
-        const res = await error.json();
-        setValidationErrors(Object.values(res.errors));
-        return;
-      }
+      foodId = await handleApiError(() =>
+        dispatch(updateFood(foodId, formData)),
+      );
     } else {
-      try {
-        foodId = await dispatch(createFood(formData));
-      } catch (error) {
-        const res = await error.json();
-        setValidationErrors(Object.values(res.errors));
-        return;
-      }
+      foodId = await handleApiError(() => dispatch(createFood(formData)));
     }
 
-    setFormData({
-      name: "",
-      imgUrl: "",
-      cuisine: "",
-      ingredients: [
-        {
-          ingredientId: "",
-          quantity: "",
-          unit: "",
-        },
-      ],
-    });
-
-    setValidationErrors([]);
-
-    history.push(`/foods/${foodId}`);
+    if (foodId !== null) {
+      setFormData({ ...initialFormData });
+      setValidationErrors([]);
+      history.push(`/foods/${foodId}`);
+    }
   };
 
   return (
