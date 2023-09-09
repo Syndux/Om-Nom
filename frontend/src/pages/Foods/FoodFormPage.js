@@ -172,32 +172,28 @@ const FoodFormPage = () => {
       return;
     }
 
-    try {
-      if (isEdit) {
-        foodId = await dispatch(updateFood(routeId, formData));
-      } else {
-        foodId = await dispatch(createFood(formData));
-      }
-
-      setFormData({
-        name: "",
-        imgUrl: "",
-        cuisine: "",
-        ingredients: [
-          {
-            ingredientId: "",
-            quantity: "",
-            unit: "",
-          },
-        ],
-      });
-
-      setValidationErrors([]);
-
-      history.push(`/foods/${foodId}`);
-    } catch (error) {
-      setValidationErrors(['An unexpected error occurred. Please try again later.']);
+    if (isEdit) {
+      foodId = await dispatch(updateFood(routeId, formData));
+    } else {
+      foodId = await dispatch(createFood(formData));
     }
+
+    setFormData({
+      name: "",
+      imgUrl: "",
+      cuisine: "",
+      ingredients: [
+        {
+          ingredientId: "",
+          quantity: "",
+          unit: "",
+        },
+      ],
+    });
+
+    setValidationErrors([]);
+
+    history.push(`/foods/${foodId}`);
   };
 
   return (
