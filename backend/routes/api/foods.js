@@ -237,7 +237,6 @@ router.put("/:foodId", requireAuth, async (req, res, next) => {
     return next(err);
   }
 
-  console.log(name, imgUrl, cuisine);
   const updatedFood = await food.update({
     name,
     imgUrl,
