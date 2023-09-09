@@ -56,43 +56,6 @@ const FoodFormPage = () => {
     }
   }, [isEdit, foodToEdit]);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    let foodId;
-    const foodValErrors = validateFood();
-    const ingredientValErrors = validateIngredients();
-
-    const valErrors = [...foodValErrors, ...ingredientValErrors];
-
-    if (valErrors.length > 0) {
-      setValidationErrors(valErrors);
-      return;
-    }
-
-    if (isEdit) {
-      foodId = await dispatch(updateFood(routeId, formData));
-    } else {
-      foodId = await dispatch(createFood(formData));
-    }
-
-    setFormData({
-      name: "",
-      imgUrl: "",
-      cuisine: "",
-      ingredients: [
-        {
-          ingredientId: "",
-          quantity: "",
-          unit: "",
-        },
-      ],
-    });
-
-    setValidationErrors([]);
-
-    history.push(`/foods/${foodId}`);
-  };
-
   // Add a new dropdown for selecting ingredients
   const addIngredientDropdown = () => {
     setFormData((prevData) => ({
@@ -194,6 +157,43 @@ const FoodFormPage = () => {
     });
 
     return errors;
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    let foodId;
+    const foodValErrors = validateFood();
+    const ingredientValErrors = validateIngredients();
+
+    const valErrors = [...foodValErrors, ...ingredientValErrors];
+
+    if (valErrors.length > 0) {
+      setValidationErrors(valErrors);
+      return;
+    }
+
+    if (isEdit) {
+      foodId = await dispatch(updateFood(routeId, formData));
+    } else {
+      foodId = await dispatch(createFood(formData));
+    }
+
+    setFormData({
+      name: "",
+      imgUrl: "",
+      cuisine: "",
+      ingredients: [
+        {
+          ingredientId: "",
+          quantity: "",
+          unit: "",
+        },
+      ],
+    });
+
+    setValidationErrors([]);
+
+    history.push(`/foods/${foodId}`);
   };
 
   return (
