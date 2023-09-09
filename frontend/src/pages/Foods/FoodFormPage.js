@@ -1,15 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useHistory } from "react-router-dom";
-import {
-  loadAllFoods,
-  loadSingleFood,
-  createFood,
-  updateFood,
-} from "../../store/foods";
+import { loadSingleFood, createFood, updateFood } from "../../store/foods";
 import { loadAllIngredients } from "../../store/ingredients";
 
-// render in edit mode
 const initialFormData = {
   name: "",
   imgUrl: "",
