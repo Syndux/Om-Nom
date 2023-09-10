@@ -3,6 +3,7 @@ import { csrfFetch } from "./csrf";
 const LOAD_ALL_INGREDIENTS = "ingredients/LOAD_ALL_INGREDIENTS";
 const CREATE_FOOD_INGREDIENT = "ingredients/CREATE_FOOD_INGREDIENT";
 const UPDATE_FOOD_INGREDIENT = "ingredients/UPDATE_FOOD_INGREDIENT";
+const DELETE_FOOD_INGREDIENT = "ingredients/DELETE_FOOD_INGREDIENT";
 
 // AC - Action creator
 const loadAllIngredientsAC = (ingredients) => ({
@@ -17,6 +18,11 @@ const createFoodIngredientAC = (ingredient) => ({
 
 const updateFoodIngredientAC = (ingredient) => ({
   type: UPDATE_FOOD_INGREDIENT,
+  payload: ingredient,
+});
+
+const deleteFoodIngredientAC = (ingredient) => ({
+  type: DELETE_FOOD_INGREDIENT,
   payload: ingredient,
 });
 
@@ -56,6 +62,16 @@ export const updateFoodIngredient = (foodId, ingredientId, ingredientData) => as
       //return updatedFoodIngredient;
   }
 };
+
+export const deleteFoodIngredient = (foodId, ingredientId) => async (dispatch) => {
+  const res = await csrfFetch(`/api/foods/${foodId}/ingredients/${ingredientId}`, {
+    method: "DELETE"
+  });
+
+  if (res.ok) {
+    dispatch(deleteFoodIngredientAC(ingredientId));
+  }
+}
 
 const initialState = {};
 
