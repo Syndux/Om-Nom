@@ -27,8 +27,6 @@ const OwnedFoodsPage = () => {
     history.push(`/foods/${foodId}/edit`);
   };
 
-  const handleDelete = (foodId) => {};
-
   return (
     <div className="dark:text-light-gray text-secondary-dark-bg bg-light-gray dark:bg-secondary-dark-bg">
       <div className="flex flex-wrap justify-center lg:flex-nowrap">
