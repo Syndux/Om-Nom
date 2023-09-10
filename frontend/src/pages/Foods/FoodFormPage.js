@@ -31,18 +31,7 @@ const FoodFormPage = () => {
   const [validationErrors, setValidationErrors] = useState([]);
   const [ready, setReady] = useState(false);
 
-  const [formData, setFormData] = useState({
-    name: "",
-    imgUrl: "",
-    cuisine: "",
-    ingredients: [
-      {
-        ingredientId: "",
-        quantity: "",
-        unit: "",
-      },
-    ],
-  });
+  const [formData, setFormData] = useState({ ...initialFormData });
 
   useEffect(() => {
     // dispatch(loadAllFoods());

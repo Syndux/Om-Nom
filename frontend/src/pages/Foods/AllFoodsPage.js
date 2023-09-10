@@ -14,17 +14,17 @@ const AllFoodsPage = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const allFoods = useSelector((state) => Object.values(state.foods));
+  const sessionUser = useSelector((state) => state.session.user);
+  const [loaded, setLoaded] = useState(false);
   const foods = allFoods.sort((a, b) => {
     return a.name.localeCompare(b.name);
   });
-  const sessionUser = useSelector((state) => state.session.user);
-  const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
     (async () => {
       await dispatch(loadAllFoods());
-      setLoaded(true);
     })();
+    setLoaded(true);
   }, [dispatch]);
 
   const handleEdit = (foodId) => {
