@@ -31,18 +31,7 @@ const FoodFormPage = () => {
   const [validationErrors, setValidationErrors] = useState([]);
   const [ready, setReady] = useState(false);
 
-  const [formData, setFormData] = useState({
-    name: "",
-    imgUrl: "",
-    cuisine: "",
-    ingredients: [
-      {
-        ingredientId: "",
-        quantity: "",
-        unit: "",
-      },
-    ],
-  });
+  const [formData, setFormData] = useState({ ...initialFormData });
 
   useEffect(() => {
     // dispatch(loadAllFoods());
@@ -349,7 +338,6 @@ const FoodFormPage = () => {
                         className="w-1/2 rounded-lg bg-light-gray p-1 dark:bg-secondary-dark-bg"
                         id={`ingredientDropdown_${index}`}
                         name={`selectedIngredient_${index}`}
-                        defaultValue={""}
                         value={ingredient.ingredientId || ""}
                         onChange={(e) =>
                           handleIngredientChange(

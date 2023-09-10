@@ -14,17 +14,17 @@ const AllFoodsPage = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const allFoods = useSelector((state) => Object.values(state.foods));
+  const sessionUser = useSelector((state) => state.session.user);
+  const [loaded, setLoaded] = useState(false);
   const foods = allFoods.sort((a, b) => {
     return a.name.localeCompare(b.name);
   });
-  const sessionUser = useSelector((state) => state.session.user);
-  const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
     (async () => {
       await dispatch(loadAllFoods());
-      setLoaded(true);
     })();
+    setLoaded(true);
   }, [dispatch]);
 
   const handleEdit = (foodId) => {
@@ -39,12 +39,12 @@ const AllFoodsPage = () => {
           {loaded && (
             <>
               <div className="m-4 flex items-center justify-between text-xl font-bold">
-                <p>Browse all available foods</p>
+                <p>All Foods</p>
                 <button
-                  className="text-secondary-dark-bg dark:text-light-gray rounded-lg p-1.5 duration-100 ease-in hover:scale-110 hover:bg-light-gray dark:hover:bg-secondary-dark-bg"
+                  className="dark:text-light-gray rounded-lg text-base p-1.5 duration-100 ease-in hover:scale-105 bg-blue-ncs dark:bg-dm-blue-ncs text-main-bg"
                   onClick={() => history.push("/foods/new")}
                 >
-                  <AiOutlinePlus />
+                  New Food
                 </button>
               </div>
               {foods.map((food) => (
@@ -60,7 +60,7 @@ const AllFoodsPage = () => {
                     <div className="flex flex-row gap-4">
                       <div className="text-secondary-dark-bg dark:text-light-gray flex justify-center rounded-lg px-2 duration-100 ease-in hover:scale-110 hover:bg-light-gray dark:hover:bg-secondary-dark-bg">
                         <button
-                        className="text-xl"
+                          className="text-xl"
                           onClick={() => handleEdit(food.id)}
                         >
                           <FaEdit />
