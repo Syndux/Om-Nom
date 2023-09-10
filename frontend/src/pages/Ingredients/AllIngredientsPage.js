@@ -12,8 +12,8 @@ const AllIngredientsPage = () => {
   useEffect(() => {
     (async () => {
       await dispatch(loadAllIngredients());
-      setLoaded(true);
     })();
+    setLoaded(true);
   }, [dispatch]);
 
   return (
