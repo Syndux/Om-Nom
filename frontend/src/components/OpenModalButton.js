@@ -17,7 +17,12 @@ function OpenModalButton({
 
   return (
     <>
-      <button onClick={onClick}>{buttonText}</button>
+      <button
+        className="text-secondary-dark-bg dark:text-light-gray flex items-center justify-center rounded-lg px-2 duration-100 ease-in hover:scale-110 hover:bg-light-gray dark:hover:bg-secondary-dark-bg"
+        onClick={onClick}
+      >
+        {buttonText}
+      </button>
     </>
   );
 }
