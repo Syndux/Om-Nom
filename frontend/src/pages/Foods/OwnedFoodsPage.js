@@ -37,7 +37,7 @@ const OwnedFoodsPage = () => {
                 <div className="m-4 flex items-center justify-between text-xl font-bold">
                   <p>Owned Foods</p>
                   <Link
-                    className="dark:text-light-gray bg-maya-blue dark:bg-dm-maya-blue text-main-dark-bg rounded-lg p-1.5 text-base duration-100 ease-in hover:scale-105"
+                    className="bg-button-blue text-main-bg rounded-lg p-1.5 text-sm font-semibold duration-100 ease-in hover:scale-105"
                     to="/foods/new"
                   >
                     New Food
