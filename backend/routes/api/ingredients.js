@@ -2,6 +2,9 @@ const express = require("express");
 
 const { requireAuth } = require("../../utils/auth");
 const { Ingredient } = require("../../db/models");
+const { FoodDetailsPage } = require("../../../frontend/src/pages");
+const { EmptyResultError } = require("sequelize");
+const { default: foodsReducer } = require("../../../frontend/src/store/foods");
 
 const router = express.Router();
 
@@ -45,6 +48,33 @@ router.put("/:ingredientId", requireAuth, async (req, res, next) => {
   return res.status(200).json(updatedIngredient);
 })
 
+// Delete an ingredient with ingredientId
+router.delete("/:ingredientId", requireAuth, async (req, res, next) => {
+  const { ingredientId } = req.params;
+  const userId = req.user.id;
+
+  const ingredient = await Ingredient.findByPk(ingredientId);
+
+  if (!ingredient) {
+    const err = new Error("Ingredient not found");
+    err.status = 400;
+    err.message = "Ingredient could not be found.";
+    return next(err);
+  }
+
+  if (userId !== ingredient.creatorId) {
+    const err = new Error("Authorization required");
+    err.status = 403;
+    err.message = "You are not allowed to delete this ingredient.";
+    return next(err);
+  }
+
+  await ingredient.destroy();
+
+  return res.status(200).json({
+    message: "Successfully deleted",
+  });
+})
 
 // Get all ingredients
 router.get("/", async (req, res, next) => {
