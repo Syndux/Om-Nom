@@ -11,7 +11,7 @@ import ConfirmDeleteFoodModal from "../ConfirmDeleteFoodModal";
 
 const OwnedFoodsPage = () => {
   const dispatch = useDispatch();
-  const foods = useSelector((state) => Object.values(state.foods));
+  const allFoods = useSelector((state) => Object.values(state.foods));
   const [loaded, setLoaded] = useState(false);
   const sessionUser = useSelector((state) => state.session.user);
 
@@ -21,6 +21,10 @@ const OwnedFoodsPage = () => {
       setLoaded(true);
     })();
   }, [dispatch]);
+
+  const foods = loaded
+  ? allFoods.sort((a, b) => a.name.localeCompare(b.name))
+  : [];
 
   return (
     <div className="dark:text-light-gray text-secondary-dark-bg bg-light-gray dark:bg-secondary-dark-bg">

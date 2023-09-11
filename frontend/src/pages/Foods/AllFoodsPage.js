@@ -15,7 +15,6 @@ const AllFoodsPage = () => {
   const allFoods = useSelector((state) => Object.values(state.foods));
   const sessionUser = useSelector((state) => state.session.user);
   const [loaded, setLoaded] = useState(false);
-  const foods = allFoods.sort((a, b) => a.name.localeCompare(b.name));
 
   useEffect(() => {
     (async () => {
@@ -24,9 +23,9 @@ const AllFoodsPage = () => {
     })();
   }, [dispatch]);
 
-  const handleEdit = (foodId) => {
-    history.push(`/foods/${foodId}/edit`);
-  };
+  const foods = loaded
+  ? allFoods.sort((a, b) => a.name.localeCompare(b.name))
+  : [];
 
   return (
     // DEVNOTE - make component for the same divs across pages?
