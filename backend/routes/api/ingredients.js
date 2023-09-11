@@ -85,6 +85,7 @@ router.post("/", requireAuth, async (req, res, next) => {
   const newIngredient = await Ingredient.create({
     name: titleCasedName,
     imgUrl,
+    creatorId: userId,
   });
 
   return res.status(201).json(newIngredient);
