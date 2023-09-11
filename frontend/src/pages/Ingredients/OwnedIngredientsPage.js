@@ -13,7 +13,6 @@ const OwnedIngredientsPage = () => {
   const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
   const allIngredients = useSelector((state) => Object.values(state.ingredients));
-  const ingredients = allIngredients.sort((a, b) => a.name.localCompare(b.name));
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
@@ -22,6 +21,10 @@ const OwnedIngredientsPage = () => {
       setLoaded(true);
     })();
   }, [dispatch]);
+
+  const ingredients = loaded
+  ? allIngredients.sort((a, b) => a.name.localeCompare(b.name))
+  : [];
 
   return (
     <div className="bg-light-gray text-secondary-dark-bg dark:bg-secondary-dark-bg dark:text-light-gray">
@@ -32,12 +35,6 @@ const OwnedIngredientsPage = () => {
               <>
                 <div className="m-4 flex items-center justify-between text-xl font-bold">
                   <p>Owned Ingredients</p>
-                  {/* <Link
-                    className="bg-blue-700 text-main-bg rounded-lg p-1.5 text-sm font-semibold duration-100 ease-in hover:scale-105"
-                    to="/ingredients/new"
-                  >
-                    New Ingredient
-                  </Link> */}
                   <OpenModalButton
                     modalComponent={<IngredientFormModal />}
                     buttonText="New Ingredient"
