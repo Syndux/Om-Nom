@@ -152,11 +152,15 @@ const ingredientsReducer = (state = initialState, action) => {
     case CREATE_INGREDIENT:
       return { ...state, [action.payload.id]: action.payload };
     case CREATE_FOOD_INGREDIENT:
-      return [...state, action.payload];
+      return { ...state, [action.payload.id]: action.payload };
     case UPDATE_INGREDIENT:
       return {...state, [action.payload.id]: action.payload };
     case UPDATE_FOOD_INGREDIENT:
         return { ...state, [action.payload.id]: action.payload };
+    case DELETE_INGREDIENT:
+      let newState = {...state};
+      delete newState[action.payload.id];
+      return newState;
     default:
       return state;
   }
