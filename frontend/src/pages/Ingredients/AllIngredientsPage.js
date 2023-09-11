@@ -27,7 +27,7 @@ const AllIngredientsPage = () => {
               <div className="m-4 flex items-center justify-between text-xl font-bold">
                 <p>All Ingredients</p>
                 <Link
-                  className="bg-button-blue text-main-bg rounded-lg p-1.5 text-sm font-semibold duration-100 ease-in hover:scale-105"
+                  className="bg-blue-700 text-main-bg rounded-lg p-1.5 text-sm font-semibold duration-100 ease-in hover:scale-105"
                   to="/ingredients/new"
                 >
                   New Ingredient

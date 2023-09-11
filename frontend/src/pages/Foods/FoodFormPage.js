@@ -403,12 +403,12 @@ const FoodFormPage = () => {
                   <button
                     type="button"
                     onClick={addIngredientDropdown}
-                    className="text-light-gray dark:text-main-bg rounded-lg bg-blue-500 px-3 py-1 duration-100 ease-in hover:scale-105"
+                    className="text-main-bg dark:text-main-bg rounded-lg bg-blue-700 px-3 py-1 duration-100 ease-in hover:scale-105"
                   >
                     Add another ingredient
                   </button>
                   <button
-                    className="text-light-gray bg-chinese-gold dark:text-main-bg rounded-lg px-3 py-1 duration-100 ease-in hover:scale-105"
+                    className="text-main-bg bg-emerald-800 dark:text-main-bg rounded-lg px-3 py-1 duration-100 ease-in hover:scale-105"
                     type="submit"
                   >
                     {isEdit ? "Update this food" : "Create this food"}

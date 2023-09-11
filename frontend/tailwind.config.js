@@ -9,12 +9,6 @@ module.exports = {
         'main-dark-bg': '#23272F',
         'secondary-dark-bg': '#40464F',
         'light-gray': '#EBEBEB',
-        'maya-blue': '#7EC5FE',
-        'dm-maya-blue': '#0D47A1',
-        'earth-yellow': '#F1BC6E',
-        'dm-earth-yellow': '#814110',
-        'button-red': '#DC2626',
-        'button-blue': '#2626DC',
         'half-transparent': 'rgba(0, 0, 0, 0.5)',
       },
       backgroundImage: {
