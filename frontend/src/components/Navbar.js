@@ -7,7 +7,6 @@ import { FaCartShopping } from "react-icons/fa6";
 import { IoNotifications } from "react-icons/io5";
 import { BsSunFill } from "react-icons/bs";
 import { FaMoon } from "react-icons/fa6";
-import { FaAngleDown } from "react-icons/fa6";
 
 import { GroceryList, Notification, UserProfile } from ".";
 import { useAppContext } from "../context/AppContext";
@@ -63,14 +62,14 @@ const Navbar = () => {
       <div className="flex gap-4">
         <button
           type="button"
-          onClick={() => handleClick("groceryList")}
+          onClick={() => {}}
           className={buttonClasses}
         >
           <FaCartShopping />
         </button>
         <button
           type="button"
-          onClick={() => handleClick("notification")}
+          onClick={() => {}}
           className={buttonClasses}
         >
           <IoNotifications />
@@ -94,27 +93,11 @@ const Navbar = () => {
             <BsSunFill />
           </button>
         )}
-        <div
-          className="text-secondary-dark-bg dark:text-light-gray dark:hover:text-light-gray dark:hover:bg-secondary-dark-bg relative flex items-center gap-1 rounded-lg px-1.5 ease-in duration-200 hover:scale-105 hover:bg-light-gray"
-          onClick={() => handleClick("userProfile")}
-        >
-          {sessionUser ? (
-            <div className="flex items-center gap-2">
-              <img // DEVNOTE - All users should have imgUrl apart from seeded
-                src={sessionUser.imgUrl ? sessionUser.imgUrl : "https://cdn-icons-png.flaticon.com/512/3135/3135715.png"}
-                alt="user-profile"
-                className="h-5 rounded-full"
-              />
-              <p>Hi, {`${sessionUser.username}`}</p>
-              <FaAngleDown />
-            </div>
-          ) : (
-            <p className="font-bold">Login/Signup</p>
-          )}
-        </div>
+        <UserProfile user={sessionUser} />
+
         {isClicked.groceryList && (<GroceryList />)}
         {isClicked.notification && (<Notification />)}
-        {isClicked.userProfile && (<UserProfile user={sessionUser} />)}
+        {/* {isClicked.userProfile && (<UserProfile user={sessionUser} />)} */}
       </div>
     </div>
   );
