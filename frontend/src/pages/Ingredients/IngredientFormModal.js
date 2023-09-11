@@ -97,7 +97,7 @@ const IngredientFormModal = ({ ingredientId }) => {
   };
 
   return (
-    <div className="overflow-hidden bg-gray-200 shadow-xl dark:bg-main-dark-bg">
+    <div className="overflow-hidden bg-slate-300 shadow-xl dark:bg-main-dark-bg">
       <div className="flex">
         {sessionUser && loaded ? (
           <div className="m-4">
@@ -132,7 +132,7 @@ const IngredientFormModal = ({ ingredientId }) => {
                   type="submit"
                   className="inline-flex w-full justify-center rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 sm:ml-3 sm:w-auto"
                 >
-                  Create
+                  {isEdit ? "Edit" : "Create"}
                 </button>
                 <button
                   type="button"
