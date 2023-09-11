@@ -30,6 +30,7 @@ const FoodFormPage = () => {
 
   const [validationErrors, setValidationErrors] = useState([]);
   const [ready, setReady] = useState(false);
+  const [loaded, setLoaded] = useState(false);
 
   const [formData, setFormData] = useState({ ...initialFormData });
 
@@ -42,6 +43,7 @@ const FoodFormPage = () => {
         setReady(true);
       }
     })();
+    setLoaded(true);
   }, [dispatch]);
 
   useEffect(() => {
@@ -210,7 +212,7 @@ const FoodFormPage = () => {
     <div className="dark:text-light-gray text-secondary-dark-bg bg-light-gray dark:bg-secondary-dark-bg">
       <div className="flex flex-wrap items-center justify-center lg:flex-nowrap">
         <div className="m-3 flex h-[calc(100dvh-72px)] w-full flex-col items-center justify-start overflow-y-auto overflow-x-hidden rounded-xl bg-main-bg p-4 dark:bg-main-dark-bg">
-          {sessionUser ? (
+          {sessionUser && loaded ? (
             <>
               <p className="my-10 text-3xl">
                 {isEdit ? "Edit Food" : "Create a new food"}
