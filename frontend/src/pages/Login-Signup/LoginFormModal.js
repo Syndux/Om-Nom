@@ -4,37 +4,66 @@ import { Redirect } from "react-router-dom";
 
 import * as sessionActions from "../../store/session";
 import { useModal } from "../../context/ModalContext";
+import { useAppContext } from "../../context/AppContext";
+import { OpenModalButton } from "../../components";
+
+import OmNomDarkLogo from "../../assets/Logos/ONDark.png";
+import OmNomLightLogo from "../../assets/Logos/ONLight.png";
+
+const initialFormData = {
+  credential: "",
+  password: "",
+};
 
 const LoginFormModal = () => {
   const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
-  const [credential, setCredential] = useState("");
-  const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({});
-  const [formDisable, setFormDisable] = useState(true);
   const { closeModal } = useModal();
+  const { currentMode } = useAppContext();
+  const [formData, setFormData] = useState({ ...initialFormData });
 
-  useEffect(() => {
-    if (credential.length >= 4 && password.length >= 6) {
-      setFormDisable(false);
-    } else {
-      setFormDisable(true);
+  const validateLogin = () => {
+    const errors = [];
+
+    if (formData.credential.length < 4) {
+      errors.push("Credentials need to be at least 4 characters.");
     }
-  }, [credential, password]);
+
+    if (formData.password.length < 6) {
+      errors.push("Password needs to be at least 6 characters.");
+    }
+
+    return errors;
+  }
 
   if (sessionUser) return <Redirect to="/home" />;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setErrors({});
+    const loginValErrors = validateLogin();
+    const valErrors = [...loginValErrors];
+
+    if (valErrors.length > 0) {
+      setErrors(valErrors);
+      return;
+    }
 
     try {
-      dispatch(sessionActions.login({ credential, password }));
-      closeModal();
-    } catch (res) {
-      const data = await res.json();
-      if (data.message) data.errors = { credential: data.message };
-      if (data && data.errors) setErrors(data.errors);
+      const result = await dispatch(sessionActions.login( formData ));
+
+      if (result !== null) {
+        setFormData({ ...initialFormData });
+        setErrors([]);
+        closeModal();
+      } 
+    } catch (error) {
+      const res = await error.json();
+      if (res.errors) {
+        setErrors(Object.values(res.errors));
+      } else if (res.message) {
+        setErrors([res.message]);
+      }
     }
   };
 
@@ -49,49 +78,73 @@ const LoginFormModal = () => {
     );
   };
 
+  const OmNomLogo = currentMode === "Dark" ? OmNomLightLogo : OmNomDarkLogo;
+
   return (
-    <div className="">
-      <h1>Log In</h1>
-      <form onSubmit={handleSubmit} className="">
-        {errors.credential && (
-          <p className="">{errors.credential}</p>
-        )}
-        <div className="">
-          <input
-            type="text"
-            id="credential"
-            placeholder="Username or Email"
-            value={credential}
-            onChange={(e) => setCredential(e.target.value)}
-            required
-          />
+    <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-6 lg:px-8">
+      <div className="mx-auto w-full">
+        <img className="mx-auto h-40 w-auto" src={OmNomLogo} alt="Om Nom" />
+        <h2 className="mt-8 text-center text-2xl font-bold leading-8 text-gray-700 dark:text-gray-200">
+          Sign in
+        </h2>
+        <div className="mt-3 flex whitespace-pre-wrap text-center justify-center items-center text-slate-200">
+          {errors.length > 0 && (
+            <ul>
+              {errors.map((error, index) => (
+                <li key={index}>{error}</li>
+              ))}
+            </ul>
+          )}
         </div>
-        <div className="">
-          <input
-            type="password"
-            id="password"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </div>
-        <button
-          type="submit"
-          className="disabled:opacity-50"
-          disabled={formDisable}
-        >
-          Log In
-        </button>
-      </form>
-      <div className="" onClick={loginDemo}>
+      </div>
+      <div className="mt-6 w-full">
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <div className="">
+            <input
+              type="text"
+              id="credential"
+              placeholder="Username or Email"
+              value={formData.credential}
+              onChange={(e) =>
+                setFormData({ ...formData, credential: e.target.value })
+              }
+              className="w-full rounded-lg bg-secondary-dark-bg p-1.5 dark:bg-light-gray"
+              required
+            />
+          </div>
+          <div className="">
+            <input
+              type="password"
+              id="password"
+              placeholder="Password"
+              value={formData.password}
+              onChange={(e) =>
+                setFormData({ ...formData, password: e.target.value })
+              }
+              required
+              className="w-full rounded-lg bg-secondary-dark-bg p-1.5 dark:bg-light-gray"
+            />
+          </div>
+          <button
+            type="submit"
+            className="flex w-full justify-center rounded-md bg-blue-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white"
+          >
+            Sign In
+          </button>
+        </form>
+      </div>
+      <div
+        className="mt-3 flex w-full justify-center rounded-md bg-green-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white"
+        onClick={loginDemo}
+      >
         Demo User
       </div>
-      <div className="">
-          Don't have an account? Sign up.
-        </div>
+      <div className="mt-4 text-slate-200">
+        Don't have an account?{" "}
+        <OpenModalButton onClick={closeModal} buttonText="Sign up." />
+      </div>
     </div>
   );
-}
+};
 
 export default LoginFormModal;

@@ -47,7 +47,7 @@ const UserProfile = ({ user }) => {
   const linkClasses =
     "flex m-1 font-semibold text-base dark:hover:bg-slate-500 rounded-lg pl-2";
   return (
-    <div className="z-100 relative rounded-lg p-1.5 text-xl text-secondary-dark-bg hover:bg-light-gray dark:text-light-gray dark:hover:bg-secondary-dark-bg dark:hover:text-light-gray">
+    <div className="z-50 relative rounded-lg p-1.5 text-xl text-secondary-dark-bg hover:bg-light-gray dark:text-light-gray dark:hover:bg-secondary-dark-bg dark:hover:text-light-gray">
       <button
         className="flex flex-row items-center justify-center gap-2"
         onClick={openMenu}
