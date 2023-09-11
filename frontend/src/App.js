@@ -16,7 +16,8 @@ import {
   FoodFormPage,
   IngredientFormPage,
   OwnedIngredientsPage,
-  PageNotFound
+  PageNotFound,
+  AboutTheDev
 } from "./pages";
 
 import * as sessionActions from "./store/session";
@@ -107,6 +108,8 @@ function App() {
                 <Route exact path="/logout">
                   <Redirect to="/" />
                 </Route>
+                {/* About */}
+                <Route exact path="/about" component={AboutTheDev} />
                 <Route component={PageNotFound} />
               </Switch>
             </div>

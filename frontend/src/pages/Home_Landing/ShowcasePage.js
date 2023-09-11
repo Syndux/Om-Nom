@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 
 import { useAppContext } from "../../context/AppContext";
 import homeLight from "../../assets/home_light.png";
@@ -36,15 +36,15 @@ const ShowcasePage = () => {
             >
               Get started
             </a>
-            <a
-              href="#"
+            <Link
+              to="/about"
               className="text-md font-semibold leading-6 text-black dark:text-white"
             >
               About the dev →
-            </a>
+            </Link>
           </div>
-          <div className="relative mt-16 h-80 lg:mt-8">
-            <img src={homeSrc} className="absolute -left-[30rem] w-[90rem] top-10 max-w-none rounded-md border shadow-[rgba(17,_17,_26,_0.1)_0px_0px_16px] dark:shadow-[rgba(233,_233,_224,_0.1)_0px_0px_16px]"/>
+          <div className="flex mt-16 justify-center sm:flex-none sm:relative">
+            <img src={homeSrc} className="w-[90%] sm:w-[80rem] sm:absolute sm:-left-[15rem] max-w-none rounded-md border shadow-[rgba(17,_17,_26,_0.1)_0px_0px_16px] dark:shadow-[rgba(233,_233,_224,_0.1)_0px_0px_16px]"/>
           </div>
         </div>
       </div>
