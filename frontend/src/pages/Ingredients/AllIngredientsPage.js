@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import { loadAllIngredients } from "../../store/ingredients";
 
 const AllIngredientsPage = () => {
   const dispatch = useDispatch();
-  const history = useHistory();
+
   const allIngredients = useSelector((state) => Object.values(state.ingredients));
   const ingredients = allIngredients.sort((a, b) => a.name.localeCompare(b.name));
   const [loaded, setLoaded] = useState(false);
@@ -26,12 +26,12 @@ const AllIngredientsPage = () => {
             <>
               <div className="m-4 flex items-center justify-between text-xl font-bold">
                 <p>All Ingredients</p>
-                <button
-                  className="dark:text-light-gray rounded-lg text-base p-1.5 duration-100 ease-in hover:scale-105 bg-blue-ncs dark:bg-dm-blue-ncs text-main-bg"
-                  onClick={() => history.push("/ingredients/new")}
+                <Link
+                  className="dark:text-light-gray bg-maya-blue dark:bg-dm-maya-blue text-main-dark-bg rounded-lg p-1.5 text-base duration-100 ease-in hover:scale-105"
+                  to="/ingredients/new"
                 >
                   New Ingredient
-                </button>
+                </Link>
               </div>
               {ingredients.map((ingredient) => (
                 <div key={ingredient.id} className="border-t px-10 py-3 duration-100 ease-in hover:scale-[1.01] hover:shadow-[rgba(50,_50,_105,_0.15)_0px_2px_5px_0px,_rgba(0,_0,_0,_0.05)_0px_1px_1px_0px] dark:hover:shadow-[rgba(205,_205,_150,_0.15)_0px_2px_5px_0px,_rgba(255,_255,_255,_0.3)_0px_1px_1px_0px]">
