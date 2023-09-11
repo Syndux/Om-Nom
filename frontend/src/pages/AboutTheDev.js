@@ -10,7 +10,7 @@ const AboutTheDev = () => {
     <>
       <div className="bg-light-gray text-secondary-dark-bg dark:bg-secondary-dark-bg dark:text-light-gray">
         <div className="flex flex-wrap justify-center">
-          <div className="m-3 h-[calc(100dvh-71px)] w-full overflow-hidden overflow-y-scroll rounded-xl bg-main-bg p-5 dark:bg-main-dark-bg">
+          <div className="m-3 h-[calc(100dvh-135px)] w-full overflow-hidden overflow-y-scroll rounded-xl bg-main-bg p-5 dark:bg-main-dark-bg">
             <p className="mb-9 ml-2 text-2xl font-bold">About The Dev</p>
             <div className="flex w-full items-center justify-center">
               <div className="flex flex-col sm:flex-row sm:gap-10">

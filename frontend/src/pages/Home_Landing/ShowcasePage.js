@@ -20,7 +20,7 @@ const ShowcasePage = () => {
   return (
     <div className="bg-light-gray text-secondary-dark-bg dark:bg-secondary-dark-bg dark:text-light-gray">
       <div className="flex flex-wrap justify-center lg:flex-nowrap">
-        <div className="m-3 flex h-[calc(100dvh-71px)] w-full flex-col items-center overflow-hidden rounded-xl bg-main-bg text-center dark:bg-main-dark-bg">
+        <div className="m-3 flex h-[calc(100dvh-135px)] w-full flex-col items-center overflow-hidden rounded-xl bg-main-bg text-center dark:bg-main-dark-bg">
           <h2 className="mt-24 text-3xl font-bold tracking-tight text-main-dark-bg dark:text-main-bg sm:text-4xl">
             Streamline your dinner decision.
             <br />
