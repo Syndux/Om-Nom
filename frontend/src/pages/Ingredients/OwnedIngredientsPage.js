@@ -12,7 +12,8 @@ import { IngredientFormModal, ConfirmDeleteIngredientModal } from "../";
 const OwnedIngredientsPage = () => {
   const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
-  const ingredients = useSelector((state) => Object.values(state.ingredients));
+  const allIngredients = useSelector((state) => Object.values(state.ingredients));
+  const ingredients = allIngredients.sort((a, b) => a.name.localCompare(b.name));
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
