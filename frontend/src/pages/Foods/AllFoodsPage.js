@@ -11,7 +11,6 @@ import ConfirmDeleteFoodModal from "../ConfirmDeleteFoodModal";
 
 const AllFoodsPage = () => {
   const dispatch = useDispatch();
-  const history = useHistory();
   const allFoods = useSelector((state) => Object.values(state.foods));
   const sessionUser = useSelector((state) => state.session.user);
   const [loaded, setLoaded] = useState(false);
