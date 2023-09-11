@@ -11,7 +11,7 @@ import ConfirmDeleteFoodModal from "../ConfirmDeleteFoodModal";
 
 const OwnedFoodsPage = () => {
   const dispatch = useDispatch();
-  const foods = useSelector((state) => Object.values(state.foods));
+  const allFoods = useSelector((state) => Object.values(state.foods));
   const [loaded, setLoaded] = useState(false);
   const sessionUser = useSelector((state) => state.session.user);
 
@@ -22,10 +22,14 @@ const OwnedFoodsPage = () => {
     })();
   }, [dispatch]);
 
+  const foods = loaded
+  ? allFoods.sort((a, b) => a.name.localeCompare(b.name))
+  : [];
+
   return (
     <div className="dark:text-light-gray text-secondary-dark-bg bg-light-gray dark:bg-secondary-dark-bg">
       <div className="flex flex-wrap justify-center lg:flex-nowrap">
-        <div className="m-3 flex h-[calc(100dvh-71px)] w-full flex-col overflow-x-hidden overflow-y-scroll rounded-xl bg-main-bg dark:bg-main-dark-bg">
+        <div className="m-3 flex h-[calc(100dvh-135px)] w-full flex-col overflow-x-hidden overflow-y-scroll rounded-xl bg-main-bg dark:bg-main-dark-bg">
           {sessionUser ? (
             loaded && (
               <>

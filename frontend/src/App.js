@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { Route, Switch, Redirect } from "react-router-dom";
 
-import { Navbar, Sidebar } from "./components";
+import { Navbar, Sidebar, Footer } from "./components";
 import {
   ComingSoonPage,
   ExplorePage,
@@ -16,7 +16,8 @@ import {
   FoodFormPage,
   IngredientFormPage,
   OwnedIngredientsPage,
-  PageNotFound
+  PageNotFound,
+  AboutTheDev
 } from "./pages";
 
 import * as sessionActions from "./store/session";
@@ -107,9 +108,12 @@ function App() {
                 <Route exact path="/logout">
                   <Redirect to="/" />
                 </Route>
+                {/* About */}
+                <Route exact path="/about" component={AboutTheDev} />
                 <Route component={PageNotFound} />
               </Switch>
             </div>
+            <Footer />
           </div>
         </div>
       </div>

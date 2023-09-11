@@ -25,3 +25,4 @@ export { default as ConfirmDeleteFoodModal } from "./ConfirmDeleteFoodModal";
 export { default as ConfirmDeleteIngredientModal } from "./ConfirmDeleteIngredientModal";
 export { default as ComingSoonPage } from "./ComingSoonPage";
 export { default as PageNotFound } from "./PageNotFound";
+export { default as AboutTheDev } from "./AboutTheDev";

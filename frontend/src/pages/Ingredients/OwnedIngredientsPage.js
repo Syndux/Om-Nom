@@ -12,7 +12,7 @@ import { IngredientFormModal, ConfirmDeleteIngredientModal } from "../";
 const OwnedIngredientsPage = () => {
   const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
-  const ingredients = useSelector((state) => Object.values(state.ingredients));
+  const allIngredients = useSelector((state) => Object.values(state.ingredients));
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
@@ -22,21 +22,19 @@ const OwnedIngredientsPage = () => {
     })();
   }, [dispatch]);
 
+  const ingredients = loaded
+  ? allIngredients.sort((a, b) => a.name.localeCompare(b.name))
+  : [];
+
   return (
     <div className="bg-light-gray text-secondary-dark-bg dark:bg-secondary-dark-bg dark:text-light-gray">
       <div className="flex flex-wrap justify-center lg:flex-nowrap">
-        <div className="m-3 flex h-[calc(100dvh-71px)] w-full flex-col overflow-x-hidden overflow-y-scroll rounded-xl bg-main-bg dark:bg-main-dark-bg">
+        <div className="m-3 flex h-[calc(100dvh-135px)] w-full flex-col overflow-x-hidden overflow-y-scroll rounded-xl bg-main-bg dark:bg-main-dark-bg">
           {sessionUser ? (
             loaded && (
               <>
                 <div className="m-4 flex items-center justify-between text-xl font-bold">
                   <p>Owned Ingredients</p>
-                  {/* <Link
-                    className="bg-blue-700 text-main-bg rounded-lg p-1.5 text-sm font-semibold duration-100 ease-in hover:scale-105"
-                    to="/ingredients/new"
-                  >
-                    New Ingredient
-                  </Link> */}
                   <OpenModalButton
                     modalComponent={<IngredientFormModal />}
                     buttonText="New Ingredient"

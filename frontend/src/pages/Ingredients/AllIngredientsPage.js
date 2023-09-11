@@ -10,13 +10,10 @@ import { IngredientFormModal, ConfirmDeleteIngredientModal } from "../";
 
 const AllIngredientsPage = () => {
   const dispatch = useDispatch();
-
   const allIngredients = useSelector((state) =>
     Object.values(state.ingredients),
   );
-  const ingredients = allIngredients.sort((a, b) =>
-    a.name.localeCompare(b.name),
-  );
+
   const sessionUser = useSelector((state) => state.session.user);
   const [loaded, setLoaded] = useState(false);
 
@@ -27,20 +24,18 @@ const AllIngredientsPage = () => {
     setLoaded(true);
   }, [dispatch]);
 
+  const ingredients = loaded
+    ? allIngredients.sort((a, b) => a.name.localeCompare(b.name))
+    : [];
+
   return (
     <div className="bg-light-gray text-secondary-dark-bg dark:bg-secondary-dark-bg dark:text-light-gray">
       <div className="flex flex-wrap justify-center lg:flex-nowrap">
-        <div className="m-3 flex h-[calc(100dvh-71px)] w-full flex-col overflow-x-hidden overflow-y-scroll rounded-xl bg-main-bg dark:bg-main-dark-bg">
+        <div className="m-3 flex h-[calc(100dvh-135px)] w-full flex-col overflow-x-hidden overflow-y-scroll rounded-xl bg-main-bg dark:bg-main-dark-bg">
           {loaded && (
             <>
               <div className="m-4 flex items-center justify-between text-xl font-bold">
                 <p>All Ingredients</p>
-                {/* <Link
-                  className="bg-blue-700 text-main-bg rounded-lg p-1.5 text-sm font-semibold duration-100 ease-in hover:scale-105"
-                  to="/ingredients/new"
-                >
-                  New Ingredient
-                </Link> */}
                 <OpenModalButton
                   modalComponent={<IngredientFormModal />}
                   buttonText="New Ingredient"
@@ -62,7 +57,7 @@ const AllIngredientsPage = () => {
                           <IngredientFormModal ingredientId={ingredient.id} />
                         }
                         buttonText={<AiFillEdit />}
-                        className="text-secondary-dark-bg dark:text-light-gray flex items-center justify-center rounded-lg px-2 text-xl duration-100 ease-in hover:scale-110 hover:bg-light-gray dark:hover:bg-secondary-dark-bg"
+                        className="flex items-center justify-center rounded-lg px-2 text-xl text-secondary-dark-bg duration-100 ease-in hover:scale-110 hover:bg-light-gray dark:text-light-gray dark:hover:bg-secondary-dark-bg"
                       />
 
                       <OpenModalButton
@@ -72,7 +67,7 @@ const AllIngredientsPage = () => {
                           />
                         }
                         buttonText={<FaTrash />}
-                        className="text-secondary-dark-bg dark:text-light-gray flex items-center justify-center rounded-lg px-2 text-base duration-100 ease-in hover:scale-110 hover:bg-light-gray dark:hover:bg-secondary-dark-bg"
+                        className="flex items-center justify-center rounded-lg px-2 text-base text-secondary-dark-bg duration-100 ease-in hover:scale-110 hover:bg-light-gray dark:text-light-gray dark:hover:bg-secondary-dark-bg"
                       />
                     </div>
                   )}
