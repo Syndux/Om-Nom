@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
-import { AiOutlinePlus } from "react-icons/ai";
-import { FaEdit } from "react-icons/fa";
+import { useHistory, Link } from "react-router-dom";
+import { AiFillEdit } from "react-icons/ai";
 import { FaTrash } from "react-icons/fa6";
 
 import { loadAllFoods } from "../../store/foods";
@@ -38,12 +37,12 @@ const AllFoodsPage = () => {
             <>
               <div className="m-4 flex items-center justify-between text-xl font-bold">
                 <p>All Foods</p>
-                <button
-                  className="dark:text-light-gray rounded-lg text-base p-1.5 duration-100 ease-in hover:scale-105 bg-blue-ncs dark:bg-dm-blue-ncs text-main-bg"
-                  onClick={() => history.push("/foods/new")}
+                <Link
+                  className="dark:text-light-gray bg-maya-blue dark:bg-dm-maya-blue text-main-dark-bg rounded-lg p-1.5 text-base duration-100 ease-in hover:scale-105"
+                  to="/foods/new"
                 >
                   New Food
-                </button>
+                </Link>
               </div>
               {foods.map((food) => (
                 <div
@@ -56,15 +55,12 @@ const AllFoodsPage = () => {
                   </div>
                   {sessionUser && sessionUser?.id === food.creatorId && (
                     <div className="flex flex-row gap-4">
-                      <div className="text-secondary-dark-bg dark:text-light-gray flex justify-center rounded-lg px-2 duration-100 ease-in hover:scale-110 hover:bg-light-gray dark:hover:bg-secondary-dark-bg">
-                        <button
-                          className="text-xl"
-                          onClick={() => handleEdit(food.id)}
-                        >
-                          <FaEdit />
-                        </button>
+                      <div className="text-secondary-dark-bg dark:text-light-gray flex items-center justify-center rounded-lg px-2 duration-100 ease-in hover:scale-110 hover:bg-light-gray dark:hover:bg-secondary-dark-bg">
+                        <Link className="text-xl" to={`/foods/${food.id}/edit`}>
+                          <AiFillEdit />
+                        </Link>
                       </div>
-                      <div className="text-secondary-dark-bg dark:text-light-gray flex justify-center rounded-lg px-2 duration-100 ease-in hover:scale-110 hover:bg-light-gray dark:hover:bg-secondary-dark-bg">
+                      <div className="text-secondary-dark-bg dark:text-light-gray flex items-center justify-center rounded-lg px-2 duration-100 ease-in hover:scale-110 hover:bg-light-gray dark:hover:bg-secondary-dark-bg">
                         <OpenModalButton
                           modalComponent={
                             <ConfirmDeleteFoodModal foodId={food.id} />
