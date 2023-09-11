@@ -146,7 +146,11 @@ const initialState = {};
 const ingredientsReducer = (state = initialState, action) => {
   switch (action.type) {
     case LOAD_ALL_INGREDIENTS:
-      return action.payload;
+      const ingredientsMap = {};
+      action.payload.forEach((ingredient) => {
+        ingredientsMap[ingredient.id] = ingredient;
+      });
+      return ingredientsMap;
     case LOAD_SINGLE_INGREDIENT:
       return { ...state, [action.payload.id]: action.payload };
     case CREATE_INGREDIENT:
