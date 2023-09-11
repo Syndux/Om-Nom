@@ -196,7 +196,9 @@ const FoodFormPage = () => {
       if (newFoodId !== null) {
         setFormData({ ...initialFormData });
         setValidationErrors([]);
-        history.push(`/foods/${newFoodId}`);
+        // Go to food details page - Coming soon
+        // history.push(`/foods/${newFoodId}`);
+        history.push(`/foods/current`);
       }
     } catch (error) {
       const res = await error.json();
