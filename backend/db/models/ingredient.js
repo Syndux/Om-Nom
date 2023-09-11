@@ -8,6 +8,10 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
+      Ingredient.belongsTo(models.User, {
+        foreignKey: "creatorId",
+        as: "creator",
+      });
       Ingredient.belongsToMany(models.Food, {
         through: "FoodIngredients",
         foreignKey: "ingredientId",
@@ -17,6 +21,14 @@ module.exports = (sequelize, DataTypes) => {
   }
   Ingredient.init(
     {
+      creatorId: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        validate: {
+          isInt: true,
+          min: 1,
+        },
+      },
       name: {
         type: DataTypes.STRING,
         allowNull: false,
