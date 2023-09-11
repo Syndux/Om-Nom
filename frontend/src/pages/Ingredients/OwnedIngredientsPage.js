@@ -8,6 +8,7 @@ import { loadAllIngredients } from "../../store/ingredients";
 
 import { OpenModalButton } from "../../components";
 import ConfirmDeleteFoodModal from "../ConfirmDeleteFoodModal";
+import { IngredientFormModal } from "../";
 
 const OwnedIngredientsPage = () => {
   const dispatch = useDispatch();
@@ -31,12 +32,17 @@ const OwnedIngredientsPage = () => {
               <>
                 <div className="m-4 flex items-center justify-between text-xl font-bold">
                   <p>Owned Ingredients</p>
-                  <Link
+                  {/* <Link
                     className="bg-blue-700 text-main-bg rounded-lg p-1.5 text-sm font-semibold duration-100 ease-in hover:scale-105"
                     to="/ingredients/new"
                   >
                     New Ingredient
-                  </Link>
+                  </Link> */}
+                  <OpenModalButton
+                    modalComponent={<IngredientFormModal />}
+                    buttonText="New Ingredient"
+                    className="text-main-bg rounded-lg bg-blue-700 p-1.5 text-sm font-semibold duration-100 ease-in hover:scale-105"
+                  />
                 </div>
                 {ingredients.map((ingredient) => (
                   <div

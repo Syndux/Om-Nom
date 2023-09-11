@@ -8,7 +8,7 @@ export { default as OwnedFoodsPage } from "./Foods/OwnedFoodsPage";
 export { default as FoodFormPage } from "./Foods/FoodFormPage";
 
 export { default as AllIngredientsPage } from "./Ingredients/AllIngredientsPage";
-export { default as IngredientFormPage } from "./Ingredients/IngredientFormPage";
+export { default as IngredientFormModal } from "./Ingredients/IngredientFormModal";
 export { default as OwnedIngredientsPage } from "./Ingredients/OwnedIngredientsPage";
 
 export { default as FoodPlanPage} from "./FoodPlanning/FoodPlanPage";
