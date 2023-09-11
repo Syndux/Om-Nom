@@ -2,9 +2,6 @@ const express = require("express");
 
 const { requireAuth } = require("../../utils/auth");
 const { Ingredient } = require("../../db/models");
-const { FoodDetailsPage } = require("../../../frontend/src/pages");
-const { EmptyResultError } = require("sequelize");
-const { default: foodsReducer } = require("../../../frontend/src/store/foods");
 
 const router = express.Router();
 

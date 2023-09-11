@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { AiFillEdit } from "react-icons/ai";
+import { FaTrash } from "react-icons/fa6";
 
 import { loadAllIngredients } from "../../store/ingredients";
 
 import OpenModalButton from "../../components/OpenModalButton";
-import { IngredientFormModal } from "../";
+import { IngredientFormModal, ConfirmDeleteIngredientModal } from "../";
 
 const AllIngredientsPage = () => {
   const dispatch = useDispatch();
@@ -16,6 +17,7 @@ const AllIngredientsPage = () => {
   const ingredients = allIngredients.sort((a, b) =>
     a.name.localeCompare(b.name),
   );
+  const sessionUser = useSelector((state) => state.session.user);
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
@@ -51,6 +53,23 @@ const AllIngredientsPage = () => {
                   className="border-t px-10 py-3 duration-100 ease-in hover:scale-[1.01] hover:shadow-[rgba(50,_50,_105,_0.15)_0px_2px_5px_0px,_rgba(0,_0,_0,_0.05)_0px_1px_1px_0px] dark:hover:shadow-[rgba(205,_205,_150,_0.15)_0px_2px_5px_0px,_rgba(255,_255,_255,_0.3)_0px_1px_1px_0px]"
                 >
                   <p className="text-lg font-semibold">{ingredient.name}</p>
+                  {sessionUser && sessionUser?.id === ingredient.creatorId && (
+                    <div className="flex flex-row gap-4">
+                      <OpenModalButton
+                        modalComponent={
+                          <IngredientFormModal ingredientId={ingredient.id} />
+                        }
+                        buttonText={<AiFillEdit />}
+                      />
+
+                      <OpenModalButton
+                        modalComponent={
+                          <ConfirmDeleteIngredientModal ingredientId={ingredient.id} />
+                        }
+                        buttonText={<FaTrash />}
+                      />
+                    </div>
+                  )}
                 </div>
               ))}
             </>

@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 
-const Showcase = () => {
+const ShowcasePage = () => {
   const history = useHistory();
   const sessionUser = useSelector((state) => state.session.user); // User logged in?
 
@@ -21,4 +21,4 @@ const Showcase = () => {
   );
 };
 
-export default Showcase;
+export default ShowcasePage;
