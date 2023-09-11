@@ -75,7 +75,7 @@ function App() {
                 <Route exact path="/foods/new" component={FoodFormPage} />
                 {/* Edit singular food */}
                 <Route exact path="/foods/:foodId/edit" component={FoodFormPage} />
-                {/* View singular food */}
+                {/* View singular food - Coming soon! */}
                 <Route exact path="/foods/:foodId" component={FoodDetailsPage} />
                 {/* SIDEBAR - View all foods */}
                 <Route exact path="/foods" component={AllFoodsPage} />
@@ -84,6 +84,8 @@ function App() {
                 <Route exact path="/ingredients/current" component={OwnedIngredientsPage} />
                 {/* Create new ingredient form */}
                 <Route exact path="/ingredients/new" component={IngredientFormPage} />
+                {/* Edit singular ingredient */}
+                <Route exact path="/ingredients/:ingredientId/edit" component={IngredientFormPage} />
                 {/* SIDEBAR - View all ingredients */}
                 <Route exact path="/ingredients" component={AllIngredientsPage} />
 
