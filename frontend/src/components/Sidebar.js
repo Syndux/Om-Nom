@@ -7,6 +7,7 @@ import { MdMenuBook } from "react-icons/md";
 import { PiBowlFoodFill } from "react-icons/pi";
 import { FaBookmark } from "react-icons/fa6";
 import { FaCarrot } from "react-icons/fa6";
+import { FaAppleWhole } from "react-icons/fa6";
 import { FaCalendarDays } from "react-icons/fa6";
 
 import OmNomDarkLogo from "../assets/Logos/ONDark.png";
@@ -30,12 +31,12 @@ const sidebarItems = [
     link: "foods",
   },
   {
-    text: "Your Owned Foods",
+    text: "Owned Foods",
     icon: <PiBowlFoodFill />,
     link: "foods/current",
   },
   {
-    text: "Your Saved Foods",
+    text: "Saved Foods",
     icon: <FaBookmark />,
     link: "foods/saved",
   },
@@ -47,6 +48,11 @@ const sidebarItems = [
     text: "All Ingredients",
     icon: <FaCarrot />,
     link: "ingredients",
+  },
+  {
+    text: "Owned Ingredients",
+    icon: <FaAppleWhole />,
+    link: "ingredients/current"
   },
   {
     text: "Food Planning",
