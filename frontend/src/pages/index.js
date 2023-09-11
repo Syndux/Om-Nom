@@ -22,3 +22,4 @@ export { default as LoginFormModal } from "./Login-Signup/LoginFormModal.js";
 export { default as SignupFormModal } from "./Login-Signup/SignupFormModal.js";
 
 export { default as ComingSoonPage } from "./ComingSoonPage";
+export { default as PageNotFound } from "./PageNotFound";

@@ -16,6 +16,7 @@ import {
   FoodFormPage,
   IngredientFormPage,
   OwnedIngredientsPage,
+  PageNotFound
 } from "./pages";
 
 import * as sessionActions from "./store/session";
@@ -106,7 +107,7 @@ function App() {
                 <Route exact path="/logout">
                   <Redirect to="/" />
                 </Route>
-                <Route>Page not found</Route>
+                <Route component={PageNotFound} />
               </Switch>
             </div>
           </div>
