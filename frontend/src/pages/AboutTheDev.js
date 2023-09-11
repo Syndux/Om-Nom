@@ -17,12 +17,12 @@ const AboutTheDev = () => {
                 <div>
                   <img
                     src={aboutPic}
-                    alt="Developer"
+                    alt="Huey's portfolio picture"
                     className="aspect-square h-auto w-52 max-w-full rounded-2xl sm:flex-none"
                   />
                 </div>
                 <div className="flex max-w-xl flex-col">
-                  <h3 className="font-semibold leading-8 tracking-tight text-gray-700 dark:text-gray-200">
+                  <h3 className="font-semibold leading-8 tracking-normal text-gray-700 dark:text-gray-200">
                     Huey Nguyen
                   </h3>
                   <p className="text-base leading-7 text-gray-500 dark:text-gray-400">
@@ -33,13 +33,12 @@ const AboutTheDev = () => {
                     AppAcademy, Huey has discovered a passion for the world of
                     coding. Originally trained as a computer engineer, Huey
                     decided to pivot from hardware engineering to software
-                    development in 2022 Throughout this transformative
-                    experience, he has acquired proficiency in popular
-                    development technologies such as JavaScript and React,
-                    equipping him to create dynamic and innovative solutions.
-                    Huey's commitment to honing his skills extends beyond the
-                    screen, as he maintains a balanced lifestyle by hitting the
-                    gym and enjoying boba outings with friends.
+                    development in 2022. From this, he has acquired proficiency
+                    in popular development technologies such as JavaScript and
+                    React, equipping him to create dynamic and innovative
+                    solutions. Huey's commitment to honing his skills extends
+                    beyond the screen, as he maintains a balanced lifestyle by
+                    hitting the gym and enjoying boba outings with friends.
                   </p>
                   <ul className="mt-6 flex gap-6">
                     <li>
