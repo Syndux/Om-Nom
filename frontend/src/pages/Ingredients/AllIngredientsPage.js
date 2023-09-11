@@ -35,7 +35,7 @@ const AllIngredientsPage = () => {
               </div>
               {ingredients.map((ingredient) => (
                 <div key={ingredient.id} className="border-t px-10 py-3 duration-100 ease-in hover:scale-[1.01] hover:shadow-[rgba(50,_50,_105,_0.15)_0px_2px_5px_0px,_rgba(0,_0,_0,_0.05)_0px_1px_1px_0px] dark:hover:shadow-[rgba(205,_205,_150,_0.15)_0px_2px_5px_0px,_rgba(255,_255,_255,_0.3)_0px_1px_1px_0px]">
-                  <p className="text-lg">{ingredient.name}</p>
+                  <p className="text-lg font-semibold">{ingredient.name}</p>
                 </div>
               ))}
             </>

@@ -50,24 +50,24 @@ const AllFoodsPage = () => {
                   className="flex justify-between border-t px-10 py-3 duration-100 ease-in hover:scale-[1.01] hover:shadow-[rgba(50,_50,_105,_0.15)_0px_2px_5px_0px,_rgba(0,_0,_0,_0.05)_0px_1px_1px_0px] dark:hover:shadow-[rgba(205,_205,_150,_0.15)_0px_2px_5px_0px,_rgba(255,_255,_255,_0.3)_0px_1px_1px_0px]"
                 >
                   <div className="max-w-sm overflow-hidden text-ellipsis whitespace-nowrap">
-                    <p className="text-lg">{food.name}</p>
+                    <p className="text-lg font-semibold">{food.name}</p>
                     <p className="text-sm opacity-60">{food.cuisine}</p>
                   </div>
                   {sessionUser && sessionUser?.id === food.creatorId && (
                     <div className="flex flex-row gap-4">
-                      <div className="text-secondary-dark-bg dark:text-light-gray flex items-center justify-center rounded-lg px-2 duration-100 ease-in hover:scale-110 hover:bg-light-gray dark:hover:bg-secondary-dark-bg">
-                        <Link className="text-xl" to={`/foods/${food.id}/edit`}>
-                          <AiFillEdit />
-                        </Link>
-                      </div>
-                      <div className="text-secondary-dark-bg dark:text-light-gray flex items-center justify-center rounded-lg px-2 duration-100 ease-in hover:scale-110 hover:bg-light-gray dark:hover:bg-secondary-dark-bg">
-                        <OpenModalButton
-                          modalComponent={
-                            <ConfirmDeleteFoodModal foodId={food.id} />
-                          }
-                          buttonText={<FaTrash />}
-                        />
-                      </div>
+                      <Link
+                        className="text-secondary-dark-bg dark:text-light-gray flex items-center justify-center rounded-lg px-2 text-xl duration-100 ease-in hover:scale-110 hover:bg-light-gray dark:hover:bg-secondary-dark-bg"
+                        to={`/foods/${food.id}/edit`}
+                      >
+                        <AiFillEdit />
+                      </Link>
+
+                      <OpenModalButton
+                        modalComponent={
+                          <ConfirmDeleteFoodModal foodId={food.id} />
+                        }
+                        buttonText={<FaTrash />}
+                      />
                     </div>
                   )}
                 </div>
