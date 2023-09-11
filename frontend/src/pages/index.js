@@ -8,6 +8,8 @@ export { default as OwnedFoodsPage } from "./Foods/OwnedFoodsPage";
 export { default as FoodFormPage } from "./Foods/FoodFormPage";
 
 export { default as AllIngredientsPage } from "./Ingredients/AllIngredientsPage";
+export { default as IngredientFormModal } from "./Ingredients/IngredientFormModal";
+export { default as OwnedIngredientsPage } from "./Ingredients/OwnedIngredientsPage";
 
 export { default as FoodPlanPage} from "./FoodPlanning/FoodPlanPage";
 
@@ -19,4 +21,7 @@ export { default as ProfileReviewsPage } from "./Profile/ProfileReviewsPage";
 export { default as LoginFormModal } from "./Login-Signup/LoginFormModal.js";
 export { default as SignupFormModal } from "./Login-Signup/SignupFormModal.js";
 
+export { default as ConfirmDeleteFoodModal } from "./ConfirmDeleteFoodModal";
+export { default as ConfirmDeleteIngredientModal } from "./ConfirmDeleteIngredientModal";
 export { default as ComingSoonPage } from "./ComingSoonPage";
+export { default as PageNotFound } from "./PageNotFound";

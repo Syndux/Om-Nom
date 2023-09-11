@@ -110,7 +110,11 @@ const initialState = {};
 const foodsReducer = (state = initialState, action) => {
   switch (action.type) {
     case LOAD_ALL_FOODS:
-      return action.payload;
+      const foodsMap = {};
+      action.payload.forEach((food) => {
+        foodsMap[food.id] = food;
+      });
+      return foodsMap;
     case LOAD_SINGLE_FOOD:
       return { ...state, [action.payload.id]: action.payload };
     case CREATE_FOOD:

@@ -9,10 +9,6 @@ module.exports = {
         'main-dark-bg': '#23272F',
         'secondary-dark-bg': '#40464F',
         'light-gray': '#EBEBEB',
-        'maya-blue': '#7EC5FE',
-        'dm-maya-blue': '#0D47A1',
-        'earth-yellow': '#F1BC6E',
-        'dm-earth-yellow': '#814110',
         'half-transparent': 'rgba(0, 0, 0, 0.5)',
       },
       backgroundImage: {
@@ -28,7 +24,7 @@ module.exports = {
       colors: {
         'main-bg': '#F9FBFC',
         'main-dark-bg': '#23272F',
-        'secondary-dark-bg': '#2E3238',
+        'secondary-dark-bg': '#40464F',
         'light-gray': '#EBEBEB',
       },
       fontSize: {
