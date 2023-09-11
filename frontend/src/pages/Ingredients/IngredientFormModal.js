@@ -5,6 +5,7 @@ import { useParams, useHistory } from "react-router-dom";
 import { useModal } from "../../context/ModalContext";
 import {
   createIngredient,
+  loadAllIngredients,
   loadSingleIngredient,
   updateIngredient,
 } from "../../store/ingredients";
@@ -14,32 +15,31 @@ const IngredientFormModal = ({ ingredientId }) => {
   const history = useHistory();
   const isEdit = !!ingredientId;
   const sessionUser = useSelector((state) => state.session.user);
-  const ingredientToEdit = useSelector((state) => {
-    if (isEdit) {
-      return state.ingredients[ingredientId];
-    }
-    return "";
-  });
+  const ingredientToEdit = useSelector(
+    (state) => state.ingredients[ingredientId],
+  );
 
-  const [loaded, setLoaded] = useState(false);
   const [formData, setFormData] = useState({ name: "" });
   const [validationErrors, setValidationErrors] = useState([]);
+  const [loaded, setLoaded] = useState(false);
 
   const { closeModal } = useModal();
 
   useEffect(() => {
-    (async () => {
-      if (isEdit) {
-        await dispatch(loadSingleIngredient(ingredientId));
-      }
-    })();
+    const fetchData = async () => {
+      await dispatch(loadAllIngredients());
+      setLoaded(true);
+    };
 
-    setFormData({
-      name: ingredientToEdit.name,
-    });
-
-    setLoaded(true);
+    fetchData();
   }, [dispatch]);
+
+  useEffect(() => {
+    if (isEdit && ingredientToEdit) {
+      setFormData({ name: ingredientToEdit.name });
+    }
+  }, [isEdit, ingredientToEdit]);
+
 
   const validateName = () => {
     const errors = [];
@@ -85,7 +85,6 @@ const IngredientFormModal = ({ ingredientId }) => {
         // Go to ingredient details page - Coming soon
         // history.push(`/ingredients/${newIngredientId}`);
         closeModal();
-        history.push(`/ingredients/current`);
       }
     } catch (error) {
       const res = await error.json();
@@ -103,10 +102,10 @@ const IngredientFormModal = ({ ingredientId }) => {
         {sessionUser && loaded ? (
           <div className="m-4">
             <p className="text-center text-lg font-semibold text-main-dark-bg dark:text-light-gray">
-              Create Ingredient
+              {isEdit ? "Edit Ingredient" : "Create Ingredient"}
             </p>
             {validationErrors.length > 0 && (
-              <div className="bg-red-300 w-48 sm:w-auto p-2 text-center italic text-slate-900">
+              <div className="w-48 bg-red-300 p-2 text-center italic text-slate-900 sm:w-auto">
                 {validationErrors.map((error, index) => (
                   <div className="m-0.5 text-sm" key={index}>
                     {error}
@@ -146,8 +145,8 @@ const IngredientFormModal = ({ ingredientId }) => {
             </form>
           </div>
         ) : (
-          <p className="m-4 flex justify-center text-xl font-bold">
-            Must be logged-in to view this content.
+          <p className="m-4 flex justify-center text-xl font-bold dark:text-main-bg">
+            Loading...
           </p>
         )}
       </div>

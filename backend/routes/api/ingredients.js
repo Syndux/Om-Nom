@@ -30,10 +30,10 @@ router.put("/:ingredientId", requireAuth, async (req, res, next) => {
 
   const ingredient = await Ingredient.findByPk(ingredientId);
 
-  if (userId !== ingredientId) {
+  if (userId !== ingredient.creatorId) {
     const err = new Error("Authorization required");
     err.status = 403;
-    err.message = "You are not allowed to edit this food's ingredients.";
+    err.message = "You are not allowed to edit this ingredient.";
     return next(err);
   }
 
