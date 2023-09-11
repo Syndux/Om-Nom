@@ -28,7 +28,7 @@ module.exports = {
       colors: {
         'main-bg': '#F9FBFC',
         'main-dark-bg': '#23272F',
-        'secondary-dark-bg': '#2E3238',
+        'secondary-dark-bg': '#40464F',
         'light-gray': '#EBEBEB',
       },
       fontSize: {
