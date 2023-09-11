@@ -14,7 +14,8 @@ import {
   FavoriteFoodsPage,
   FoodPlanPage,
   FoodFormPage,
-  IngredientFormPage
+  IngredientFormPage,
+  OwnedIngredientsPage,
 } from "./pages";
 
 import * as sessionActions from "./store/session";
@@ -80,9 +81,11 @@ function App() {
                 <Route exact path="/foods" component={AllFoodsPage} />
 
                 {/* Ingredients */}
+                <Route exact path="/ingredients/current" component={OwnedIngredientsPage} />
+                {/* Create new ingredient form */}
+                <Route exact path="/ingredients/new" component={IngredientFormPage} />
                 {/* SIDEBAR - View all ingredients */}
                 <Route exact path="/ingredients" component={AllIngredientsPage} />
-                <Route exact path="/ingredients/new" component={IngredientFormPage} />
 
                 {/* Food Planning */}
                 {/* SIDEBAR - Calendar for foods - Coming soon!*/}
