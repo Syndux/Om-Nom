@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { Route, Switch, Redirect } from "react-router-dom";
 
-import { Navbar, Sidebar } from "./components";
+import { Navbar, Sidebar, Footer } from "./components";
 import {
   ComingSoonPage,
   ExplorePage,
@@ -113,6 +113,7 @@ function App() {
                 <Route component={PageNotFound} />
               </Switch>
             </div>
+            <Footer />
           </div>
         </div>
       </div>
