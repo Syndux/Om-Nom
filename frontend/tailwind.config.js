@@ -13,6 +13,8 @@ module.exports = {
         'dm-maya-blue': '#0D47A1',
         'earth-yellow': '#F1BC6E',
         'dm-earth-yellow': '#814110',
+        'button-red': '#DC2626',
+        'button-blue': '#2626DC',
         'half-transparent': 'rgba(0, 0, 0, 0.5)',
       },
       backgroundImage: {
