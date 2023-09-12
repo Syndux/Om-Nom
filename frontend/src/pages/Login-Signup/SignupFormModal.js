@@ -5,6 +5,7 @@ import { Redirect } from "react-router-dom";
 import * as sessionActions from "../../store/session";
 import { useModal } from "../../context/ModalContext";
 import { useAppContext } from "../../context/AppContext";
+import { OpenModalButton } from "../../components";
 
 import OmNomDarkLogo from "../../assets/Logos/ONDark.png";
 import OmNomLightLogo from "../../assets/Logos/ONLight.png";
@@ -195,6 +196,10 @@ const SignupForm = () => {
           >
             Sign Up
           </button>
+          <div className="mt-4 text-gray-600 dark:text-gray-300">
+            Already have an account?{" "}
+            <OpenModalButton onClick={closeModal} buttonText="Go back to login." />
+          </div>
         </form>
       </div>
     </div>

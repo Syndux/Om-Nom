@@ -141,7 +141,7 @@ const LoginFormModal = () => {
       </div>
       <div className="mt-4 text-gray-600 dark:text-gray-300">
         Don't have an account?{" "}
-        <OpenModalButton onClick={closeModal} buttonText="Sign up." />
+        <OpenModalButton onClick={closeModal} buttonText="Go back to sign up." />
       </div>
     </div>
   );
