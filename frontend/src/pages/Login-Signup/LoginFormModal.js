@@ -9,6 +9,7 @@ import { OpenModalButton } from "../../components";
 
 import OmNomDarkLogo from "../../assets/Logos/ONDark.png";
 import OmNomLightLogo from "../../assets/Logos/ONLight.png";
+import { SignupFormModal } from "..";
 
 const initialFormData = {
   credential: "",
@@ -91,7 +92,7 @@ const LoginFormModal = () => {
           {errors.length > 0 && (
             <ul>
               {errors.map((error, index) => (
-                <li key={index}>{error}</li>
+                <li className="text-red-700 dark:text-red-300" key={index}>{error}</li>
               ))}
             </ul>
           )}
@@ -108,7 +109,7 @@ const LoginFormModal = () => {
               onChange={(e) =>
                 setFormData({ ...formData, credential: e.target.value })
               }
-              className="w-full rounded-lg bg-secondary-dark-bg p-1.5 dark:bg-light-gray"
+              className="w-full rounded-lg bg-gray-300 p-1.5 dark:bg-light-gray placeholder:text-main-dark-bg"
               required
             />
           </div>
@@ -122,7 +123,7 @@ const LoginFormModal = () => {
                 setFormData({ ...formData, password: e.target.value })
               }
               required
-              className="w-full rounded-lg bg-secondary-dark-bg p-1.5 dark:bg-light-gray"
+              className="w-full rounded-lg bg-gray-300 p-1.5 dark:bg-light-gray placeholder:text-main-dark-bg"
             />
           </div>
           <button
@@ -141,7 +142,7 @@ const LoginFormModal = () => {
       </div>
       <div className="mt-4 text-gray-600 dark:text-gray-300">
         Don't have an account?{" "}
-        <OpenModalButton onClick={closeModal} buttonText="Go back to sign up." />
+        <OpenModalButton onClick={closeModal} buttonText="Sign up." modalComponent={<SignupFormModal />}/>
       </div>
     </div>
   );
