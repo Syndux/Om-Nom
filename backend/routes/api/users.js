@@ -30,7 +30,8 @@ router.get("/current", (req, res) => {
 // Login
 router.post("/login", validateLogin, async (req, res, next) => {
   const { credential, password } = req.body;
-
+  console.log(credential, password);
+  
   const user = await User.unscoped().findOne({
     where: {
       [Op.or]: {
@@ -44,7 +45,7 @@ router.post("/login", validateLogin, async (req, res, next) => {
     const err = new Error("Login failed");
     err.status = 401;
     err.title = "Login failed";
-    err.errors = { credential: "The provided credentials were invalid." };
+    err.message = "The provided credentials were invalid.";
     return next(err);
   }
 
