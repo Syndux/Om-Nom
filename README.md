@@ -15,8 +15,7 @@ Pour'd was built using the following technologies:
 - JavaScript
 - Express
 - Sequelize
-- WTForms
-- HTML/CSS
+- HTML5/CSS
 - React
 - Redux
 - Tailwind
