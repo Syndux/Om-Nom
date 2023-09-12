@@ -5,9 +5,11 @@ import { Redirect } from "react-router-dom";
 import * as sessionActions from "../../store/session";
 import { useModal } from "../../context/ModalContext";
 import { useAppContext } from "../../context/AppContext";
+import { OpenModalButton } from "../../components";
 
 import OmNomDarkLogo from "../../assets/Logos/ONDark.png";
 import OmNomLightLogo from "../../assets/Logos/ONLight.png";
+import { LoginFormModal } from "..";
 
 const initialFormData = {
   email: "",
@@ -109,7 +111,7 @@ const SignupForm = () => {
               onChange={(e) =>
                 setFormData({ ...formData, email: e.target.value })
               }
-              className="w-full rounded-lg bg-secondary-dark-bg p-1.5 dark:bg-light-gray"
+              className="w-full rounded-lg bg-gray-400 p-1.5 dark:bg-light-gray placeholder:text-main-dark-bg"
               required
             />
             {errors.email && <p className="text-red-600">{errors.email}</p>}
@@ -122,7 +124,7 @@ const SignupForm = () => {
               onChange={(e) =>
                 setFormData({ ...formData, username: e.target.value })
               }
-              className="w-full rounded-lg bg-secondary-dark-bg p-1.5 dark:bg-light-gray"
+              className="w-full rounded-lg bg-gray-400 p-1.5 dark:bg-light-gray placeholder:text-main-dark-bg"
               required
             />
             {errors.username && (
@@ -137,7 +139,7 @@ const SignupForm = () => {
               onChange={(e) =>
                 setFormData({ ...formData, firstName: e.target.value })
               }
-              className="w-full rounded-lg bg-secondary-dark-bg p-1.5 dark:bg-light-gray"
+              className="w-full rounded-lg bg-gray-400 p-1.5 dark:bg-light-gray placeholder:text-main-dark-bg"
               required
             />
             {errors.firstName && (
@@ -152,7 +154,7 @@ const SignupForm = () => {
               onChange={(e) =>
                 setFormData({ ...formData, lastName: e.target.value })
               }
-              className="w-full rounded-lg bg-secondary-dark-bg p-1.5 dark:bg-light-gray"
+              className="w-full rounded-lg bg-gray-400 p-1.5 dark:bg-light-gray placeholder:text-main-dark-bg"
               required
             />
             {errors.lastName && (
@@ -167,7 +169,7 @@ const SignupForm = () => {
               onChange={(e) =>
                 setFormData({ ...formData, password: e.target.value })
               }
-              className="w-full rounded-lg bg-secondary-dark-bg p-1.5 dark:bg-light-gray"
+              className="w-full rounded-lg bg-gray-400 p-1.5 dark:bg-light-gray placeholder:text-main-dark-bg"
               required
             />
             {errors.password && (
@@ -182,7 +184,7 @@ const SignupForm = () => {
               onChange={(e) =>
                 setFormData({ ...formData, confirmPassword: e.target.value })
               }
-              className="w-full rounded-lg bg-secondary-dark-bg p-1.5 dark:bg-light-gray"
+              className="w-full rounded-lg bg-gray-400 p-1.5 dark:bg-light-gray placeholder:text-main-dark-bg"
               required
             />
             {errors.confirmPassword && (
@@ -195,6 +197,13 @@ const SignupForm = () => {
           >
             Sign Up
           </button>
+          <div className="mt-4 text-gray-600 dark:text-gray-300">
+            Already have an account?{" "}
+            <OpenModalButton onClick={closeModal}
+            buttonText="Login."
+            modalComponent={<LoginFormModal/>}
+            />
+          </div>
         </form>
       </div>
     </div>
