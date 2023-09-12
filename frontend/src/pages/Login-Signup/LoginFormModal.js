@@ -139,7 +139,7 @@ const LoginFormModal = () => {
       >
         Demo User
       </div>
-      <div className="mt-4 text-slate-200">
+      <div className="mt-4 text-gray-600 dark:text-gray-300">
         Don't have an account?{" "}
         <OpenModalButton onClick={closeModal} buttonText="Sign up." />
       </div>
