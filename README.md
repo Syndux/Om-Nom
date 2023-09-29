@@ -23,10 +23,10 @@ Om Nom was built using the following technologies:
 ### 🏠 [Homepage](https://om-nom.onrender.com/)
 
 ## Table of Contents
-- [Installing/Getting Started](https://github.com/Syndux/Om-Nom/blob/main/README.md#installation)
-	 - [Initial Configuration](https://github.com/Syndux/Om-Nom/blob/main/README.md#initial-configuration)
-- [Screenshots](https://github.com/Syndux/Om-Nom/blob/main/README.md#screenshots)
-- [Wiki Documents](https://github.com/Syndux/Om-Nom/blob/main/README.md#wiki-documents)
+- [Installing/Getting Started](https://github.com/Syndux/Om-Nom#installation)
+	 - [Initial Configuration](https://github.com/Syndux/Om-Nom#initial-configuration)
+- [Screenshots](https://github.com/Syndux/Om-Nom#screenshots)
+- [Wiki Documents](https://github.com/Syndux/Om-Nom#wiki-documents)
 	- API Routes
  	- Database Schema
  	- Features
@@ -35,12 +35,12 @@ Om Nom was built using the following technologies:
  	- Redux Store Tree
 	- User Stories
 	- Wireframes 
-- [To-Dos/Future Features](https://github.com/Syndux/Om-Nom/blob/main/README.md#to-dosfuture-features)
-- [Technical Implementation Details](https://github.com/Syndux/Om-Nom/blob/main/README.md#technical-implementation-details)
+- [To-Dos/Future Features](https://github.com/Syndux/Om-Nom#to-dosfuture-features)
+- [Technical Implementation Details](https://github.com/Syndux/Om-Nom#technical-implementation-details)
 	- Challenges
 	- Code Snippets
-- [Authors](https://github.com/Syndux/Om-Nom/blob/main/README.md#authors)
-- [Show your support](https://github.com/Syndux/Om-Nom/blob/main/README.md#show-your-support)
+- [Authors](https://github.com/Syndux/Om-Nom#authors)
+- [Show your support](https://github.com/Syndux/Om-Nom#show-your-support)
 
 ## Installation
 
@@ -78,7 +78,7 @@ To install and run this project locally, start off with your backend server.
 5. Now that you have your backend Flask server running. You need to run the React App in development in a different terminal instance.
 
 #### React
-1. Make sure you have a new terminal instance seperate from your terminal for your backend. Navigate into the Om Nom project folder and then into react-app folder.
+1. Make sure you have a new terminal instance separate from your terminal for your backend. Navigate into the Om Nom project folder and then into react-app folder.
     ```bash
     cd frontend
     ```
@@ -111,7 +111,7 @@ To run the application, navigate into the project folder in two separate termina
 ## Screenshots
 
 ## [Wiki Documents](https://github.com/Syndux/Om-Nom/wiki)
-- [API Routes](https://github.com/nSyndux/Om-Nom/wiki/Backend-Routes)
+- [API Routes](https://github.com/Syndux/Om-Nom/wiki/Backend-Routes)
 - [Database Schema](https://github.com/Syndux/Om-Nom/wiki/Database-Schema)
 - [Features](https://github.com/Syndux/Om-Nom/wiki/Feature-List)
 - [Frontend Routes](https://github.com/Syndux/Om-Nom/wiki/Frontend-Routes)
@@ -146,4 +146,9 @@ The project is fully functional in its current state, but some other features we
 ## Author
 
 👤 **Huey Nguyen**
-* Huey's [Github](https://github.com/Syndux) and [LinkedIn](https://www.linkedin.com/in/huey-nguyen/)
+* [![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/Syndux)
+* [![LinkedIn](https://img.shields.io/badge/linkedin-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/huey-nguyen/)
+
+## Show your support
+
+Give a ⭐️ if this project helped you!
