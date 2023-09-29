@@ -36,7 +36,7 @@ Om Nom was built using the following technologies:
 - [To-Dos/Future Features](https://github.com/Syndux/Om-Nom#to-dosfuture-features)
 - [Technical Implementation Details](https://github.com/Syndux/Om-Nom#technical-implementation-details)
 	- [Code Snippets](https://github.com/Syndux/Om-Nom#code-snippets)
-- [Authors](https://github.com/Syndux/Om-Nom#authors)
+- [Author](https://github.com/Syndux/Om-Nom#author)
 - [Show your support](https://github.com/Syndux/Om-Nom#show-your-support)
 
 ## Installation
@@ -106,6 +106,8 @@ To run the application, navigate into the project folder in two separate termina
 4. Om Nom will open in your browser and you can now enjoy using Om Nom. Munch away!
 
 ## Screenshots
+![Homepage Darkmode](https://github.com/Syndux/Om-Nom/assets/78172054/0724aaf1-c4e8-4f33-9edd-a7bdb5c38329)
+![Homepage_Lightmode](https://github.com/Syndux/Om-Nom/assets/78172054/571f2675-53d2-4b6b-800b-d420436a8dd1)
 
 ## [Wiki Documents](https://github.com/Syndux/Om-Nom/wiki)
 - [API Routes](https://github.com/Syndux/Om-Nom/wiki/Backend-Routes)
