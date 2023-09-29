@@ -10,7 +10,7 @@
 
 ## Technologies Used
 
-Pour'd was built using the following technologies:
+Om Nom was built using the following technologies:
 
 - JavaScript
 - Express
@@ -23,8 +23,7 @@ Pour'd was built using the following technologies:
 ### 🏠 [Homepage](https://om-nom.onrender.com/)
 
 ## Table of Contents
-
- - [Installing/Getting Started](https://github.com/Syndux/Om-Nom/blob/main/README.md#installation)
+- [Installing/Getting Started](https://github.com/Syndux/Om-Nom/blob/main/README.md#installation)
 	 - [Initial Configuration](https://github.com/Syndux/Om-Nom/blob/main/README.md#initial-configuration)
 - [Screenshots](https://github.com/Syndux/Om-Nom/blob/main/README.md#screenshots)
 - [Wiki Documents](https://github.com/Syndux/Om-Nom/blob/main/README.md#wiki-documents)
@@ -63,13 +62,13 @@ To install and run this project locally, start off with your backend server.
 3. Create a **.env** file based on the example with proper settings for your
    development environment
     - Make sure the SQLite3 database connection URL is in the **.env** file
-    - The env example organizes all tables inside the `flask_schema` schema, defined
+    - The env example organizes all tables inside the `schema_name_here` schema, defined
         by the `SCHEMA` environment variable.  Replace the value for
         `SCHEMA` with a unique name, **making sure you use the snake_case
         convention**.
     <br></br>
 
-4. Migrate your database, seed your database, and run your Expresss app
+4. Migrate your database, seed your database, and run your Express app
 
    ```bash
     npx dotenv sequelize db:migrate
@@ -79,7 +78,7 @@ To install and run this project locally, start off with your backend server.
 5. Now that you have your backend Flask server running. You need to run the React App in development in a different terminal instance.
 
 #### React
-1. Make sure you have a new terminal instance seperate from your terminal for your backend. Navigate into the pour'd project folder and then into react-app folder.
+1. Make sure you have a new terminal instance seperate from your terminal for your backend. Navigate into the Om Nom project folder and then into react-app folder.
     ```bash
     cd frontend
     ```
@@ -90,14 +89,14 @@ To install and run this project locally, start off with your backend server.
     npm start
     ```
 
-3. Now that you have both your Express backend and React App frontend running, enjoy using Om-Nom. Cheers!
+3. Now that you have both your Express backend and React App frontend running, Om Nom is operable.
 
 ### Operating
 To run the application, navigate into the project folder in two separate terminal windows.
 
 1. Ensure that the database has already been migrated and seeded. If it hasn't been done yet, refer to [Intitial Configuration](https://github.com/Syndux/Om-Nom/blob/main/README.md#initial-configuration)
 
-2. In one terminal, go into pipenv and run the Flask app
+2. In one terminal, go into backend and run the Express app
     ```bash
     npm start
     ```
@@ -107,7 +106,7 @@ To run the application, navigate into the project folder in two separate termina
     npm start
     ```
 
-4. Om Nom will open in your browser and you can now enjoy using Om Nom. Enjoy!
+4. Om Nom will open in your browser and you can now enjoy using Om Nom. Munch away!
 
 ## Screenshots
 
