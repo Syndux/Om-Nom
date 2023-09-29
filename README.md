@@ -31,14 +31,11 @@ Om Nom was built using the following technologies:
  	- Database Schema
  	- Features
  	- Frontend Routes
- 	- React Components
  	- Redux Store Tree
 	- User Stories
-	- Wireframes 
 - [To-Dos/Future Features](https://github.com/Syndux/Om-Nom#to-dosfuture-features)
 - [Technical Implementation Details](https://github.com/Syndux/Om-Nom#technical-implementation-details)
-	- Challenges
-	- Code Snippets
+	- [Code Snippets](https://github.com/Syndux/Om-Nom#code-snippets)
 - [Authors](https://github.com/Syndux/Om-Nom#authors)
 - [Show your support](https://github.com/Syndux/Om-Nom#show-your-support)
 
@@ -126,6 +123,8 @@ The project is fully functional in its current state, but some other features we
 - Food categories for more sorting options
 - Shopping lists for saved meals to plan your next few meals easier
 
+
+## Technical Implementation Details
 ### Code Snippets
 
 **Showcase page**
