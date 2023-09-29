@@ -1,4 +1,3 @@
-
 <h1 align="center">Welcome to Om Nom 👋</h1>
 <p>
   <a href="https://github.com/Syndux/Om-Nom" target="_blank">
@@ -142,6 +141,28 @@ The project is fully functional in its current state, but some other features we
           <p className="mx-10 mt-6 text-lg leading-8 text-gray-700 dark:text-gray-300 sm:mx-28">
             Let Om Nom help you bring your next food closer to you.
           </p>       
+```
+**Light/Dark mode w/ Context**
+```javascript
+<div className={currentMode === "Dark" ? "dark" : ""}>
+<div className="relative flex dark:bg-main-dark-bg">
+  <div
+    className={`${
+      sidebarOpen
+	? "sidebar fixed w-60 bg-main-bg dark:bg-main-dark-bg"
+	: "w-0 dark:bg-secondary-dark-bg"
+    }`}
+  >
+    <Sidebar />
+  </div>
+  <div
+    className={`min-h-screen w-full bg-main-bg dark:bg-main-bg ${
+      sidebarOpen ? `md:ml-60` : `flex-2`
+    }`}
+  >
+    <div className="navbar static w-full bg-main-bg dark:bg-main-dark-bg">
+      <Navbar />
+    </div>
 ```
 
 ## Author
