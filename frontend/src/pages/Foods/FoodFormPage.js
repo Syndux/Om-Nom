@@ -213,7 +213,7 @@ const FoodFormPage = () => {
   return (
     <div className="dark:text-light-gray text-secondary-dark-bg bg-light-gray dark:bg-secondary-dark-bg">
       <div className="flex flex-wrap items-center justify-center lg:flex-nowrap">
-        <div className="m-3 flex h-[calc(100dvh-100px)] w-full flex-col items-center justify-start overflow-y-auto overflow-x-hidden rounded-xl bg-main-bg p-4 dark:bg-main-dark-bg">
+        <div className="shadow-[rgba(17,_17,_26,_0.1)_0px_0px_16px] dark:shadow-[rgba(233,_233,_224,_0.1)_0px_0px_16px] m-3 flex h-[calc(100dvh-100px)] w-full flex-col items-center justify-start overflow-y-auto overflow-x-hidden rounded-xl bg-main-bg p-4 dark:bg-main-dark-bg">
           {sessionUser && loaded ? (
             <>
               <p className="my-10 text-3xl">
