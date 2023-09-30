@@ -5,6 +5,7 @@ import { FaXmark } from "react-icons/fa6";
 import { FaHouse } from "react-icons/fa6";
 import { MdMenuBook } from "react-icons/md";
 import { PiBowlFoodFill } from "react-icons/pi";
+import { AiFillHeart } from "react-icons/ai";
 import { FaBookmark } from "react-icons/fa6";
 import { FaCarrot } from "react-icons/fa6";
 import { FaAppleWhole } from "react-icons/fa6";
@@ -36,9 +37,14 @@ const sidebarItems = [
     link: "foods/current",
   },
   {
-    text: "Saved Foods",
+    text: "Liked Foods",
+    icon: <AiFillHeart />,
+    link: "foods/liked",
+  },
+  {
+    text: "Categories",
     icon: <FaBookmark />,
-    link: "foods/saved",
+    link: "foods/categories",
   },
   {
     text: "Ingredients",

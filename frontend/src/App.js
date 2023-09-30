@@ -78,7 +78,7 @@ function App() {
                   {/* SIDEBAR - View favorite/saved foods - Coming soon! */}
                   <Route
                     exact
-                    path="/foods/saved"
+                    path="/foods/liked"
                     component={FavoriteFoodsPage}
                   />
                   {/* Create new food form */}
