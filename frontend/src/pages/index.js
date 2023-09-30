@@ -6,6 +6,7 @@ export { default as FavoriteFoodsPage } from "./Foods/FavoriteFoodsPage";
 export { default as FoodDetailsPage } from "./Foods/FoodDetailsPage";
 export { default as OwnedFoodsPage } from "./Foods/OwnedFoodsPage";
 export { default as FoodFormPage } from "./Foods/FoodFormPage";
+export { default as FoodCategories } from "./Foods/FoodCategories";
 
 export { default as AllIngredientsPage } from "./Ingredients/AllIngredientsPage";
 export { default as IngredientFormModal } from "./Ingredients/IngredientFormModal";

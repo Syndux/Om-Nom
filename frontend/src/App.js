@@ -17,6 +17,7 @@ import {
   OwnedIngredientsPage,
   PageNotFound,
   AboutTheDev,
+  FoodCategories,
 } from "./pages";
 
 import * as sessionActions from "./store/session";
@@ -69,6 +70,8 @@ function App() {
                   <Route exact path="/home" component={ExplorePage} />
 
                   {/* Foods */}
+                  {/* SIDEBAR - View categories of foods */}
+                  <Route exact path="/foods/categories" component={FoodCategories} />
                   {/* SIDEBAR - View all of your foods */}
                   <Route
                     exact
