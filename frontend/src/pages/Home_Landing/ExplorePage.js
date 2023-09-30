@@ -45,7 +45,7 @@ const Explore = () => {
   return (
     <div className="bg-light-gray text-secondary-dark-bg dark:bg-secondary-dark-bg dark:text-light-gray">
       <div className="flex flex-wrap justify-center lg:flex-nowrap">
-        <div className="m-3 h-[calc(100dvh-135px)] w-full overflow-x-hidden overflow-y-scroll rounded-xl bg-main-bg dark:bg-main-dark-bg">
+        <div className="m-3 h-[calc(100dvh-100px)] w-full overflow-x-hidden overflow-y-scroll rounded-xl bg-main-bg dark:bg-main-dark-bg">
           {sessionUser ? (
             loaded && (
               <>

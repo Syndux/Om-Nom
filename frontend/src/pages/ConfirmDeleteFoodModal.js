@@ -25,11 +25,11 @@ const ConfirmDeleteFoodModal = ({ foodId }) => {
     <div className="overflow-hidden text-left shadow-xl">
       <div className="flex items-start">
         <div className="m-4">
-          <h3 className="text-base font-semibold leading-6 text-gray-900">
+          <h3 className="text-base font-semibold leading-6 text-gray-900 dark:text-gray-100">
             Delete Food
           </h3>
           <div className="mt-2">
-            <p className="text-sm text-gray-500">
+            <p className="text-sm text-gray-500 dark:text-gray-300">
               Are you sure you want to delete this food?
             </p>
           </div>
