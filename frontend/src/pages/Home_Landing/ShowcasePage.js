@@ -31,7 +31,7 @@ const ShowcasePage = () => {
           </p>
           <div className="mt-10 flex items-center justify-center gap-x-6 sm:gap-x-28 lg:justify-start">
             <a
-              href="#"
+              href="/foods"
               className="text-md rounded-md bg-blue-600 px-3.5 py-2.5 font-semibold text-gray-200 shadow-sm hover:bg-blue-500"
             >
               Get started
@@ -44,7 +44,7 @@ const ShowcasePage = () => {
             </Link>
           </div>
           <div className="flex mt-16 justify-center sm:flex-none sm:relative">
-            <img src={homeSrc} className="w-[90%] sm:w-[80rem] sm:absolute sm:-left-[15rem] max-w-none rounded-md border shadow-[rgba(17,_17,_26,_0.1)_0px_0px_16px] dark:shadow-[rgba(233,_233,_224,_0.1)_0px_0px_16px]"/>
+            <img src={homeSrc} alt="homepage preview" className="w-[90%] sm:w-[80rem] sm:absolute sm:-left-[15rem] max-w-none rounded-md border shadow-[rgba(17,_17,_26,_0.1)_0px_0px_16px] dark:shadow-[rgba(233,_233,_224,_0.1)_0px_0px_16px]"/>
           </div>
         </div>
       </div>

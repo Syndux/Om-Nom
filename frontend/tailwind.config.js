@@ -11,10 +11,6 @@ module.exports = {
         'light-gray': '#EBEBEB',
         'half-transparent': 'rgba(0, 0, 0, 0.5)',
       },
-      backgroundImage: {
-        'hero-pattern':
-        "url('https://wallpapercave.com/wp/wp7707112.jpg')",
-      },
       borderColor: {
         color: 'rgba(0, 0, 0, 0.1)',
       },

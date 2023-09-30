@@ -8,6 +8,7 @@ const PageNotFound = () => {
           <p className="m-4 text-xl font-bold">Page not found :(</p>
         <img
           src="https://media.tenor.com/YJFYm5-uHwMAAAAC/jaw-dropped-om-nom.gif"
+          alt="OmNom jaw drop"
           width="100dvh"
         />
         </div>

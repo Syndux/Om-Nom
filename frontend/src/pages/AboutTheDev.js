@@ -17,7 +17,7 @@ const AboutTheDev = () => {
                 <div>
                   <img
                     src={aboutPic}
-                    alt="Huey's portfolio picture"
+                    alt="Huey smiling at the camera"
                     className="aspect-square h-auto w-52 max-w-full rounded-2xl sm:flex-none"
                   />
                 </div>

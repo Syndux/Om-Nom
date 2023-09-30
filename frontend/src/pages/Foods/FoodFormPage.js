@@ -44,7 +44,7 @@ const FoodFormPage = () => {
       }
     })();
     setLoaded(true);
-  }, [dispatch]);
+  }, [dispatch, foodId, isEdit]);
 
   useEffect(() => {
     if (isEdit && foodToEdit && ready) {

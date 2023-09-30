@@ -14,7 +14,6 @@ import {
   FavoriteFoodsPage,
   FoodPlanPage,
   FoodFormPage,
-  IngredientFormPage,
   OwnedIngredientsPage,
   PageNotFound,
   AboutTheDev

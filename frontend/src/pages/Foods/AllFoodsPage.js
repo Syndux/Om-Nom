@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { AiFillEdit } from "react-icons/ai";
 import { FaTrash } from "react-icons/fa6";
 

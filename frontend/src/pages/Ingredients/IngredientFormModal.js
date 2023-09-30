@@ -1,18 +1,15 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams, useHistory } from "react-router-dom";
 
 import { useModal } from "../../context/ModalContext";
 import {
   createIngredient,
   loadAllIngredients,
-  loadSingleIngredient,
   updateIngredient,
 } from "../../store/ingredients";
 
 const IngredientFormModal = ({ ingredientId }) => {
   const dispatch = useDispatch();
-  const history = useHistory();
   const isEdit = !!ingredientId;
   const sessionUser = useSelector((state) => state.session.user);
   const ingredientToEdit = useSelector(
