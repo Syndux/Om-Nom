@@ -42,9 +42,9 @@ const sidebarItems = [
     link: "foods/liked",
   },
   {
-    text: "Categories",
+    text: "Cuisines",
     icon: <FaBookmark />,
-    link: "foods/categories",
+    link: "foods/cuisines",
   },
   {
     text: "Ingredients",
