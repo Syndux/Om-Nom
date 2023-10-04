@@ -17,6 +17,10 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: "foodId",
         as: "ingredients",
       });
+      Food.belongsTo(models.Cuisine, {
+        foreignKey: "cuisineId",
+        as: "cuisine",
+      });
     }
   }
   Food.init(
@@ -47,20 +51,16 @@ module.exports = (sequelize, DataTypes) => {
           },
         },
       },
-      cuisine: {
-        type: DataTypes.STRING,
+      cuisineId: {
+        type: DataTypes.INTEGER,
         allowNull: false,
-        validate: {
-          len: [3, 20],
-        },
       },
       imgUrl: {
         type: DataTypes.STRING,
         validate: {
-          isNullableUrl(value) {
-            if (value && !Validator.isURL(value)) {
-              throw new Error('Invalid URL format');
-            }
+          type: DataTypes.STRING,
+          validate: {
+            isUrl: true,
           },
         },
       },

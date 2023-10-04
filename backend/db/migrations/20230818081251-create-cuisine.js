@@ -3,38 +3,21 @@
 
 let options = {};
 if (process.env.NODE_ENV === "production") {
-  options.schema = process.env.SCHEMA; // define your schema in options object
+  options.schema = process.env.SCHEMA;
 }
 
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Food', {
+    await queryInterface.createTable('Cuisines', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      creatorId: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-        references: { model: "Users", key: "id" },
-        onUpdate: "CASCADE",
-        onDelete: "CASCADE"
-      },
       name: {
-        type: Sequelize.STRING(120),
+        type: Sequelize.STRING(20),
         allowNull: false,
-      },
-      cuisineId: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-        references: { model: "Cuisines", key: "id"},
-        onUpdate: "CASCADE",
-        onDelete: "CASCADE"
-      },
-      imgUrl: {
-        type: Sequelize.STRING
       },
       createdAt: {
         allowNull: false,
@@ -49,6 +32,6 @@ module.exports = {
     }, options);
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Food', options);
+    await queryInterface.dropTable('Cuisines', options);
   }
 };
