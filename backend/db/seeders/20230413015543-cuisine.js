@@ -13,28 +13,36 @@ module.exports = {
       options,
       [
         {
-          name: "Korean"
+          name: "Korean",
+          creatorId: 11
         },
         {
-          name: "Italian"
+          name: "Italian",
+          creatorId: 11
         },
         {
-          name: "Thai"
+          name: "Thai",
+          creatorId: 11
         },
         {
-          name: "American"
+          name: "American",
+          creatorId: 11
         },
         {
-          name: "Greek"
+          name: "Greek",
+          creatorId: 11
         },
         {
-          name: "Indian"
+          name: "Indian",
+          creatorId: 11
         },
         {
-          name: "Japanese"
+          name: "Japanese",
+          creatorId: 11
         },
         {
-          name: "Vietnamese"
+          name: "Vietnamese",
+          creatorId: 11
         },
       ],
       { validate: true }
