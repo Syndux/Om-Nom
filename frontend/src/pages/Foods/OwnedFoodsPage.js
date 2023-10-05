@@ -14,6 +14,7 @@ const OwnedFoodsPage = () => {
   const allFoods = useSelector((state) => Object.values(state.foods));
   const [loaded, setLoaded] = useState(false);
   const sessionUser = useSelector((state) => state.session.user);
+  const [selectedCuisine, setSelectedCuisine] = useState("All");
 
   useEffect(() => {
     (async () => {
@@ -26,21 +27,54 @@ const OwnedFoodsPage = () => {
     ? allFoods.sort((a, b) => a.name.localeCompare(b.name))
     : [];
 
+  const uniqueCuisines = [
+    ...new Set(allFoods.map((food) => food["cuisine.name"])),
+  ];
+
+  const filteredFoods =
+    selectedCuisine === "All"
+      ? foods
+      : foods.filter((food) => food["cuisine.name"] === selectedCuisine);
+
+  const handleCuisineChange = (event) => {
+    setSelectedCuisine(event.target.value);
+  };
+
   return (
     <div className="m-3 flex h-[calc(100dvh-100px)] w-full flex-col overflow-x-hidden overflow-y-scroll rounded-xl bg-main-bg shadow-[rgba(17,_17,_26,_0.1)_0px_0px_16px] dark:bg-main-dark-bg dark:shadow-[rgba(233,_233,_224,_0.1)_0px_0px_16px]">
       {sessionUser ? (
         loaded && (
           <>
-            <div className="m-4 flex items-center justify-between text-xl font-bold">
-              <p>Owned Foods</p>
-              <Link
-                className="rounded-lg bg-blue-700 p-1.5 text-sm font-semibold text-main-bg duration-100 ease-in hover:scale-105"
-                to="/foods/new"
-              >
-                New Food
-              </Link>
+            <div className="m-3 flex items-center justify-between text-xl font-bold">
+              <p className="whitespace-nowrap">Owned Foods</p>
+              {sessionUser && (
+                <Link
+                  className="whitespace-nowrap rounded-lg bg-blue-700 p-1.5 text-sm font-semibold text-main-bg duration-100 ease-in hover:scale-105"
+                  to="/foods/new"
+                >
+                  New Food
+                </Link>
+              )}
             </div>
-            {foods
+            <div className="mb-2">
+              <label htmlFor="cuisineDropdown" className="ml-4 mr-2">
+                Filter by Cuisine:
+              </label>
+              <select
+                id="cuisineDropdown"
+                value={selectedCuisine}
+                onChange={handleCuisineChange}
+                className="bg-light-gray text-secondary-dark-bg dark:bg-secondary-dark-bg dark:text-light-gray"
+              >
+                <option value="All">All</option>
+                {uniqueCuisines.map((cuisine) => (
+                  <option key={cuisine} value={cuisine}>
+                    {cuisine}
+                  </option>
+                ))}
+              </select>
+            </div>
+            {filteredFoods
               .filter((food) => food.creatorId === sessionUser.id)
               .map((food) => (
                 <div
