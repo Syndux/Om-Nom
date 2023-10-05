@@ -34,11 +34,11 @@ const AllIngredientsPage = () => {
         <>
           <div className="m-4 flex items-center justify-between text-xl font-bold">
             <p>All Ingredients</p>
-            <OpenModalButton
+            {sessionUser && <OpenModalButton
               modalComponent={<IngredientFormModal />}
               buttonText="New Ingredient"
               className="rounded-lg bg-blue-700 p-1.5 text-sm font-semibold text-main-bg duration-100 ease-in hover:scale-105"
-            />
+            />}
           </div>
           {ingredients.map((ingredient) => (
             <div
