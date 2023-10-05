@@ -18,7 +18,7 @@ module.exports = (sequelize, DataTypes) => {
       });
       User.hasMany(models.Cuisine, {
         foreignKey: "creatorId",
-        as: "creator",
+        as: "creatorCuisine",
       })
     }
   }

@@ -15,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
       });
       Cuisine.belongsTo(models.User, {
         foreignKey: "creatorId",
-        as: "creator",
+        as: "creatorCuisine",
       });
     }
   }
