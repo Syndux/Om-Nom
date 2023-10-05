@@ -5,7 +5,7 @@ import { FaTrash } from "react-icons/fa6";
 
 import { loadAllIngredients } from "../../store/ingredients";
 
-import OpenModalButton from "../../components/OpenModalButton";
+import { OpenModalButton } from "../../components";
 import { IngredientFormModal, ConfirmDeleteIngredientModal } from "../";
 
 const AllIngredientsPage = () => {
