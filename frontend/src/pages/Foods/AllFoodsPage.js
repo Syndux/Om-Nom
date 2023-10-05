@@ -27,9 +27,14 @@ const AllFoodsPage = () => {
     ? allFoods.sort((a, b) => a.name.localeCompare(b.name))
     : [];
 
-  const uniqueCuisines = [...new Set(allFoods.map((food) => food["cuisine.name"]).sort())];
+  const uniqueCuisines = [
+    ...new Set(allFoods.map((food) => food["cuisine.name"]).sort()),
+  ];
 
-  const filteredFoods = selectedCuisine === "All" ? foods : foods.filter((food) => food["cuisine.name"] === selectedCuisine);
+  const filteredFoods =
+    selectedCuisine === "All"
+      ? foods
+      : foods.filter((food) => food["cuisine.name"] === selectedCuisine);
 
   const handleCuisineChange = (event) => {
     setSelectedCuisine(event.target.value);
@@ -40,16 +45,17 @@ const AllFoodsPage = () => {
       {loaded && (
         <>
           <div className="m-4 flex items-center justify-between text-xl font-bold">
-            <p>All Foods</p>
-            <Link
-              className="rounded-lg bg-blue-700 p-1.5 text-sm font-semibold text-main-bg duration-100 ease-in hover:scale-105"
+            <p className="whitespace-nowrap">All Foods</p>
+            {sessionUser && <Link
+              className="whitespace-nowrap rounded-lg bg-blue-700 p-1.5 text-sm font-semibold text-main-bg duration-100 ease-in hover:scale-105"
               to="/foods/new"
             >
               New Food
-            </Link>
+            </Link>}
           </div>
-          <div className="m-4">
-            <label htmlFor="cuisineDropdown" className="mr-2">
+
+          <div className="mb-2">
+            <label htmlFor="cuisineDropdown" className="ml-4 mr-2">
               Filter by Cuisine:
             </label>
             <select
@@ -66,6 +72,7 @@ const AllFoodsPage = () => {
               ))}
             </select>
           </div>
+
           {filteredFoods.map((food) => (
             <div
               key={food.id}
