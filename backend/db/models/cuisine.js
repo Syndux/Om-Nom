@@ -13,11 +13,29 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: "cuisineId",
         as: "cuisine",
       });
+      Cuisine.belongsTo(models.User, {
+        foreignKey: "creatorId",
+        as: "creator",
+      });
     }
   }
   Cuisine.init(
     {
-      name: DataTypes.STRING,
+      name: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          len: [2, 120],
+        }
+      },
+      creatorId: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        validate: {
+          isInt: true,
+          min: 1,
+        },
+      },
     },
     {
       sequelize,
