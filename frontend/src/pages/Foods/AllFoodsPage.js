@@ -46,12 +46,14 @@ const AllFoodsPage = () => {
         <>
           <div className="m-4 flex items-center justify-between text-xl font-bold">
             <p className="whitespace-nowrap">All Foods</p>
-            {sessionUser && <Link
-              className="whitespace-nowrap rounded-lg bg-blue-700 p-1.5 text-sm font-semibold text-main-bg duration-100 ease-in hover:scale-105"
-              to="/foods/new"
-            >
-              New Food
-            </Link>}
+            {sessionUser && (
+              <Link
+                className="whitespace-nowrap rounded-lg bg-blue-700 p-1.5 text-sm font-semibold text-main-bg duration-100 ease-in hover:scale-105"
+                to="/foods/new"
+              >
+                New Food
+              </Link>
+            )}
           </div>
 
           <div className="mb-2">
