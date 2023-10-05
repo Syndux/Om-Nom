@@ -1,9 +1,14 @@
-import React from 'react'
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
-const CuisineFormModal = () => {
-  return (
-    <div>CuisineFormModal</div>
-  )
-}
+import { useModal } from "../../context/ModalContext";
+
+const CuisineFormModal = ({ cuisineId }) => {
+  const dispatch = useDispatch();
+  const isEdit = !!cuisineId;
+  const sessionUser = useSelector((state) => state.session.user);
+
+  return <div>CuisineFormModal</div>;
+};
 
 export default CuisineFormModal;
