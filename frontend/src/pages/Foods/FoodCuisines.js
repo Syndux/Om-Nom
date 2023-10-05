@@ -19,7 +19,7 @@ const FoodCuisines = () => {
   }, [dispatch]);
 
   const cuisines = loaded
-    ? [...new Set(allFoods.map((food) => food.cuisine).sort())]
+    ? [...new Set(allFoods.map((food) => food["cuisine.name"]).sort())]
     : [];
 
   return (

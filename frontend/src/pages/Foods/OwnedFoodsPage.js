@@ -49,7 +49,7 @@ const OwnedFoodsPage = () => {
                 >
                   <div>
                     <p className="text-lg font-semibold">{food.name}</p>
-                    <p className="text-sm opacity-60">{food.cuisine}</p>
+                    <p className="text-sm opacity-60">{food["cuisine.name"]}</p>
                   </div>
                   {sessionUser && sessionUser?.id === food.creatorId && (
                     <div className="flex flex-row gap-4">
