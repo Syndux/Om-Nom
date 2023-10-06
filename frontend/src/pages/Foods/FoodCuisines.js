@@ -17,10 +17,10 @@ const FoodCuisines = () => {
   useEffect(() => {
     const loadCuisines = async () => {
       await dispatch(loadAllCuisines());
-      setLoaded(true);
     };
-
+    
     loadCuisines();
+    setLoaded(true);
   }, [dispatch]);
 
   const cuisines = loaded
@@ -53,7 +53,7 @@ const FoodCuisines = () => {
                 <div className="flex flex-row gap-4">
                   <OpenModalButton
                     modalComponent={
-                      <CuisineFormModal ingredientId={cuisine.id} />
+                      <CuisineFormModal cuisineId={cuisine.id} />
                     }
                     buttonText={<AiFillEdit />}
                     className="flex items-center justify-center rounded-lg px-2 text-xl text-secondary-dark-bg duration-100 ease-in hover:scale-110 hover:bg-light-gray dark:text-light-gray dark:hover:bg-secondary-dark-bg"
@@ -62,7 +62,7 @@ const FoodCuisines = () => {
                   <OpenModalButton
                     modalComponent={
                       <ConfirmDeleteCuisineModal
-                        ingredientId={cuisine.id}
+                        cuisineId={cuisine.id}
                       />
                     }
                     buttonText={<FaTrash />}
