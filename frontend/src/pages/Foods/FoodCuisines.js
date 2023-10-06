@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { AiFillEdit } from "react-icons/ai";
+import { FaTrash } from "react-icons/fa6";
 
 import { loadAllCuisines } from "../../store/cuisines";
 
 import { OpenModalButton } from "../../components";
-import { CuisineFormModal } from "../"
+import { CuisineFormModal, ConfirmDeleteCuisineModal } from "../";
 
 const FoodCuisines = () => {
   const dispatch = useDispatch();
@@ -47,6 +49,27 @@ const FoodCuisines = () => {
               <div className="max-w-sm overflow-hidden text-ellipsis whitespace-nowrap text-lg">
                 {cuisine.name}
               </div>
+              {sessionUser && sessionUser?.id === cuisine.creatorId && (
+                <div className="flex flex-row gap-4">
+                  <OpenModalButton
+                    modalComponent={
+                      <CuisineFormModal ingredientId={cuisine.id} />
+                    }
+                    buttonText={<AiFillEdit />}
+                    className="flex items-center justify-center rounded-lg px-2 text-xl text-secondary-dark-bg duration-100 ease-in hover:scale-110 hover:bg-light-gray dark:text-light-gray dark:hover:bg-secondary-dark-bg"
+                  />
+
+                  <OpenModalButton
+                    modalComponent={
+                      <ConfirmDeleteCuisineModal
+                        ingredientId={cuisine.id}
+                      />
+                    }
+                    buttonText={<FaTrash />}
+                    className="flex items-center justify-center rounded-lg px-2 text-base text-secondary-dark-bg duration-100 ease-in hover:scale-110 hover:bg-light-gray dark:text-light-gray dark:hover:bg-secondary-dark-bg"
+                  />
+                </div>
+              )}
             </div>
           ))}
         </>
