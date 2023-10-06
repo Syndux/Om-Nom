@@ -1,28 +1,28 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { loadAllFoods } from "../../store/foods";
+import { loadAllCuisines } from "../../store/cuisines";
 
 import { OpenModalButton } from "../../components";
 import { CuisineFormModal } from "../"
 
 const FoodCuisines = () => {
   const dispatch = useDispatch();
-  const allFoods = useSelector((state) => Object.values(state.foods));
+  const allCuisines = useSelector((state) => Object.values(state.cuisines));
   const sessionUser = useSelector((state) => state.session.user);
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
-    const loadFoods = async () => {
-      await dispatch(loadAllFoods());
+    const loadCuisines = async () => {
+      await dispatch(loadAllCuisines());
       setLoaded(true);
     };
 
-    loadFoods();
+    loadCuisines();
   }, [dispatch]);
 
   const cuisines = loaded
-    ? [...new Set(allFoods.map((food) => food["cuisine.name"]).sort())]
+    ? allCuisines.sort((a, b) => a.name.localeCompare(b.name))
     : [];
 
   return (
@@ -41,11 +41,11 @@ const FoodCuisines = () => {
           </div>
           {cuisines.map((cuisine) => (
             <div
-              key={cuisine}
+              key={cuisine.id}
               className="flex justify-between border-t px-10 py-3 duration-100 ease-in hover:scale-[1.01] hover:shadow-[rgba(50,_50,_105,_0.15)_0px_2px_5px_0px,_rgba(0,_0,_0,_0.05)_0px_1px_1px_0px] dark:hover:shadow-[rgba(205,_205,_150,_0.15)_0px_2px_5px_0px,_rgba(255,_255,_255,_0.3)_0px_1px_1px_0px]"
             >
               <div className="max-w-sm overflow-hidden text-ellipsis whitespace-nowrap text-lg">
-                {cuisine}
+                {cuisine.name}
               </div>
             </div>
           ))}
