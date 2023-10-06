@@ -73,6 +73,7 @@ router.put("/:cuisineId", requireAuth, async (req, res, next) => {
   return res.json(updatedCuisine);
 });
 
+// Delete cuisine
 router.delete("/:cuisineId", requireAuth, async (req, res, next) => {
   const { cuisineId } = req.params;
   const userId = req.user.id;
