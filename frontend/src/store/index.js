@@ -4,11 +4,13 @@ import thunk from "redux-thunk";
 import sessionReducer from "./session";
 import foodsReducer from "./foods";
 import ingredientsReducer from "./ingredients";
+import cuisinesReducer from "./cuisines";
 
 const rootReducer = combineReducers({
   session: sessionReducer,
   foods: foodsReducer,
   ingredients: ingredientsReducer,
+  cuisines: cuisinesReducer,
 });
 
 let enhancer;
