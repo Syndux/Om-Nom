@@ -20,11 +20,18 @@ export const loadAllCuisines = () => async (dispatch) => {
     }
 };
 
+// Update a cuisine
 export const updateCuisine = () => async (dispatch) => {
     return null;
 }
 
+// Create a cuisine
 export const createCuisine = () => async (dispatch) => {
+    return null;
+}
+
+// Delete a cuisine
+export const deleteCuisine = () => async (dispatch) => {
     return null;
 }
 
