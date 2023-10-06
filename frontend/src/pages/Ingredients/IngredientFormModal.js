@@ -37,7 +37,6 @@ const IngredientFormModal = ({ ingredientId }) => {
     }
   }, [isEdit, ingredientToEdit]);
 
-
   const validateName = () => {
     const errors = [];
     if (!formData.name) {
