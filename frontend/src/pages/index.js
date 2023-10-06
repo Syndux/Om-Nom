@@ -25,6 +25,7 @@ export { default as SignupFormModal } from "./Login-Signup/SignupFormModal.js";
 
 export { default as ConfirmDeleteFoodModal } from "./ConfirmDeleteFoodModal";
 export { default as ConfirmDeleteIngredientModal } from "./ConfirmDeleteIngredientModal";
+export { default as ConfirmDeleteCuisineModal } from "./ConfirmDeleteCuisineModal";
 export { default as ComingSoonPage } from "./ComingSoonPage";
 export { default as PageNotFound } from "./PageNotFound";
 export { default as AboutTheDev } from "./AboutTheDev";
