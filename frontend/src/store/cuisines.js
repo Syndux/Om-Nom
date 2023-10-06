@@ -86,6 +86,14 @@ const cuisinesReducer = (state = initialState, action) => {
         cuisinesMap[cuisine.id] = cuisine;
       });
       return cuisinesMap;
+    case CREATE_CUISINE:
+        return { ...state, [action.payload.id]: action.payload };
+    case UPDATE_CUISINE:
+        return { ...state, [action.payload.id]: action.payload };
+    case DELETE_CUISINE:
+        let newState = {...state};
+        delete newState[action.payload.id];
+        return newState;
     default:
       return state;
   }
