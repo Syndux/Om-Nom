@@ -1,5 +1,4 @@
 import { csrfFetch } from "./csrf";
-import ingredientsReducer from "./ingredients";
 
 const LOAD_ALL_CUISINES = "cuisines/LOAD_ALL_CUISINES";
 const CREATE_CUISINE = "cuisines/CREATE_CUISINE";
