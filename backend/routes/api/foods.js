@@ -311,7 +311,7 @@ router.get("/", async (req, res, next) => {
 // Create new food
 router.post("/", requireAuth, async (req, res, next) => {
   try {
-    const { name, imgUrl, cuisine } = req.body;
+    const { name, imgUrl, cuisineId } = req.body;
     const userId = req.user.id;
 
     const titleCase = (name) => {
@@ -322,13 +322,12 @@ router.post("/", requireAuth, async (req, res, next) => {
     };
 
     const titleCasedName = titleCase(name);
-    const titleCasedCuisine = titleCase(cuisine);
-
+    
     const newFood = await Food.create({
       creatorId: userId,
       name: titleCasedName,
       imgUrl,
-      cuisine: titleCasedCuisine,
+      cuisineId: Number(cuisineId),
     });
 
     return res.status(201).json(newFood);

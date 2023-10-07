@@ -45,7 +45,7 @@ const OwnedFoodsPage = () => {
       {sessionUser ? (
         loaded && (
           <>
-            <div className="m-3 flex items-center justify-between text-xl font-bold">
+            <div className="m-4 flex items-center justify-between text-xl font-bold">
               <p className="whitespace-nowrap">Owned Foods</p>
               {sessionUser && (
                 <Link

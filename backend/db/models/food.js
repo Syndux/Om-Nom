@@ -58,9 +58,10 @@ module.exports = (sequelize, DataTypes) => {
       imgUrl: {
         type: DataTypes.STRING,
         validate: {
-          type: DataTypes.STRING,
-          validate: {
-            isUrl: true,
+          isNullableUrl(value) {
+            if (value && !Validator.isURL(value)) {
+              throw new Error("Invalid URL format");
+            }
           },
         },
       },

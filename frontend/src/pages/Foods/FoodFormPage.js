@@ -4,11 +4,12 @@ import { useParams, useHistory } from "react-router-dom";
 
 import { loadSingleFood, createFood, updateFood } from "../../store/foods";
 import { loadAllIngredients } from "../../store/ingredients";
+import { loadAllCuisines } from "../../store/cuisines";
 
 const initialFormData = {
   name: "",
   imgUrl: "",
-  cuisine: "",
+  cuisineId: "",
   ingredients: [
     {
       ingredientId: "",
@@ -27,6 +28,7 @@ const FoodFormPage = () => {
   const sessionUser = useSelector((state) => state.session.user);
   const foodToEdit = useSelector((state) => state.foods[foodId]);
   const ingredients = useSelector((state) => Object.values(state.ingredients));
+  const cuisines = useSelector((state) => Object.values(state.cuisines));
 
   const [validationErrors, setValidationErrors] = useState([]);
   const [ready, setReady] = useState(false);
@@ -38,8 +40,10 @@ const FoodFormPage = () => {
     // dispatch(loadAllFoods());
     (async () => {
       await dispatch(loadAllIngredients());
+      await dispatch(loadAllCuisines());
       if (isEdit) {
         await dispatch(loadSingleFood(foodId));
+        await dispatch(loadAllCuisines());
         setReady(true);
       }
     })();
@@ -56,7 +60,7 @@ const FoodFormPage = () => {
       setFormData({
         name: foodToEdit.name,
         imgUrl: foodToEdit.imgUrl,
-        cuisine: foodToEdit.cuisine,
+        cuisineId: foodToEdit.cuisineId,
         ingredients: ingredientData,
       });
     }
@@ -117,8 +121,8 @@ const FoodFormPage = () => {
       errors.push("Name must be between 2 and 120 characters.");
     }
 
-    if (formData.cuisine.length < 3 || formData.cuisine.length > 20) {
-      errors.push("Cuisine must be between 3 and 20 characters.");
+    if (formData.cuisineId.length === "") {
+      errors.push("Cuisine must be assigned.");
     }
 
     if (formData.imgUrl && !imageUrlRegex.test(formData.imgUrl)) {
@@ -190,6 +194,7 @@ const FoodFormPage = () => {
       if (isEdit) {
         newFoodId = await dispatch(updateFood(foodId, formData));
       } else {
+        console.log(formData);
         newFoodId = await dispatch(createFood(formData));
       }
 
@@ -211,9 +216,9 @@ const FoodFormPage = () => {
   };
 
   return (
-    <div className="dark:text-light-gray text-secondary-dark-bg bg-light-gray dark:bg-secondary-dark-bg">
+    <div className="w-full bg-light-gray text-secondary-dark-bg dark:bg-secondary-dark-bg dark:text-light-gray">
       <div className="flex flex-wrap items-center justify-center lg:flex-nowrap">
-        <div className="shadow-[rgba(17,_17,_26,_0.1)_0px_0px_16px] dark:shadow-[rgba(233,_233,_224,_0.1)_0px_0px_16px] m-3 flex h-[calc(100dvh-100px)] w-full flex-col items-center justify-start overflow-y-auto overflow-x-hidden rounded-xl bg-main-bg p-4 dark:bg-main-dark-bg">
+        <div className="m-3 flex h-[calc(100dvh-100px)] w-full flex-col items-center justify-start overflow-y-auto overflow-x-hidden rounded-xl bg-main-bg p-4 shadow-[rgba(17,_17,_26,_0.1)_0px_0px_16px] dark:bg-main-dark-bg dark:shadow-[rgba(233,_233,_224,_0.1)_0px_0px_16px]">
           {sessionUser && loaded ? (
             <>
               <p className="my-10 text-3xl">
@@ -246,18 +251,23 @@ const FoodFormPage = () => {
                     />
                   </div>
                   <div className="w-1/2">
-                    <input
+                    <select
                       className="w-full rounded-lg bg-light-gray p-1.5 dark:bg-secondary-dark-bg"
-                      placeholder="Cuisine"
-                      type="text"
                       id="cuisine"
-                      name="cuisine"
-                      value={formData.cuisine}
+                      name="cuisineId"
+                      value={formData.cuisineId}
                       onChange={(e) =>
-                        setFormData({ ...formData, cuisine: e.target.value })
+                        setFormData({ ...formData, cuisineId: e.target.value })
                       }
                       required
-                    />
+                    >
+                      <option value="">Select a Cuisine</option>
+                      {cuisines.map((cuisine) => (
+                        <option key={cuisine.id} value={cuisine.id}>
+                          {cuisine.name}
+                        </option>
+                      ))}
+                    </select>
                   </div>
                 </div>
                 <div className="w-full">
@@ -405,12 +415,12 @@ const FoodFormPage = () => {
                   <button
                     type="button"
                     onClick={addIngredientDropdown}
-                    className="text-main-bg dark:text-main-bg rounded-lg bg-blue-700 px-3 py-1 duration-100 ease-in hover:scale-105"
+                    className="rounded-lg bg-blue-700 px-3 py-1 text-main-bg duration-100 ease-in hover:scale-105 dark:text-main-bg"
                   >
                     Add another ingredient
                   </button>
                   <button
-                    className="text-main-bg bg-emerald-800 dark:text-main-bg rounded-lg px-3 py-1 duration-100 ease-in hover:scale-105"
+                    className="rounded-lg bg-emerald-800 px-3 py-1 text-main-bg duration-100 ease-in hover:scale-105 dark:text-main-bg"
                     type="submit"
                   >
                     {isEdit ? "Update this food" : "Create this food"}
