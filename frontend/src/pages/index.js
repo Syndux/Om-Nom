@@ -6,6 +6,8 @@ export { default as FavoriteFoodsPage } from "./Foods/FavoriteFoodsPage";
 export { default as FoodDetailsPage } from "./Foods/FoodDetailsPage";
 export { default as OwnedFoodsPage } from "./Foods/OwnedFoodsPage";
 export { default as FoodFormPage } from "./Foods/FoodFormPage";
+export { default as FoodCuisines } from "./Foods/FoodCuisines";
+export { default as CuisineFormModal } from "./Foods/CuisineFormModal";
 
 export { default as AllIngredientsPage } from "./Ingredients/AllIngredientsPage";
 export { default as IngredientFormModal } from "./Ingredients/IngredientFormModal";
@@ -23,6 +25,7 @@ export { default as SignupFormModal } from "./Login-Signup/SignupFormModal.js";
 
 export { default as ConfirmDeleteFoodModal } from "./ConfirmDeleteFoodModal";
 export { default as ConfirmDeleteIngredientModal } from "./ConfirmDeleteIngredientModal";
+export { default as ConfirmDeleteCuisineModal } from "./ConfirmDeleteCuisineModal";
 export { default as ComingSoonPage } from "./ComingSoonPage";
 export { default as PageNotFound } from "./PageNotFound";
 export { default as AboutTheDev } from "./AboutTheDev";

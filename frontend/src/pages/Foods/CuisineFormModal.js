@@ -3,18 +3,16 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { useModal } from "../../context/ModalContext";
 import {
-  createIngredient,
-  loadAllIngredients,
-  updateIngredient,
-} from "../../store/ingredients";
+  createCuisine,
+  loadAllCuisines,
+  updateCuisine,
+} from "../../store/cuisines";
 
-const IngredientFormModal = ({ ingredientId }) => {
+const CuisineFormModal = ({ cuisineId }) => {
   const dispatch = useDispatch();
-  const isEdit = !!ingredientId;
+  const isEdit = !!cuisineId;
   const sessionUser = useSelector((state) => state.session.user);
-  const ingredientToEdit = useSelector(
-    (state) => state.ingredients[ingredientId],
-  );
+  const cuisineToEdit = useSelector((state) => state.cuisines[cuisineId]);
 
   const [formData, setFormData] = useState({ name: "" });
   const [validationErrors, setValidationErrors] = useState([]);
@@ -24,7 +22,7 @@ const IngredientFormModal = ({ ingredientId }) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      await dispatch(loadAllIngredients());
+      await dispatch(loadAllCuisines());
       setLoaded(true);
     };
 
@@ -32,19 +30,19 @@ const IngredientFormModal = ({ ingredientId }) => {
   }, [dispatch]);
 
   useEffect(() => {
-    if (isEdit && ingredientToEdit) {
-      setFormData({ name: ingredientToEdit.name });
+    if (isEdit && cuisineToEdit) {
+      setFormData({ name: cuisineToEdit.name });
     }
-  }, [isEdit, ingredientToEdit]);
+  }, [isEdit, cuisineToEdit]);
 
   const validateName = () => {
     const errors = [];
     if (!formData.name) {
-      errors.push("An ingredient name is required.");
+      errors.push("A cuisine name is required.");
     }
 
-    if (formData.name.length < 2 || formData.name.length > 120) {
-      errors.push("Ingredient name must be between 2 and 120 characters.");
+    if (formData.name.length < 2 || formData.name.length > 20) {
+      errors.push("Cuisine name must be between 2 and 20 characters.");
     }
     return errors;
   };
@@ -63,23 +61,19 @@ const IngredientFormModal = ({ ingredientId }) => {
       return;
     }
 
-    let newIngredientId;
+    let newCuisineId;
 
     try {
       if (isEdit) {
-        newIngredientId = await dispatch(
-          updateIngredient(ingredientId, formData),
-        );
+        newCuisineId = await dispatch(updateCuisine(cuisineId, formData));
       } else {
-        newIngredientId = await dispatch(createIngredient(formData));
+        newCuisineId = await dispatch(createCuisine(formData));
       }
 
-      if (newIngredientId !== null) {
+      if (newCuisineId !== null) {
         setFormData({ name: "" });
         setValidationErrors([]);
 
-        // Go to ingredient details page - Coming soon
-        // history.push(`/ingredients/${newIngredientId}`);
         closeModal();
       }
     } catch (error) {
@@ -98,7 +92,7 @@ const IngredientFormModal = ({ ingredientId }) => {
         {sessionUser && loaded ? (
           <div className="m-4">
             <p className="text-center text-lg font-semibold text-main-dark-bg dark:text-light-gray">
-              {isEdit ? "Edit Ingredient" : "Create Ingredient"}
+              {isEdit ? "Edit Cuisine" : "Create Cuisine"}
             </p>
             {validationErrors.length > 0 && (
               <div className="w-48 bg-red-300 p-2 text-center italic text-slate-900 sm:w-auto">
@@ -150,4 +144,4 @@ const IngredientFormModal = ({ ingredientId }) => {
   );
 };
 
-export default IngredientFormModal;
+export default CuisineFormModal;

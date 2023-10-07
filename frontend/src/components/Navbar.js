@@ -20,7 +20,6 @@ const Navbar = () => {
     sidebarOpen,
     setSidebarOpen,
     currentMode,
-    handleClick,
     setMode,
   } = useAppContext();
 

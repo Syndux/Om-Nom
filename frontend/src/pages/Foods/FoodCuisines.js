@@ -3,29 +3,28 @@ import { useDispatch, useSelector } from "react-redux";
 import { AiFillEdit } from "react-icons/ai";
 import { FaTrash } from "react-icons/fa6";
 
-import { loadAllIngredients } from "../../store/ingredients";
+import { loadAllCuisines } from "../../store/cuisines";
 
 import { OpenModalButton } from "../../components";
-import { IngredientFormModal, ConfirmDeleteIngredientModal } from "../";
+import { CuisineFormModal, ConfirmDeleteCuisineModal } from "../";
 
-const AllIngredientsPage = () => {
+const FoodCuisines = () => {
   const dispatch = useDispatch();
-  const allIngredients = useSelector((state) =>
-    Object.values(state.ingredients),
-  );
-
+  const allCuisines = useSelector((state) => Object.values(state.cuisines));
   const sessionUser = useSelector((state) => state.session.user);
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
-    (async () => {
-      await dispatch(loadAllIngredients());
-    })();
+    const loadCuisines = async () => {
+      await dispatch(loadAllCuisines());
+    };
+    
+    loadCuisines();
     setLoaded(true);
   }, [dispatch]);
 
-  const ingredients = loaded
-    ? allIngredients.sort((a, b) => a.name.localeCompare(b.name))
+  const cuisines = loaded
+    ? allCuisines.sort((a, b) => a.name.localeCompare(b.name))
     : [];
 
   return (
@@ -33,26 +32,28 @@ const AllIngredientsPage = () => {
       {loaded && (
         <>
           <div className="m-4 flex items-center justify-between text-xl font-bold">
-            <p>All Ingredients</p>
-            {sessionUser && <OpenModalButton
-              modalComponent={<IngredientFormModal />}
-              buttonText="New Ingredient"
-              className="rounded-lg bg-blue-700 p-1.5 text-sm font-semibold text-main-bg duration-100 ease-in hover:scale-105"
-            />}
+            <p className="whitespace-nowrap">Cuisines</p>
+            {sessionUser && (
+              <OpenModalButton
+                modalComponent={<CuisineFormModal />}
+                buttonText="New Cuisine"
+                className="rounded-lg bg-blue-700 p-1.5 text-sm font-semibold text-main-bg duration-100 ease-in hover:scale-105"
+              />
+            )}
           </div>
-          {ingredients.map((ingredient) => (
+          {cuisines.map((cuisine) => (
             <div
-              key={ingredient.id}
+              key={cuisine.id}
               className="flex justify-between border-t px-10 py-3 duration-100 ease-in hover:scale-[1.01] hover:shadow-[rgba(50,_50,_105,_0.15)_0px_2px_5px_0px,_rgba(0,_0,_0,_0.05)_0px_1px_1px_0px] dark:hover:shadow-[rgba(205,_205,_150,_0.15)_0px_2px_5px_0px,_rgba(255,_255,_255,_0.3)_0px_1px_1px_0px]"
             >
-              <div className="max-w-sm overflow-hidden text-ellipsis whitespace-nowrap">
-                <p className="text-lg font-semibold">{ingredient.name}</p>
+              <div className="max-w-sm overflow-hidden text-ellipsis whitespace-nowrap text-lg">
+                {cuisine.name}
               </div>
-              {sessionUser && sessionUser?.id === ingredient.creatorId && (
+              {sessionUser && sessionUser?.id === cuisine.creatorId && (
                 <div className="flex flex-row gap-4">
                   <OpenModalButton
                     modalComponent={
-                      <IngredientFormModal ingredientId={ingredient.id} />
+                      <CuisineFormModal cuisineId={cuisine.id} />
                     }
                     buttonText={<AiFillEdit />}
                     className="flex items-center justify-center rounded-lg px-2 text-xl text-secondary-dark-bg duration-100 ease-in hover:scale-110 hover:bg-light-gray dark:text-light-gray dark:hover:bg-secondary-dark-bg"
@@ -60,8 +61,8 @@ const AllIngredientsPage = () => {
 
                   <OpenModalButton
                     modalComponent={
-                      <ConfirmDeleteIngredientModal
-                        ingredientId={ingredient.id}
+                      <ConfirmDeleteCuisineModal
+                        cuisineId={cuisine.id}
                       />
                     }
                     buttonText={<FaTrash />}
@@ -77,4 +78,4 @@ const AllIngredientsPage = () => {
   );
 };
 
-export default AllIngredientsPage;
+export default FoodCuisines;

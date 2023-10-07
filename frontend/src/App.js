@@ -14,10 +14,10 @@ import {
   FavoriteFoodsPage,
   FoodPlanPage,
   FoodFormPage,
-  IngredientFormPage,
   OwnedIngredientsPage,
   PageNotFound,
-  AboutTheDev
+  AboutTheDev,
+  FoodCuisines,
 } from "./pages";
 
 import * as sessionActions from "./store/session";
@@ -59,59 +59,87 @@ function App() {
             <div className="navbar static w-full bg-main-bg dark:bg-main-dark-bg">
               <Navbar />
             </div>
-            <div>
-              {/* Preparing to update ReactRouterDom v6 */}
-              <Switch>
-                {/* Home */}
-                {/* SIDEBAR - View for logged-out (showcase) */}
-                <Route exact path="/" component={ShowcasePage} />
-                {/* SIDEBAR - View for logged-in (home) */}
-                <Route exact path="/home" component={ExplorePage} />
+            <div className="bg-light-gray text-secondary-dark-bg dark:bg-secondary-dark-bg dark:text-light-gray">
+              <div className="flex flex-wrap justify-center lg:flex-nowrap">
+                {/* Preparing to update ReactRouterDom v6 */}
+                <Switch>
+                  {/* Home */}
+                  {/* SIDEBAR - View for logged-out (showcase) */}
+                  <Route exact path="/" component={ShowcasePage} />
+                  {/* SIDEBAR - View for logged-in (home) */}
+                  <Route exact path="/home" component={ExplorePage} />
 
-                {/* Foods */}
-                {/* SIDEBAR - View all of your foods */}
-                <Route exact path="/foods/current" component={OwnedFoodsPage} />
-                {/* SIDEBAR - View favorite/saved foods - Coming soon! */}
-                <Route exact path="/foods/saved" component={FavoriteFoodsPage} />
-                {/* Create new food form */}
-                <Route exact path="/foods/new" component={FoodFormPage} />
-                {/* Edit singular food */}
-                <Route exact path="/foods/:foodId/edit" component={FoodFormPage} />
-                {/* View singular food - Coming soon! */}
-                <Route exact path="/foods/:foodId" component={FoodDetailsPage} />
-                {/* SIDEBAR - View all foods */}
-                <Route exact path="/foods" component={AllFoodsPage} />
+                  {/* Foods */}
+                  {/* SIDEBAR - View cuisines of foods */}
+                  <Route exact path="/foods/cuisines" component={FoodCuisines} />
+                  {/* SIDEBAR - View all of your foods */}
+                  <Route
+                    exact
+                    path="/foods/current"
+                    component={OwnedFoodsPage}
+                  />
+                  {/* SIDEBAR - View favorite/saved foods - Coming soon! */}
+                  <Route
+                    exact
+                    path="/foods/liked"
+                    component={FavoriteFoodsPage}
+                  />
+                  {/* Create new food form */}
+                  <Route exact path="/foods/new" component={FoodFormPage} />
+                  {/* Edit singular food */}
+                  <Route
+                    exact
+                    path="/foods/:foodId/edit"
+                    component={FoodFormPage}
+                  />
+                  {/* View singular food - Coming soon! */}
+                  <Route
+                    exact
+                    path="/foods/:foodId"
+                    component={FoodDetailsPage}
+                  />
+                  {/* SIDEBAR - View all foods */}
+                  <Route exact path="/foods" component={AllFoodsPage} />
 
-                {/* Ingredients */}
-                <Route exact path="/ingredients/current" component={OwnedIngredientsPage} />
-                {/* Create new ingredient form */}
-                {/* <Route exact path="/ingredients/new" component={IngredientFormPage} /> */}
-                {/* Edit singular ingredient */}
-                {/* <Route exact path="/ingredients/:ingredientId/edit" component={IngredientFormPage} /> */}
-                {/* SIDEBAR - View all ingredients */}
-                <Route exact path="/ingredients" component={AllIngredientsPage} />
+                  {/* Ingredients */}
+                  <Route
+                    exact
+                    path="/ingredients/current"
+                    component={OwnedIngredientsPage}
+                  />
+                  {/* Create new ingredient form */}
+                  {/* <Route exact path="/ingredients/new" component={IngredientFormPage} /> */}
+                  {/* Edit singular ingredient */}
+                  {/* <Route exact path="/ingredients/:ingredientId/edit" component={IngredientFormPage} /> */}
+                  {/* SIDEBAR - View all ingredients */}
+                  <Route
+                    exact
+                    path="/ingredients"
+                    component={AllIngredientsPage}
+                  />
 
-                {/* Food Planning */}
-                {/* SIDEBAR - Calendar for foods - Coming soon!*/}
-                <Route exact path="/food-plan" component={FoodPlanPage} />
+                  {/* Food Planning */}
+                  {/* SIDEBAR - Calendar for foods - Coming soon!*/}
+                  <Route exact path="/food-plan" component={FoodPlanPage} />
 
-                {/* User Profile */}
-                {/* NAVBAR - View profile after dropdown - Coming soon! */}
-                <Route exact path="/profile" component={ComingSoonPage} />
-                {/* NAVBAR - View followers/following after dropdown - Coming soon! */}
-                <Route exact path="/following" component={ComingSoonPage} />
-                {/* NAVBAR - View all reviews you made - Coming soon! */}
-                <Route exact path="/reviews" component={ComingSoonPage} />
-                {/* NAVBAR - View your messages - Coming soon! */}
-                <Route exact path="/messages" component={ComingSoonPage} />
-                {/* Logout */}
-                <Route exact path="/logout">
-                  <Redirect to="/" />
-                </Route>
-                {/* About */}
-                <Route exact path="/about" component={AboutTheDev} />
-                <Route component={PageNotFound} />
-              </Switch>
+                  {/* User Profile */}
+                  {/* NAVBAR - View profile after dropdown - Coming soon! */}
+                  <Route exact path="/profile" component={ComingSoonPage} />
+                  {/* NAVBAR - View followers/following after dropdown - Coming soon! */}
+                  <Route exact path="/following" component={ComingSoonPage} />
+                  {/* NAVBAR - View all reviews you made - Coming soon! */}
+                  <Route exact path="/reviews" component={ComingSoonPage} />
+                  {/* NAVBAR - View your messages - Coming soon! */}
+                  <Route exact path="/messages" component={ComingSoonPage} />
+                  {/* Logout */}
+                  <Route exact path="/logout">
+                    <Redirect to="/" />
+                  </Route>
+                  {/* About */}
+                  <Route exact path="/about" component={AboutTheDev} />
+                  <Route component={PageNotFound} />
+                </Switch>
+              </div>
             </div>
             <Footer />
           </div>

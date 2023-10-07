@@ -14,6 +14,7 @@ const OwnedFoodsPage = () => {
   const allFoods = useSelector((state) => Object.values(state.foods));
   const [loaded, setLoaded] = useState(false);
   const sessionUser = useSelector((state) => state.session.user);
+  const [selectedCuisine, setSelectedCuisine] = useState("All");
 
   useEffect(() => {
     (async () => {
@@ -23,67 +24,93 @@ const OwnedFoodsPage = () => {
   }, [dispatch]);
 
   const foods = loaded
-  ? allFoods.sort((a, b) => a.name.localeCompare(b.name))
-  : [];
+    ? allFoods.sort((a, b) => a.name.localeCompare(b.name))
+    : [];
+
+  const uniqueCuisines = [
+    ...new Set(allFoods.map((food) => food["cuisine.name"])),
+  ];
+
+  const filteredFoods =
+    selectedCuisine === "All"
+      ? foods
+      : foods.filter((food) => food["cuisine.name"] === selectedCuisine);
+
+  const handleCuisineChange = (event) => {
+    setSelectedCuisine(event.target.value);
+  };
 
   return (
-    <div className="dark:text-light-gray text-secondary-dark-bg bg-light-gray dark:bg-secondary-dark-bg">
-      <div className="flex flex-wrap justify-center lg:flex-nowrap">
-        <div className="m-3 flex h-[calc(100dvh-135px)] w-full flex-col overflow-x-hidden overflow-y-scroll rounded-xl bg-main-bg dark:bg-main-dark-bg">
-          {sessionUser ? (
-            loaded && (
-              <>
-                <div className="m-4 flex items-center justify-between text-xl font-bold">
-                  <p>Owned Foods</p>
-                  <Link
-                    className="bg-blue-700 text-main-bg rounded-lg p-1.5 text-sm font-semibold duration-100 ease-in hover:scale-105"
-                    to="/foods/new"
-                  >
-                    New Food
-                  </Link>
-                </div>
-                {foods
-                  .filter((food) => food.creatorId === sessionUser.id)
-                  .map((food) => (
-                    <div
-                      key={food.id}
-                      className="flex justify-between border-t px-10 py-3 duration-100 ease-in hover:scale-[1.01] hover:shadow-[rgba(50,_50,_105,_0.15)_0px_2px_5px_0px,_rgba(0,_0,_0,_0.05)_0px_1px_1px_0px] dark:hover:shadow-[rgba(205,_205,_150,_0.15)_0px_2px_5px_0px,_rgba(255,_255,_255,_0.3)_0px_1px_1px_0px]"
-                    >
-                      <div>
-                        <p className="text-lg font-semibold">{food.name}</p>
-                        <p className="text-sm opacity-60">{food.cuisine}</p>
+    <div className="m-3 flex h-[calc(100dvh-100px)] w-full flex-col overflow-x-hidden overflow-y-scroll rounded-xl bg-main-bg shadow-[rgba(17,_17,_26,_0.1)_0px_0px_16px] dark:bg-main-dark-bg dark:shadow-[rgba(233,_233,_224,_0.1)_0px_0px_16px]">
+      {sessionUser ? (
+        loaded && (
+          <>
+            <div className="m-4 flex items-center justify-between text-xl font-bold">
+              <p className="whitespace-nowrap">Owned Foods</p>
+              {sessionUser && (
+                <Link
+                  className="whitespace-nowrap rounded-lg bg-blue-700 p-1.5 text-sm font-semibold text-main-bg duration-100 ease-in hover:scale-105"
+                  to="/foods/new"
+                >
+                  New Food
+                </Link>
+              )}
+            </div>
+            <div className="mb-2">
+              <label htmlFor="cuisineDropdown" className="ml-4 mr-2">
+                Filter by Cuisine:
+              </label>
+              <select
+                id="cuisineDropdown"
+                value={selectedCuisine}
+                onChange={handleCuisineChange}
+                className="bg-light-gray text-secondary-dark-bg dark:bg-secondary-dark-bg dark:text-light-gray"
+              >
+                <option value="All">All</option>
+                {uniqueCuisines.map((cuisine) => (
+                  <option key={cuisine} value={cuisine}>
+                    {cuisine}
+                  </option>
+                ))}
+              </select>
+            </div>
+            {filteredFoods
+              .filter((food) => food.creatorId === sessionUser.id)
+              .map((food) => (
+                <div
+                  key={food.id}
+                  className="flex justify-between border-t px-10 py-3 duration-100 ease-in hover:scale-[1.01] hover:shadow-[rgba(50,_50,_105,_0.15)_0px_2px_5px_0px,_rgba(0,_0,_0,_0.05)_0px_1px_1px_0px] dark:hover:shadow-[rgba(205,_205,_150,_0.15)_0px_2px_5px_0px,_rgba(255,_255,_255,_0.3)_0px_1px_1px_0px]"
+                >
+                  <div>
+                    <p className="text-lg font-semibold">{food.name}</p>
+                    <p className="text-sm opacity-60">{food["cuisine.name"]}</p>
+                  </div>
+                  {sessionUser && sessionUser?.id === food.creatorId && (
+                    <div className="flex flex-row gap-4">
+                      <div className="flex items-center justify-center rounded-lg px-2 text-secondary-dark-bg duration-100 ease-in hover:scale-110 hover:bg-light-gray dark:text-light-gray dark:hover:bg-secondary-dark-bg">
+                        <Link className="text-xl" to={`/foods/${food.id}/edit`}>
+                          <AiFillEdit />
+                        </Link>
                       </div>
-                      {sessionUser && sessionUser?.id === food.creatorId && (
-                        <div className="flex flex-row gap-4">
-                          <div className="text-secondary-dark-bg dark:text-light-gray flex items-center justify-center rounded-lg px-2 duration-100 ease-in hover:scale-110 hover:bg-light-gray dark:hover:bg-secondary-dark-bg">
-                            <Link
-                              className="text-xl"
-                              to={`/foods/${food.id}/edit`}
-                            >
-                              <AiFillEdit />
-                            </Link>
-                          </div>
-                          <div className="text-secondary-dark-bg dark:text-light-gray flex justify-center items-center rounded-lg px-2 duration-100 ease-in hover:scale-110 hover:bg-light-gray dark:hover:bg-secondary-dark-bg">
-                            <OpenModalButton
-                              modalComponent={
-                                <ConfirmDeleteFoodModal foodId={food.id} />
-                              }
-                              buttonText={<FaTrash />}
-                            />
-                          </div>
-                        </div>
-                      )}
+                      <div className="flex items-center justify-center rounded-lg px-2 text-secondary-dark-bg duration-100 ease-in hover:scale-110 hover:bg-light-gray dark:text-light-gray dark:hover:bg-secondary-dark-bg">
+                        <OpenModalButton
+                          modalComponent={
+                            <ConfirmDeleteFoodModal foodId={food.id} />
+                          }
+                          buttonText={<FaTrash />}
+                        />
+                      </div>
                     </div>
-                  ))}
-              </>
-            )
-          ) : (
-            <p className="m-4 flex justify-center text-xl font-bold">
-              Must be logged-in to view this page.
-            </p>
-          )}
-        </div>
-      </div>
+                  )}
+                </div>
+              ))}
+          </>
+        )
+      ) : (
+        <p className="m-4 flex justify-center text-xl font-bold">
+          Must be logged-in to view this page.
+        </p>
+      )}
     </div>
   );
 };

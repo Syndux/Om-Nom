@@ -1,7 +1,13 @@
 const express = require("express");
 
 const { requireAuth } = require("../../utils/auth");
-const { Food, Ingredient, FoodIngredient, sequelize } = require("../../db/models");
+const {
+  Food,
+  Ingredient,
+  FoodIngredient,
+  Cuisine,
+  sequelize,
+} = require("../../db/models");
 
 const router = express.Router();
 
@@ -178,6 +184,12 @@ router.get("/:foodId/ingredients", async (req, res, next) => {
 router.get("/current", requireAuth, async (req, res, next) => {
   const foods = await Food.findAll({
     where: { creatorId: req.user.id },
+    include: {
+      model: Cuisine,
+      as: "cuisine",
+      attributes: ["name"],
+    },
+    raw: true,
     order: [["createdAt", "DESC"]],
   });
 
@@ -188,18 +200,24 @@ router.get("/current", requireAuth, async (req, res, next) => {
 router.get("/:foodId", async (req, res, next) => {
   const { foodId } = req.params;
   const food = await Food.findByPk(foodId, {
-    include: {
-      model: Ingredient,
-      as: "ingredients",
-      through: {
-        model: FoodIngredient,
-        attributes: ["quantity", "unit"],
+    include: [
+      {
+        model: Ingredient,
+        as: "ingredients",
+        through: {
+          model: FoodIngredient,
+          attributes: ["quantity", "unit"],
+        },
+        attributes: {
+          exclude: ["createdAt", "updatedAt"],
+        },
       },
-      attributes: {
-        exclude: ["createdAt", "updatedAt"],
+      {
+        model: Cuisine,
+        as: "cuisine",
+        attributes: ["name"],
       },
-    },
-    // raw: true,
+    ],
     attributes: {
       exclude: ["createdAt", "updatedAt"],
     },
@@ -278,6 +296,12 @@ router.delete("/:foodId", requireAuth, async (req, res, next) => {
 // Get all foods
 router.get("/", async (req, res, next) => {
   const foods = await Food.findAll({
+    include: {
+      model: Cuisine,
+      as: "cuisine",
+      attributes: ["name"]
+    },
+    raw: true,
     order: ["id"],
   });
 
@@ -287,7 +311,7 @@ router.get("/", async (req, res, next) => {
 // Create new food
 router.post("/", requireAuth, async (req, res, next) => {
   try {
-    const { name, imgUrl, cuisine } = req.body;
+    const { name, imgUrl, cuisineId } = req.body;
     const userId = req.user.id;
 
     const titleCase = (name) => {
@@ -298,13 +322,12 @@ router.post("/", requireAuth, async (req, res, next) => {
     };
 
     const titleCasedName = titleCase(name);
-    const titleCasedCuisine = titleCase(cuisine);
-
+    
     const newFood = await Food.create({
       creatorId: userId,
       name: titleCasedName,
       imgUrl,
-      cuisine: titleCasedCuisine,
+      cuisineId: Number(cuisineId),
     });
 
     return res.status(201).json(newFood);
