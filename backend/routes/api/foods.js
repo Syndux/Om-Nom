@@ -11,7 +11,7 @@ const {
 
 const router = express.Router();
 
-// Create/add ingredients for a food with foodId
+// Add ingredients for a food with foodId
 router.post(
   "/:foodId/ingredients/:ingredientId",
   requireAuth,
@@ -261,7 +261,31 @@ router.put("/:foodId", requireAuth, async (req, res, next) => {
     cuisine,
   });
 
-  return res.json(updatedFood);
+  const resFood = await Food.findByPk(foodId, {
+    include: [
+      {
+        model: Ingredient,
+        as: "ingredients",
+        through: {
+          model: FoodIngredient,
+          attributes: ["quantity", "unit"],
+        },
+        attributes: {
+          exclude: ["createdAt", "updatedAt"],
+        },
+      },
+      {
+        model: Cuisine,
+        as: "cuisine",
+        attributes: ["name"],
+      },
+    ],
+    attributes: {
+      exclude: ["createdAt", "updatedAt"],
+    },
+  });
+  
+  return res.json(resFood);
 });
 
 // Delete food from foodId

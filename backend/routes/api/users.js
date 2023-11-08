@@ -30,7 +30,6 @@ router.get("/current", (req, res) => {
 // Login
 router.post("/login", validateLogin, async (req, res, next) => {
   const { credential, password } = req.body;
-  console.log(credential, password);
   
   const user = await User.unscoped().findOne({
     where: {
