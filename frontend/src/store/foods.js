@@ -92,8 +92,6 @@ export const updateFood =
       const updatedFood = await res.json();
       
       dispatch(updateFoodAC(updatedFood));
-      console.log("before")
-      console.log(updatedFood)
 
       const existingIngredients = updatedFood.ingredients.map((ingredient) => ({
         ingredientId: ingredient.id,
@@ -101,7 +99,6 @@ export const updateFood =
         unit: ingredient.FoodIngredients.unit,
       }));
       
-      console.log("after");
       for (const ingredient of ingredients) {
         const { ingredientId, quantity, unit } = ingredient;
 

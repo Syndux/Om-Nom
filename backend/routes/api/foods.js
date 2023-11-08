@@ -260,7 +260,6 @@ router.put("/:foodId", requireAuth, async (req, res, next) => {
     imgUrl,
     cuisine,
   });
-  console.log("updatedFood is: ", updatedFood); // NOT RETURNING INGREDIENTS
 
   const resFood = await Food.findByPk(foodId, {
     include: [
@@ -285,7 +284,7 @@ router.put("/:foodId", requireAuth, async (req, res, next) => {
       exclude: ["createdAt", "updatedAt"],
     },
   });
-  console.log("resFood is: ", resFood);
+  
   return res.json(resFood);
 });
 

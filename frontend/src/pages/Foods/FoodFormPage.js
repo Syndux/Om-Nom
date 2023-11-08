@@ -194,7 +194,6 @@ const FoodFormPage = () => {
       if (isEdit) {
         newFoodId = await dispatch(updateFood(foodId, formData));
       } else {
-        console.log(formData);
         newFoodId = await dispatch(createFood(formData));
       }
 
