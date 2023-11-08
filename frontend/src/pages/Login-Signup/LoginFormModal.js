@@ -135,7 +135,7 @@ const LoginFormModal = () => {
         </form>
       </div>
       <div
-        className="mt-3 flex w-full justify-center rounded-md bg-green-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white"
+        className="cursor-pointer mt-3 flex w-full justify-center rounded-md bg-green-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white"
         onClick={loginDemo}
       >
         Demo User
