@@ -1,5 +1,5 @@
 import { csrfFetch } from "./csrf";
-import { createFoodIngredient, updateFoodIngredient } from "./ingredients";
+import { createFoodIngredient, updateFoodIngredient, deleteFoodIngredient } from "./ingredients";
 
 const LOAD_ALL_FOODS = "foods/LOAD_ALL_FOODS";
 const LOAD_SINGLE_FOOD = "foods/LOAD_SINGLE_FOOD";
@@ -31,7 +31,7 @@ const updateFoodAC = (food) => ({
 const deleteFoodAC = (food) => ({
   type: DELETE_FOOD,
   payload: food,
-})
+});
 
 // THUNK ACTION CREATOR
 // Get all foods
@@ -57,42 +57,89 @@ export const loadSingleFood = (foodId) => async (dispatch) => {
 };
 
 // Create new food
-export const createFood = ({ ingredients, ...foodData }) => async (dispatch) => {
-  const res = await csrfFetch("/api/foods", {
-    method: "POST",
-    body: JSON.stringify(foodData),
-  });
+export const createFood =
+  ({ ingredients, ...foodData }) =>
+  async (dispatch) => {
+    const res = await csrfFetch("/api/foods", {
+      method: "POST",
+      body: JSON.stringify(foodData),
+    });
 
-  if (res.ok) {
-    const food = await res.json();
-    dispatch(createFoodAC(food));
+    if (res.ok) {
+      const food = await res.json();
+      dispatch(createFoodAC(food));
 
-    for (const ingredient of ingredients) {
-      const { ingredientId, quantity, unit } = ingredient;
-      await dispatch(createFoodIngredient(food.id, ingredientId, { quantity, unit }));
+      for (const ingredient of ingredients) {
+        const { ingredientId, quantity, unit } = ingredient;
+        await dispatch(
+          createFoodIngredient(food.id, ingredientId, { quantity, unit }),
+        );
+      }
+      return food.id;
     }
-    return food.id;
-  }
-};
+  };
 
 // Edit a food
-export const updateFood = (foodId, {ingredients, ...formData}) => async (dispatch) => {
-  const res = await csrfFetch(`/api/foods/${foodId}`, {
-    method: "PUT",
-    body: JSON.stringify(formData),
-  });
+export const updateFood =
+  (foodId, { ingredients, ...formData }) =>
+  async (dispatch) => {
+    const res = await csrfFetch(`/api/foods/${foodId}`, {
+      method: "PUT",
+      body: JSON.stringify(formData),
+    });
 
-  if (res.ok) {
-    const food = await res.json();
-    dispatch(updateFoodAC(food));
+    if (res.ok) {
+      const updatedFood = await res.json();
+      
+      dispatch(updateFoodAC(updatedFood));
+      console.log("before")
+      console.log(updatedFood)
 
-    for (const ingredient of ingredients) {
-      const { ingredientId, quantity, unit } = ingredient;
-      await dispatch(updateFoodIngredient(food.id, ingredientId, { quantity, unit }));
+      const existingIngredients = updatedFood.ingredients.map((ingredient) => ({
+        ingredientId: ingredient.id,
+        quantity: ingredient.FoodIngredients.quantity,
+        unit: ingredient.FoodIngredients.unit,
+      }));
+      
+      console.log("after");
+      for (const ingredient of ingredients) {
+        const { ingredientId, quantity, unit } = ingredient;
+
+        const existingIngredient = existingIngredients.find(
+          (existing) => existing.ingredientId === ingredientId,
+        );
+
+        if (existingIngredient) {
+          await dispatch(
+            updateFoodIngredient(updatedFood.id, ingredientId, {
+              quantity,
+              unit,
+            }),
+          );
+        } else {
+          await dispatch(
+            createFoodIngredient(updatedFood.id, ingredientId, {
+              quantity,
+              unit,
+            }),
+          );
+        }
+      }
+
+      for (const existingIngredient of existingIngredients) {
+        const { ingredientId } = existingIngredient;
+        if (
+          !ingredients.some(
+            (ingredient) => ingredient.ingredientId === ingredientId,
+          )
+        ) {
+          await dispatch(deleteFoodIngredient(updatedFood.id, ingredientId));
+        }
+      }
+
+      return updatedFood.id;
     }
-    return food.id;
-  }
-};
+  };
 
 // Delete a food
 export const deleteFood = (foodId) => async (dispatch) => {
@@ -128,7 +175,7 @@ const foodsReducer = (state = initialState, action) => {
         },
       };
     case DELETE_FOOD:
-      let newState = {...state};
+      let newState = { ...state };
       delete newState[action.payload.id];
       return newState;
     default:
